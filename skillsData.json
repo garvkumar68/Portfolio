@@ -1,40 +1,36 @@
 {
   "skills": [
     {
-      "name": "Python Development",
-      "progress": 85
-    },
-    {
-      "name": "Image Processing",
+      "name": "Machine Learning & AI",
       "progress": 90
     },
     {
-      "name": "Model Training",
+      "name": "Deep Learning (TensorFlow, PyTorch, Keras)",
       "progress": 85
     },
     {
-      "name": "ML Research",
-      "progress": 90
+      "name": "Computer Vision (OpenCV, YOLOv8, OCR, Generative AI)",
+      "progress": 88
     },
     {
-      "name": "Model Architecture Design",
-      "progress": 85
-    },
-    {
-      "name": "Object Detection",
-      "progress": 95
-    },
-    {
-      "name": "Data Analysis",
-      "progress": 85
-    },
-    {
-      "name": "Statistics",
-      "progress": 85
-    },
-    {
-      "name": "3D Modeling",
+      "name": "Natural Language Processing (LLMs, Speech Recognition, AI TTS)",
       "progress": 80
+    },
+    {
+      "name": "IoT & Embedded Systems",
+      "progress": 85
+    },
+    {
+      "name": "Hardware (ESP32, MPU6050, GPS, ECU Data Processing)",
+      "progress": 80
+    },
+    {
+      "name": "Programming (Python, C++, MySQL, Django)",
+      "progress": 90
+    },
+    {
+      "name": "Problem-Solving & Research",
+      "progress": 95
     }
   ]
 }
