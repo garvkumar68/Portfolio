@@ -1,0 +1,52 @@
+{
+  "skills": [
+    {
+      "name": "Machine Learning & AI",
+      "progress": 90
+    },
+    {
+      "name": "Deep Learning (TensorFlow, PyTorch, Keras)",
+      "progress": 85
+    },
+    {
+      "name": "Computer Vision",
+      "progress": 88
+    },
+    {
+      "name": "IoT",
+      "progress": 85
+    },
+    {
+      "name": "Programming (C++, Python, MySQL)",
+      "progress": 90
+    },
+    {
+      "name": "Problem-Solving (DSA) & OOPs",
+      "progress": 90
+    },
+    {
+      "name": "Data Science (Pandas, NumPy, Matplotlib, Scikit-learn)",
+      "progress": 87
+    },
+    {
+      "name": "Neural Networks & Deep Learning",
+      "progress": 85
+    },
+    {
+      "name": "Supervised & Unsupervised Learning",
+      "progress": 83
+    },
+    {
+      "name": "Git/GitHub",
+      "progress": 88
+    },
+    {
+      "name": "ML Model Deployment (Hugging Face)",
+      "progress": 80
+    },
+    {
+      "name": "Backend Development (FastAPI, Flask)",
+      "progress": 82
+    }
+  ]
+}

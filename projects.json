@@ -1,0 +1,35 @@
+[
+  {
+    "title": "AstroTerra",
+    "description": "AstroTerra aims to detect and analyze boulders on the lunar surface using image processing and machine learning, providing crucial data for safe landing site selection and mission planning.",
+    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734274123/AsstroTerra_oo1cew.png",
+    "link": "https://github.com/Rathoreatri03/Moon_Creator"
+  },
+
+    {
+    "title": "Project G.U.A.R.D",
+    "description": "GUARD is an AI-powered accident detection system designed to monitor and alert authorities in real-time. By analyzing sensor data and visual inputs, it swiftly identifies accidents, triggering immediate notifications to ensure timely responses and enhanced safety.",
+    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734274123/Guard_e8fr8x.png",
+    "link": "https://github.com/Rathoreatri03/G.U.A.R.D"
+  },
+  
+  {
+    "title": "Project O.C.G",
+    "description": "Object Controlling Glasses (O.C.G.) enable users to control devices with eye movements and gestures, offering hands-free interaction for enhanced accessibility and convenience.",
+    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734274123/OCG_sfbkvb.png",
+    "link": "https://github.com/Rathoreatri03/Object-Detection-Glasses-OCG-"
+  },
+     
+  {
+    "title": "Project Robocop",
+    "description": "Robocop is an advanced robotic system designed for automation and security. It integrates AI and robotics to perform surveillance, threat detection, and response, ensuring enhanced safety and efficiency in various environments.",
+    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734284893/Robocop_xkurfc.jpg",
+    "link": " "
+  },
+  {
+    "title": "LifeMatrix",
+    "description": "LifeMatrix is a real-time hospital system that monitors vital signs and patient movements. It alerts medical staff to abnormalities and uses cameras to assess the patient's condition for better decision-making.",
+    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734284910/lifematix_g75wzz.png",
+    "link": " "
+  }
+]
