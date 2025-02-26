@@ -1,15 +1,15 @@
 {
   "skills": [
     {
-      "name": "Machine Learning & AI",
+      "name": "Machine Learning \n&\n AI",
       "progress": 90
     },
     {
-      "name": "Deep Learning (TensorFlow, PyTorch, Keras)",
+      "name": "Deep Learning \n(TensorFlow, PyTorch, Keras)",
       "progress": 85
     },
     {
-      "name": "Computer Vision ",
+      "name": "Computer Vision",
       "progress": 88
     },
     {
@@ -17,23 +17,23 @@
       "progress": 85
     },
     {
-      "name": "Programming (C++, Python, MySQL)",
+      "name": "Programming \n(C++, Python, MySQL)",
       "progress": 90
     },
     {
-      "name": "Problem-Solving (DSA) & OOPs",
+      "name": "Problem-Solving(DSA) \n&\n OOPs",
       "progress": 90
     },
     {
-      "name": "Data Science (Pandas, NumPy, Matplotlib, Scikit-learn)",
+      "name": "Data Science \n(Pandas, NumPy, Matplotlib, Scikit-learn)",
       "progress": 87
     },
     {
-      "name": "Neural Networks & Deep Learning",
+      "name": "Neural Networks \n&\n Deep Learning",
       "progress": 85
     },
     {
-      "name": "Supervised & Unsupervised Learning",
+      "name": "Supervised \n&\n Unsupervised Learning",
       "progress": 83
     },
     {
@@ -41,11 +41,11 @@
       "progress": 88
     },
     {
-      "name": "ML Model Deployment (Hugging Face)",
+      "name": "ML Model Deployment \n(Hugging Face)",
       "progress": 80
     },
     {
-      "name": "Backend Development (FastAPI, Flask)",
+      "name": "Backend Development \n(FastAPI, Flask)",
       "progress": 82
     }
   ]
