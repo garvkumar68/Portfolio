@@ -1,0 +1,26 @@
+[
+    {
+    "title": "Book Chapter: Printing a Sustainable Future",
+    "description": "Co-authored a chapter in 'Hybrid Metal Additive Manufacturing' on revolutionizing waste management through additive manufacturing. Published by CRC Press in 2023.",
+    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734283497/bookchapter_yx60hp.jpg",
+    "link": "https://www.taylorfrancis.com/chapters/edit/10.1201/9781003406488-8/printing-sustainable-future-jagdeep-kaur-atri-rathore-tarveen-kaur-prabal-batra"
+  },
+  {
+    "title": "Organic 3D Filament for 3D Printers",
+    "description": "Innovated a sustainable method for synthesizing organic 3D filament using food waste, driving advancements in eco-friendly 3D printing. Filed under patent number 202311054420 on Aug 13, 2023.",
+    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734283498/Patent-1_xoo5oi.jpg",
+    "link": ""
+  },
+  {
+    "title": "Mycofibre Composite and Synthesis",
+    "description": "Developed fungal-based mycofibre, an eco-friendly and biodegradable material, offering a sustainable alternative to traditional textiles. Filed under patent number 202311048967 on Jul 20, 2023.",
+    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734283499/Patent-2_agztfr.jpg",
+    "link": ""
+  },
+  {
+    "title": "AI-Enabled Tracking-Based Security System",
+    "description": "Designed a cutting-edge AI-powered tracking security system for enhanced safety and surveillance. Issued under patent number 202311054397 on Aug 13, 2023.",
+    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734283497/Patent-3_pcz4qb.jpg",
+    "link": ""
+  }
+]
