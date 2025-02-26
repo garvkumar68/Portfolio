@@ -9,28 +9,44 @@
       "progress": 85
     },
     {
-      "name": "Computer Vision (OpenCV, YOLOv8, OCR, Generative AI)",
+      "name": "Computer Vision (OpenCV, YOLOv8)",
       "progress": 88
     },
     {
-      "name": "Natural Language Processing (LLMs, Speech Recognition, AI TTS)",
-      "progress": 80
-    },
-    {
-      "name": "IoT & Embedded Systems",
+      "name": "IoT",
       "progress": 85
     },
     {
-      "name": "Hardware (ESP32, MPU6050, GPS, ECU Data Processing)",
-      "progress": 80
-    },
-    {
-      "name": "Programming (Python, C++, MySQL, Django)",
+      "name": "Programming (C++, Python, MySQL)",
       "progress": 90
     },
     {
-      "name": "Problem-Solving & Research",
-      "progress": 95
+      "name": "Problem-Solving (DSA) & OOPs",
+      "progress": 90
+    },
+    {
+      "name": "Data Science (Pandas, NumPy, Matplotlib, Scikit-learn)",
+      "progress": 87
+    },
+    {
+      "name": "Neural Networks & Deep Learning",
+      "progress": 85
+    },
+    {
+      "name": "Supervised & Unsupervised Learning",
+      "progress": 83
+    },
+    {
+      "name": "Git/GitHub",
+      "progress": 88
+    },
+    {
+      "name": "ML Model Deployment (Hugging Face)",
+      "progress": 80
+    },
+    {
+      "name": "Backend Development (FastAPI, Flask)",
+      "progress": 82
     }
   ]
 }
