@@ -1,11 +1,11 @@
 {
   "skills": [
     {
-      "name": "Machine Learning \n&\n AI",
+      "name": "Machine Learning <br>&<br> AI",
       "progress": 90
     },
     {
-      "name": "Deep Learning \n(TensorFlow, PyTorch, Keras)",
+      "name": "Deep Learning <br>(TensorFlow, PyTorch, Keras)",
       "progress": 85
     },
     {
@@ -13,23 +13,27 @@
       "progress": 88
     },
     {
-      "name": "Programming \n(C++, Python, MySQL)",
-      "progress": 90
-    },
-    {
-      "name": "Problem-Solving(DSA) \n&\n OOPs",
-      "progress": 90
-    },
-    {
-      "name": "Data Science \n(Pandas, NumPy, Matplotlib, Scikit-learn)",
-      "progress": 87
-    },
-    {
-      "name": "Neural Networks \n&\n Deep Learning",
+      "name": "Internet of Things",
       "progress": 85
     },
     {
-      "name": "Supervised \n&\n Unsupervised Learning",
+      "name": "Programming <br>(C++, Python, MySQL)",
+      "progress": 90
+    },
+    {
+      "name": "Problem-Solving (DSA) <br>&<br> OOPs",
+      "progress": 90
+    },
+    {
+      "name": "Data Science <br>(Pandas, NumPy, Matplotlib, Scikit-learn)",
+      "progress": 87
+    },
+    {
+      "name": "Neural Networks <br>&<br> Deep Learning",
+      "progress": 85
+    },
+    {
+      "name": "Supervised <br>&<br> Unsupervised Learning",
       "progress": 83
     },
     {
@@ -37,11 +41,11 @@
       "progress": 88
     },
     {
-      "name": "ML Model Deployment \n(Hugging Face)",
+      "name": "ML Model Deployment <br>(Hugging Face)",
       "progress": 80
     },
     {
-      "name": "Backend Development \n(FastAPI, Flask)",
+      "name": "Backend Development <br>(FastAPI, Flask)",
       "progress": 82
     }
   ]
