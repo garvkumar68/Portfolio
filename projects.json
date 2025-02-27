@@ -1,35 +1,32 @@
 [
   {
     "title": "AstroTerra",
-    "description": "AstroTerra aims to detect and analyze boulders on the lunar surface using image processing and machine learning, providing crucial data for safe landing site selection and mission planning.",
-    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734274123/AsstroTerra_oo1cew.png",
-    "link": "https://github.com/Rathoreatri03/Moon_Creator"
-  },
-
-    {
-    "title": "Project G.U.A.R.D",
-    "description": "GUARD is an AI-powered accident detection system designed to monitor and alert authorities in real-time. By analyzing sensor data and visual inputs, it swiftly identifies accidents, triggering immediate notifications to ensure timely responses and enhanced safety.",
-    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734274123/Guard_e8fr8x.png",
-    "link": "https://github.com/Rathoreatri03/G.U.A.R.D"
-  },
-  
-  {
-    "title": "Project O.C.G",
-    "description": "Object Controlling Glasses (O.C.G.) enable users to control devices with eye movements and gestures, offering hands-free interaction for enhanced accessibility and convenience.",
-    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734274123/OCG_sfbkvb.png",
-    "link": "https://github.com/Rathoreatri03/Object-Detection-Glasses-OCG-"
-  },
-     
-  {
-    "title": "Project Robocop",
-    "description": "Robocop is an advanced robotic system designed for automation and security. It integrates AI and robotics to perform surveillance, threat detection, and response, ensuring enhanced safety and efficiency in various environments.",
-    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734284893/Robocop_xkurfc.jpg",
-    "link": " "
+    "description": "AstroTerra is designed to detect and map lunar craters using deep learning and computer vision techniques. By analyzing high-resolution OHRC images from ISRO's Chandrayaan-2, the project enables precise crater localization. It integrates AI-driven path planning with the A* algorithm to optimize autonomous lunar rover navigation, ensuring the shortest and most efficient obstacle-free route. The project efficiently manages data using advanced data structures.",
+    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740672542/shortest_path_cropped_n6cy06.png",
+    "link": "https://github.com/garvkumar68/AstroTerra"
   },
   {
-    "title": "LifeMatrix",
-    "description": "LifeMatrix is a real-time hospital system that monitors vital signs and patient movements. It alerts medical staff to abnormalities and uses cameras to assess the patient's condition for better decision-making.",
-    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734284910/lifematix_g75wzz.png",
-    "link": " "
+    "title": "Accident Crash Detection Emergency System",
+    "description": "The Accident Crash Detection Emergency System is a comprehensive IoT + AI-powered vehicle black box that combines sensor-based detection and computer vision. Detects other vehicles involved in the accident to enhance road safety. Upon detection, the system automatically triggers emergency alerts via SMTP email, ensuring incident reporting.",
+    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740675550/image_1_d5njad.webp",
+    "link": "https://github.com/garvkumar68/Accident-Crash-Detection-Emergency-System"
+  },
+  {
+    "title": "Brain Wizard",
+    "description": "Brain Wizard is an AI-powered mental health assistant designed to provide real-time support through speech and text interactions. It leverages NLP, Generative AI, and chatbot functionality to offer mental health insights.Features: 🗣 Conversational AI Chatbot 📊 AI-Powered Sentiment Analysis: Detects user emotions and mental states.🧠 Mental Disorder Detection: transformer models analyzation 🧘 Meditation & Well-being Advice 📄 PDF Report Generation",
+    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740675801/logo_o74iws.jpg",
+    "link": "https://garvkumar68.github.io/BrainWizard-website/"
+  },
+  {
+    "title": "Smart Cleaning Robot for High-Rise Buildings",
+    "description": "A lightweight, wire-powered smart cleaning robot designed for high-rise buildings to ensure efficient and eco-friendly window and surface cleaning. Designed using Autodesk Fusion 360, the robot features an aerodynamic aluminum exterior for stability and efficiency. It operates on an integrated wire system instead of batteries, reducing e-waste and increasing operational time while ensuring uninterrupted performance.",
+    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740675553/image_2_wzv6j0.webp",
+    "link": "https://github.com/garvkumar68/HIGH-RISER-ROBOT-3D-DESIGN"
+  },  
+  {
+    "title": "The Murphy System",
+    "description": "Multi-disease medical diagnosis platform that leverages machine learning and deep learning for accurate and automated disease detection. Combined multiple ML model Random Forest, CNN, DNN, NLP, GenAi. Features: Brain Wizard AI-powered mental health assistant 🤖 Brain Tumor Detection 🧠 Breast Cancer Classification 🎗 Symptom-Based Disease Prediction 🤒Automated Report Generation 📄",
+    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740676941/5ecc8141-5f9f-45b4-adeb-424ba9aaacf7_fniwgm.webp",
+    "link": "https://garvkumar68.github.io/Murphy-System/"
   }
 ]
