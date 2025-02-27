@@ -8,25 +8,25 @@
   {
     "title": "Accident Crash Detection Emergency System",
     "description": "The **Accident Crash Detection Emergency System** is a comprehensive **IoT + AI-powered vehicle black box** that combines **sensor-based detection and computer vision** to enhance road safety. It uses **ESP32, MPU6050, and GPS** to monitor a vehicle’s acceleration and orientation for crash detection. Additionally, **computer vision** analyzes the surroundings to detect other vehicles involved in the accident. Upon detection, the system automatically triggers **emergency alerts via SMTP email or SMS**, ensuring rapid response and accurate incident reporting.",
-    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734274123/Guard_e8fr8x.png",
+    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740675550/image_1_d5njad.webp",
     "link": "https://github.com/garvkumar68/Accident-Crash-Detection-Emergency-System"
   },
   {
     "title": "Brain Wizard",
     "description": "Brain Wizard is an AI-powered mental health assistant designed to provide real-time support through speech and text interactions. It leverages NLP, Generative AI, and chatbot functionality to engage users, analyze emotions, and offer mental health insights.\n\n**Features**\n- 🗣 **Conversational AI Chatbot**: Uses NLP and Generative AI for meaningful mental health conversations.\n- 📊 **AI-Powered Sentiment Analysis**: Detects user emotions and mental states.\n- 🧠 **Mental Disorder Detection**: Utilizes transformer models to analyze speech and text interactions.\n- 🧘 **Meditation & Well-being Advice**: Suggests mindfulness exercises and relaxation techniques.\n- 📄 **PDF Report Generation**: Summarizes analysis results and emails them via SMTP.\n- 🌐 **Web & Wearable Support**: Designed for both desktop and wearable devices.\n\n**🚀 Technologies Used**\n- Natural Language Processing (NLP)\n- Generative AI for chatbot interactions\n- Speech Recognition & AI Text-to-Speech (TTS)\n- Transformers (Sentiment & Mental Disorder Analysis)\n- PDF Report Generation\n- SMTP Emailing\n- Web & Wearable Platform Support",
-    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734274123/BrainWizard.png",
-    "link": "https://github.com/your-repo-link"
+    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740675801/logo_o74iws.jpg",
+    "link": "https://garvkumar68.github.io/BrainWizard-website/"
   },
   {
     "title": "Smart Cleaning Robot for High-Rise Buildings",
     "description": "A lightweight, wire-powered smart cleaning robot designed for high-rise buildings to ensure efficient and eco-friendly window and surface cleaning. Designed using Autodesk Fusion 360, the robot features an aerodynamic aluminum exterior for stability and efficiency. It operates on an integrated wire system instead of batteries, reducing e-waste and increasing operational time while ensuring uninterrupted performance.",
-    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734274123/SmartCleaningRobot.png",
-    "link": "https://github.com/YourGitHubRepo/SmartCleaningRobot"
+    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740675553/image_2_wzv6j0.webp",
+    "link": "https://github.com/garvkumar68/HIGH-RISER-ROBOT-3D-DESIGN"
   },  
   {
     "title": "The Murphy System",
     "description": "Multi-disease medical diagnosis platform that leverages machine learning and deep learning for accurate and automated disease detection. \n\n- **Brain Tumor Detection 🧠**: Analyzes MRI scans using deep learning to identify tumors. \n- **Breast Cancer Classification 🎗**: Classifies images as Benign, Malignant, or Normal using AI. \n- **Symptom-Based Disease Prediction 🤒**: Uses a trained Random Forest model to predict possible diseases based on input symptoms. \n- **Automated Report Generation 📄**: Generates detailed PDF reports for diagnoses. \n\nThe system provides RESTful API endpoints, supports CORS for web integration, and ensures efficient diagnosis processing with Flask, TensorFlow, and machine learning models. 🚀",
     "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734274123/OCG_sfbkvb.png",
-    "link": "https://github.com/Rathoreatri03/Object-Detection-Glasses-OCG-"
+    "link": "https://garvkumar68.github.io/Murphy-System/"
   }
 ]
