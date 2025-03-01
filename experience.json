@@ -2,25 +2,37 @@
     {
     "title": "Machine Learning Intern at Cognifyz Technologies",
     "description": "Gained hands-on experience in machine learning, working on real-world projects, enhancing analytical abilities, collaborating across teams, and tackling new challenges in the field of ML.",
-    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734284401/cognifyz_mnlbfb.jpg",
-    "link": ""
-  },
-  {
-    "title": "Oracle Cloud Infrastructure 2024 Generative AI Certified Professional",
-    "description": "Achieved certification in Oracle Cloud Infrastructure, specializing in Generative AI technologies and applications.",
-    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734284399/oracle_ghwiz7.jpg",
-    "link": ""
+    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740853551/cognifyz_amdxt5.png",
+    "link": "https://drive.google.com/file/d/19v5KOEp-xVMeyeF6uQMz4Dkd0a8FJz5-/view"
   },
     {
-    "title": "Chapter Chair at Prakash Bharati Scholar Chapter Chandigarh University (PBSC CU)",
-    "description": "Providing visionary leadership and strategic direction for the IEEE PBSC chapter. Oversee a dedicated team promoting scholarship, research, and innovation at Chandigarh University.",
-    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734284403/Chapter-Chair_kgvs7g.jpg",
-    "link": ""
+    "title": "Certification* Microsoft Certified: Azure AI Fundamentals ",
+    "description": "Skills Gained: Basics of artificial intelligence (AI), machine learning (ML), computer vision, natural language processing (NLP), responsible AI, and Azure AI services",
+    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740853551/Azure_fundamental_c2vqbe.png",
+    "link": "https://drive.google.com/file/d/1P5fr_vzp4rVTwQgXtz0_ZOxiU23vONth/view"
   },
     {
-    "title": "Student at Chandigarh University",
-    "description": "Pursuing a Bachelor's degree in Computer Science with a focus on Artificial Intelligence and Machine Learning. Engaged in hybrid learning, integrating practical skills with academic knowledge.",
-    "imgUrl": "https://res.cloudinary.com/dxh9tugzx/image/upload/v1734284400/Chandigarh_University_ievdnq.jpg",
-    "link": ""
+    "title": "Certification* Microsoft Introduction to Generative AI for Data Analysis Coursera",
+    "description": "Skills Gained: Understanding generative AI applications in data analysis, automated insights generation, and AI-powered decision-making",
+    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740853552/microsoft_genai_zu2l3q.png",
+    "link": "https://coursera.org/share/0fcb817b365ba2ddd52e34446e1d482f"
+  },
+    {
+    "title": "Certification* Google Foundations: Data, Data, Everywhere Coursera",
+    "description": "Skills Gained: Data collection, data visualization, data cleaning, SQL, and spreadsheet analysis",
+    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740853552/google_data_wzlxmy.png",
+    "link": "https://www.coursera.org/account/accomplishments/verify/HLAIQ6OPFFWQ?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course"
+  },
+    {
+    "title": "Certification* IBM Python for Data Science, AI & Development Coursera",
+    "description": "Skills Gained: Python programming for data science, AI, and machine learning; working with libraries like Pandas, NumPy, and Scikit-learn.",
+    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740853552/IBM_d32gmu.png",
+    "link": "https://www.coursera.org/account/accomplishments/verify/AP986VJ4SX8H?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course"
+  },
+    {
+    "title": "Certification* AWS Cloud Foundations",
+    "description": "Skills Gained: Cloud computing principles, AWS services, security, and cost management.",
+    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740853553/aws_w5jfz2.png",
+    "link": "https://drive.google.com/file/d/1NTFvYGcX352M17Sgp7RZn0AGnk9YUkY4/view"
   }
 ]
