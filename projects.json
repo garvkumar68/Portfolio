@@ -12,12 +12,6 @@
     "link": "https://github.com/garvkumar68/Accident-Crash-Detection-Emergency-System"
   },
   {
-    "title": "Brain Wizard",
-    "description": "Brain Wizard is an AI-powered mental health assistant designed to provide real-time support through speech and text interactions. It leverages NLP, Generative AI, and chatbot functionality to offer mental health insights.Features: 🗣 Conversational AI Chatbot 📊 AI-Powered Sentiment Analysis: Detects user emotions and mental states.🧠 Mental Disorder Detection: transformer models analyzation 🧘 Meditation & Well-being Advice 📄 PDF Report Generation",
-    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740675801/logo_o74iws.jpg",
-    "link": "https://garvkumar68.github.io/BrainWizard-website/"
-  },
-  {
     "title": "Smart Cleaning Robot for High-Rise Buildings",
     "description": "A lightweight, wire-powered smart cleaning robot designed for high-rise buildings to ensure efficient and eco-friendly window and surface cleaning. Designed using Autodesk Fusion 360, the robot features an aerodynamic aluminum exterior for stability and efficiency. It operates on an integrated wire system instead of batteries, reducing e-waste and increasing operational time while ensuring uninterrupted performance.",
     "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740675553/image_2_wzv6j0.webp",
@@ -28,5 +22,11 @@
     "description": "Multi-disease medical diagnosis platform that leverages machine learning and deep learning for accurate and automated disease detection. Combined multiple ML model Random Forest, CNN, DNN, NLP, GenAi. Features: Brain Wizard AI-powered mental health assistant 🤖 Brain Tumor Detection 🧠 Breast Cancer Classification 🎗 Symptom-Based Disease Prediction 🤒Automated Report Generation 📄",
     "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740676941/5ecc8141-5f9f-45b4-adeb-424ba9aaacf7_fniwgm.webp",
     "link": "https://garvkumar68.github.io/Murphy-System/"
+  },
+  {
+    "title": "Brain Wizard",
+    "description": "Brain Wizard is an AI-powered mental health assistant designed to provide real-time support through speech and text interactions. It leverages NLP, Generative AI, and chatbot functionality to offer mental health insights.Features: 🗣 Conversational AI Chatbot 📊 AI-Powered Sentiment Analysis: Detects user emotions and mental states.🧠 Mental Disorder Detection: transformer models analyzation 🧘 Meditation & Well-being Advice 📄 PDF Report Generation",
+    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740675801/logo_o74iws.jpg",
+    "link": "https://garvkumar68.github.io/BrainWizard-website/"
   }
 ]
