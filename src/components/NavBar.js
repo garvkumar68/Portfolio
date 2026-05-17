@@ -47,6 +47,7 @@ export const NavBar = () => {
     if (path === "/skills") return "skills";
     if (path === "/projects") return "projects";
     if (path === "/experience") return "experience";
+    if (path === "/certifications") return "certifications";
     if (path === "/achievements") return "achievements";
     if (path === "/resume") return "resume";
     if (path === "/reachout") return "reachout";
@@ -94,6 +95,12 @@ export const NavBar = () => {
                   onClick={() => navigate("/experience")}
               >
                 Experience
+              </Nav.Link>
+              <Nav.Link
+                  className={activeLink === "certifications" ? "active navbar-link" : "navbar-link"}
+                  onClick={() => navigate("/certifications")}
+              >
+                Certifications
               </Nav.Link>
               <Nav.Link
                   className={activeLink === "achievements" ? "active navbar-link" : "navbar-link"}

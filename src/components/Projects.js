@@ -5,16 +5,16 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export const Projects = () => {
-    const [projects, setProjectsData] = useState([]);
+    const [projects, setProjects] = useState([]);
 
     useEffect(() => {
         const fetchProjects = async () => {
             try {
                 const url = 'https://raw.githubusercontent.com/garvkumar68/Portfolio/json-data/projects.json';
                 const response = await axios.get(url);
-                setProjectsData(response.data);
+                setProjects(response.data);
             } catch (err) {
-                console.error('Error fetching projects from GitHub', err);
+                console.error('Error fetching projects data from GitHub', err);
             }
         };
 
@@ -36,31 +36,33 @@ export const Projects = () => {
                                         Click on any project title to view details or source code.
                                     </p>
                                     <div className="divided-grid">
-                                        <Row className="g-4 justify-content-center">
+                                        <Row className="g-4 justify-content-start">
                                             {projects.map((project, index) => (
                                                 <Col xs={12} sm={6} md={4} lg={3} key={index} className="d-flex align-items-stretch">
-                                                    <div className="divided-card">
-                                                        <div className="proj-imgbx">
-                                                            <img
-                                                                src={(project.imgUrl) || "/assets/fallback-image/fallback-image.png"}
-                                                                alt={project.title}
-                                                                onError={(e) => {
-                                                                    e.target.onerror = null;
-                                                                    e.target.src = process.env.PUBLIC_URL + "/assets/fallback-image/fallback-image.png";
-                                                                }}
-                                                            />
-                                                            <div className="proj-txtx">
-                                                                <span>{project.description}</span>
-                                                            </div>
-                                                        </div>
-                                                        <button className={`proj-btn ${!project.link.trim() ? 'disabled' : ''}`}>
-                                                            <div className="col-title">
-                                                                <a href={project.link.trim() || '#'} target="_blank" rel="noopener noreferrer">
-                                                                    <h4>{project.title}</h4>
-                                                                </a>
-                                                            </div>
-                                                        </button>
-                                                    </div>
+                                                     <div className="divided-card">
+                                                         <div className="proj-imgbx">
+                                                             <img
+                                                                 src={(project.imgUrl) || "/assets/fallback-image/fallback-image.png"}
+                                                                 alt={project.title}
+                                                                 onError={(e) => {
+                                                                     e.target.onerror = null;
+                                                                     e.target.src = process.env.PUBLIC_URL + "/assets/fallback-image/fallback-image.png";
+                                                                 }}
+                                                             />
+                                                             <div className="proj-txtx">
+                                                                 <span>{project.description}</span>
+                                                             </div>
+                                                         </div>
+                                                         <div className="card-body">
+                                                             {project.link && project.link.trim() ? (
+                                                                 <a href={project.link.trim()} target="_blank" rel="noopener noreferrer" className="card-title-link">
+                                                                     <h4 className="card-title">{project.title}</h4>
+                                                                 </a>
+                                                             ) : (
+                                                                 <h4 className="card-title">{project.title}</h4>
+                                                             )}
+                                                         </div>
+                                                     </div>
                                                 </Col>
                                             ))}
                                         </Row>

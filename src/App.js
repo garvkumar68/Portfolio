@@ -7,6 +7,7 @@ import { Skills } from "./components/Skills";
 import { Projects } from "./components/Projects";
 import { Experience } from "./components/Experience";
 import { Achievements } from "./components/Achievements";
+import { Certifications } from "./components/Certifications";
 import { Contact } from "./components/Contact";
 import { ProfessionalSection } from './components/ProfessionalSection';
 import { BlackHole } from "./components/BlackHole";
@@ -54,6 +55,13 @@ const ExperiencePage = () => (
   </div>
 );
 
+const CertificationsPage = () => (
+  <div className="page-container animate__animated animate__fadeIn">
+    <NavBar />
+    <Certifications />
+  </div>
+);
+
 const AchievementsPage = () => (
   <div className="page-container animate__animated animate__fadeIn">
     <NavBar />
@@ -85,6 +93,7 @@ function App() {
           <Route path="/skills" element={<SkillsPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/experience" element={<ExperiencePage />} />
+          <Route path="/certifications" element={<CertificationsPage />} />
           <Route path="/achievements" element={<AchievementsPage />} />
           <Route path="/resume" element={<ResumePage />} />
           <Route path="/reachout" element={<ReachoutPage />} />

@@ -11,21 +11,26 @@ export const Experience = () => {
     useEffect(() => {
         const fetchExperienceData = async () => {
             try {
-                // Fetch Professional Experience (experience.json)
-                const expUrl = 'https://raw.githubusercontent.com/garvkumar68/Portfolio/json-data/experience.json';
-                const expResponse = await axios.get(expUrl);
-                setProfessionalExp(expResponse.data);
-
-                // Fetch Academic Education (education.json)
-                const eduUrl = 'https://raw.githubusercontent.com/garvkumar68/Portfolio/json-data/education.json';
-                const eduResponse = await axios.get(eduUrl);
-                setEducation(eduResponse.data);
+                const url = 'https://raw.githubusercontent.com/garvkumar68/Portfolio/json-data/experience.json';
+                const response = await axios.get(url);
+                setProfessionalExp(response.data);
             } catch (err) {
-                console.error('Error fetching experience/education data from GitHub', err);
+                console.error('Error fetching experience data from GitHub', err);
+            }
+        };
+
+        const fetchEducationData = async () => {
+            try {
+                const url = 'https://raw.githubusercontent.com/garvkumar68/Portfolio/json-data/education.json';
+                const response = await axios.get(url);
+                setEducation(response.data);
+            } catch (err) {
+                console.error('Error fetching education data from GitHub', err);
             }
         };
 
         fetchExperienceData();
+        fetchEducationData();
     }, []);
 
     return (
@@ -36,7 +41,7 @@ export const Experience = () => {
                         <TrackVisibility>
                             {({ isVisible }) => (
                                 <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                                    <h2 className="section-title">Professional Experience</h2>
+                                    <h2 className="section-title">Experience & Education</h2>
                                     <p className="section-subtitle">
                                         An overview of my engineering history, research work, and academic background.
                                     </p>
@@ -44,8 +49,10 @@ export const Experience = () => {
                                     {/* Professional Experience Section */}
                                     <h3 className="divided-subheading">Work & Research Experience</h3>
                                     <div className="divided-grid mb-5">
-                                        <Row className="g-4 justify-content-center">
-                                            {professionalExp.map((item, index) => (
+                                        <Row className="g-4 justify-content-start">
+                                            {professionalExp
+                                                .filter(item => !item.title.toLowerCase().includes("certification*") && !item.title.toLowerCase().includes("certification"))
+                                                .map((item, index) => (
                                                 <Col xs={12} sm={6} md={4} lg={3} key={index} className="d-flex align-items-stretch">
                                                     <div className="divided-card">
                                                         <div className="proj-imgbx">
@@ -61,13 +68,15 @@ export const Experience = () => {
                                                                 <span>{item.description}</span>
                                                             </div>
                                                         </div>
-                                                        <button className={`proj-btn ${!item.link.trim() ? 'disabled' : ''}`}>
-                                                            <div className="col-title">
-                                                                <a href={item.link.trim() || '#'} target="_blank" rel="noopener noreferrer">
-                                                                    <h4>{item.title}</h4>
+                                                        <div className="card-body">
+                                                            {item.link && item.link.trim() ? (
+                                                                <a href={item.link.trim()} target="_blank" rel="noopener noreferrer" className="card-title-link">
+                                                                    <h4 className="card-title">{item.title}</h4>
                                                                 </a>
-                                                            </div>
-                                                        </button>
+                                                            ) : (
+                                                                <h4 className="card-title">{item.title}</h4>
+                                                            )}
+                                                        </div>
                                                     </div>
                                                 </Col>
                                             ))}
@@ -77,7 +86,7 @@ export const Experience = () => {
                                     {/* Education Section */}
                                     <h3 className="divided-subheading mt-5">Education</h3>
                                     <div className="divided-grid">
-                                        <Row className="g-4 justify-content-center">
+                                        <Row className="g-4 justify-content-start">
                                             {education.map((item, index) => (
                                                 <Col xs={12} sm={6} md={4} lg={3} key={index} className="d-flex align-items-stretch">
                                                     <div className="divided-card">
@@ -94,13 +103,15 @@ export const Experience = () => {
                                                                 <span>{item.description}</span>
                                                             </div>
                                                         </div>
-                                                        <button className={`proj-btn ${!item.link.trim() ? 'disabled' : ''}`}>
-                                                            <div className="col-title">
-                                                                <a href={item.link.trim() || '#'} target="_blank" rel="noopener noreferrer">
-                                                                    <h4>{item.title}</h4>
+                                                        <div className="card-body">
+                                                            {item.link && item.link.trim() ? (
+                                                                <a href={item.link.trim()} target="_blank" rel="noopener noreferrer" className="card-title-link">
+                                                                    <h4 className="card-title">{item.title}</h4>
                                                                 </a>
-                                                            </div>
-                                                        </button>
+                                                            ) : (
+                                                                <h4 className="card-title">{item.title}</h4>
+                                                            )}
+                                                        </div>
                                                     </div>
                                                 </Col>
                                             ))}

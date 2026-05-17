@@ -1,18 +1,20 @@
 /************ Custom Font ************/
 @font-face {
-	font-family: Centra;
-	src: url('./assets/font/CentraNo2-Bold.ttf');
-	font-weight: 700;
+  font-family: Centra;
+  src: url('./assets/font/CentraNo2-Bold.ttf');
+  font-weight: 700;
 }
+
 @font-face {
-	font-family: Centra;
-	src: url('./assets/font/CentraNo2-Medium.ttf');
-	font-weight: 500;
+  font-family: Centra;
+  src: url('./assets/font/CentraNo2-Medium.ttf');
+  font-weight: 500;
 }
+
 @font-face {
-	font-family: Centra;
-	src: url('./assets/font/CentraNo2-Book.ttf');
-	font-weight: 400;
+  font-family: Centra;
+  src: url('./assets/font/CentraNo2-Book.ttf');
+  font-weight: 400;
 }
 
 /************ Default Css ************/
@@ -25,8 +27,10 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 75px;
-  scrollbar-width: none;       /* Firefox */
-  -ms-overflow-style: none;   /* IE/Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
 }
 
 body {
@@ -44,7 +48,7 @@ body {
 }
 
 .page-container {
-  padding-top: 150px !important;
+  padding-top: 120px !important; /* Balanced with the new larger header size */
   padding-bottom: 80px !important;
   min-height: 100vh;
   position: relative;
@@ -52,13 +56,30 @@ body {
   background-color: #000;
 }
 
-h1, h2, h3, h4, h5, h6 {
+/* Eliminate excessive gap under the header on all subpages */
+.page-container .project,
+.page-container .skills-section,
+.page-container .contact,
+.page-container .professional-section-container {
+  padding-top: 10px !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   padding: 0;
   line-height: normal;
 }
 
-p, a, li, button, ul {
+p,
+a,
+li,
+button,
+ul {
   margin: 0;
   padding: 0;
   line-height: normal;
@@ -79,28 +100,31 @@ button {
   background-color: transparent;
 }
 
-input:focus, textarea:focus, select:focus {
+input:focus,
+textarea:focus,
+select:focus {
   outline: none;
 }
 
 @media (min-width:1700px) {
-	main .container {
-		max-width: 100%;
-		padding: 0 150px;
-	}
+  main .container {
+    max-width: 100%;
+    padding: 0 150px;
+  }
 }
 
 p.success {
-	color: green;
+  color: green;
 }
 
 p.danger {
-	color: red;
+  color: red;
 }
 
 /************ Navbar Css ************/
 nav.navbar {
-  padding: 18px 0;
+  padding: 16px 0;
+  /* Premium, highly spacious header padding */
   position: fixed;
   width: 100%;
   top: 0;
@@ -109,25 +133,41 @@ nav.navbar {
 }
 
 nav.navbar.scrolled {
-  padding: 0px 0;
+  padding: 8px 0;
+  /* Balanced thin scroll padding */
   background-color: #000000;
 }
 
+.navbar-logo {
+  height: 84px !important;
+  /* Even bigger, high-profile personal branding */
+  width: 84px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  border: 2.5px solid rgba(255, 255, 255, 0.25) !important;
+  display: block;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
 .navbar-link.active {
-  color: #007bff;  /* Active link color */
+  color: #007bff;
+  /* Active link color */
   font-weight: bold;
 }
 
 nav.navbar a.navbar-brand {
-  width: 9%;
+  width: auto !important;
+  /* Remove static grid width distorting logo */
 }
 
 nav.navbar .navbar-nav .nav-link.navbar-link {
-  font-weight: 400;
+  font-weight: 500;
   color: #fff !important;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.6px;
   padding: 0 12px;
-  font-size: 17px;
+  /* Adjusted padding for perfect spacing */
+  font-size: 16.5px;
+  /* Scaled up by 20% */
   opacity: 0.75;
 }
 
@@ -143,27 +183,31 @@ span.navbar-text {
 }
 
 .social-icon {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   margin-left: 14px;
 }
 
 .social-icon a {
-  width: 42px;
-  height: 42px;
+  width: 32px !important;
+  /* Smaller icon circle dimensions */
+  height: 32px !important;
   display: inline-flex;
   border-radius: 50%;
   margin-right: 6px;
-  margin-bottom: 20px;
+  margin-bottom: 0 !important;
+  /* Remove bottom margin to align middle */
   align-items: center;
   justify-content: center;
   line-height: 1;
-  border: 1px solid white;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  position: relative;
 }
 
 .social-icon a::before {
   content: "";
-  width: 42px;
-  height: 42px;
+  width: 32px !important;
+  height: 32px !important;
   position: absolute;
   background-color: rgba(0, 139, 104, 0.8);
   border-radius: 50%;
@@ -176,7 +220,8 @@ span.navbar-text {
 }
 
 .social-icon a img {
-  width: 40%;
+  width: 45% !important;
+  /* Keep icons relative and clean */
   z-index: 1;
   transition: 0.3s ease-in-out;
 }
@@ -187,17 +232,21 @@ span.navbar-text {
 
 /* Shrinking the Reach Out Button */
 .navbar-text button {
-  font-weight: 700;
+  font-weight: 600;
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  padding: 12px 40px;  /* Increased padding for a wider button */
-  font-size: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  padding: 8px 18px !important;
+  /* Clean, compact padding */
+  font-size: 13px !important;
+  /* Sleek, high-impact font size */
   margin-left: 12px;
   position: relative;
   background-color: transparent;
-  border-radius: 20px;  /* Round edges */
+  border-radius: 14px !important;
+  /* Beautiful rounded rectangle corners */
   transition: 0.3s ease-in-out, background 0.3s ease, color 0.3s ease;
-  overflow: hidden; /* Contain effects */
+  overflow: hidden;
+  /* Contain effects */
 }
 
 /* Shine Effect for Button */
@@ -208,7 +257,8 @@ span.navbar-text {
   left: -100%;
   width: 200%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.2); /* Subtle shine effect */
+  background: rgba(255, 255, 255, 0.2);
+  /* Subtle shine effect */
   transform: skewX(-45deg);
   transition: left 0.5s ease;
   z-index: 0;
@@ -217,13 +267,15 @@ span.navbar-text {
 /* Hover Effects */
 .navbar-text button:hover {
   background: linear-gradient(90deg, rgba(0, 139, 104, 0.8), #00695c 111.58%);
-  color: black !important;  /* Change text color on hover */
+  color: black !important;
+  /* Change text color on hover */
   border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
 /* Shine Effect on Hover */
 .navbar-text button:hover::before {
-  left: 100%;  /* Shine moves across */
+  left: 100%;
+  /* Shine moves across */
 }
 
 /* Hover Effect for Text */
@@ -302,7 +354,8 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%; /* Full coverage */
+  height: 100%;
+  /* Full coverage */
   pointer-events: none;
   z-index: 1;
 }
@@ -314,14 +367,18 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   background: white;
   border-radius: 50%;
   opacity: 0.8;
-  animation: starTwinkle 2s ease-in-out infinite, starFloat 3s linear infinite; /* Increased speed */
+  animation: starTwinkle 2s ease-in-out infinite, starFloat 3s linear infinite;
+  /* Increased speed */
 }
 
 /* Twinkling Effect */
 @keyframes starTwinkle {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.8;
   }
+
   50% {
     opacity: 0.4;
   }
@@ -332,8 +389,10 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   0% {
     transform: translateY(0);
   }
+
   100% {
-    transform: translateY(-100px); /* Faster upward movement */
+    transform: translateY(-100px);
+    /* Faster upward movement */
   }
 }
 
@@ -361,9 +420,11 @@ h1 {
   padding: 10px 20px;
   border-radius: 20px !important;
   transition: background 0.3s ease, color 0.3s ease;
-  z-index: 10; /* Keeps button on top */
+  z-index: 10;
+  /* Keeps button on top */
   position: relative;
-  overflow: hidden; /* Contain effects */
+  overflow: hidden;
+  /* Contain effects */
 }
 
 /* Shine Effect for Button */
@@ -374,7 +435,8 @@ h1 {
   left: -100%;
   width: 200%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.2); /* Subtle shine effect */
+  background: rgba(255, 255, 255, 0.2);
+  /* Subtle shine effect */
   transform: skewX(-45deg);
   transition: left 0.5s ease;
   z-index: 0;
@@ -383,20 +445,23 @@ h1 {
 /* Hover Effects for Button */
 .banner button:hover {
   background: linear-gradient(90deg, rgba(0, 139, 104, 0.8), #00695c 111.58%);
-  color: black !important; /* Force text color change */
+  color: black !important;
+  /* Force text color change */
   border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
 /* Shine Effect on Hover for Button */
 .banner button:hover::before {
-  left: 100%; /* Shine moves across */
+  left: 100%;
+  /* Shine moves across */
 }
 
 /* Tagline with Gradient Background */
 .banner .tagline {
   font-weight: 700;
   letter-spacing: 1px;
-  padding: 8px 20px; /* Adjust padding */
+  padding: 8px 20px;
+  /* Adjust padding */
   background: linear-gradient(90deg, #00695c -5.91%, rgba(0, 139, 104, 0.5) 111.58%);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 20px !important;
@@ -405,7 +470,8 @@ h1 {
   display: inline-block;
   transition: all 0.3s ease;
   position: relative;
-  overflow: hidden; /* Contain effects */
+  overflow: hidden;
+  /* Contain effects */
   z-index: 1;
   color: white;
 }
@@ -418,21 +484,24 @@ h1 {
   left: -100%;
   width: 200%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.2); /* Subtle shine effect */
+  background: rgba(255, 255, 255, 0.2);
+  /* Subtle shine effect */
   transform: skewX(-45deg);
   transition: left 0.5s ease;
   z-index: 0;
 }
 
 .banner .tagline:hover::before {
-  left: 100%; /* Shine moves across */
+  left: 100%;
+  /* Shine moves across */
 }
 
 /* Hover Effect for Tagline */
 .banner .tagline:hover {
   background: linear-gradient(90deg, rgba(0, 139, 104, 0.8), #00695c 111.58%);
   border: 1px solid rgba(255, 255, 255, 0.8);
-  color: black; /* Change text color on hover */
+  color: black;
+  /* Change text color on hover */
 }
 
 
@@ -477,7 +546,8 @@ h1 {
 
 .banner button:hover svg {
   margin-left: 25px;
-  transform: scale(1.1); /* Slightly larger icon on hover */
+  transform: scale(1.1);
+  /* Slightly larger icon on hover */
 }
 
 /* Image Animation */
@@ -490,16 +560,18 @@ h1 {
   0% {
     transform: translateY(-10px);
   }
+
   50% {
     transform: translateY(10px);
   }
+
   100% {
     transform: translateY(-10px);
   }
 }
 
 /* Typing Effect Cursor */
-.txt-rotate > .wrap {
+.txt-rotate>.wrap {
   border-right: 0.08em solid #666;
 }
 
@@ -511,33 +583,39 @@ h1 {
   font-weight: bold;
   color: #fff;
 }
+
 /************ Skills Css ************/
 .skill {
   padding: 0 0 50px 0;
   position: relative;
   background: transparent;
-  color: #f0f0f0; /* Light text for better contrast */
+  color: #f0f0f0;
+  /* Light text for better contrast */
 }
 
 .skill-bx {
-  background: rgba(0, 0, 0, 0.85); /* Semi-transparent black background */
+  background: rgba(0, 0, 0, 0.85);
+  /* Semi-transparent black background */
   border-radius: 64px;
   text-align: center;
   padding: 60px 50px;
   margin-top: -60px;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  /* Add shadow for depth */
 }
 
 .skill h2 {
   font-size: 48px;
   font-weight: 700;
-  color: #ffffff; /* Bright heading */
+  color: #ffffff;
+  /* Bright heading */
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
 .skill p {
-  color: #cccccc; /* Softer light gray for text */
+  color: #cccccc;
+  /* Softer light gray for text */
   font-size: 18px;
   letter-spacing: 1px;
   line-height: 1.6em;
@@ -555,7 +633,8 @@ h1 {
 }
 
 .skill-slider .item .meter-container {
-  width: 70%; /* Adjust size for better visibility */
+  width: 70%;
+  /* Adjust size for better visibility */
   margin: 0 auto 20px auto;
 }
 
@@ -573,7 +652,8 @@ h1 {
   bottom: 0;
   width: 35%;
   z-index: -4;
-  opacity: 0.7; /* Subtle background image */
+  opacity: 0.7;
+  /* Subtle background image */
 }
 
 .meter-container {
@@ -587,18 +667,21 @@ h1 {
 
 .odometer-background {
   fill: none;
-  stroke: #333333; /* Dark gray background stroke */
+  stroke: #333333;
+  /* Dark gray background stroke */
   stroke-width: 18;
 }
 
 .odometer-progress {
   fill: none;
-  stroke: url(#gradient); /* Use gradient for progress bar */
+  stroke: url(#gradient);
+  /* Use gradient for progress bar */
   stroke-width: 18;
   stroke-linecap: round;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
-  transition: stroke-dashoffset 0.5s ease-in-out; /* Smooth transition */
+  transition: stroke-dashoffset 0.5s ease-in-out;
+  /* Smooth transition */
 }
 
 .odometer-text {
@@ -606,7 +689,8 @@ h1 {
   font-size: 28px;
   font-weight: bold;
   fill: #ffffff;
-  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6); /* Text shadow for visibility */
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
+  /* Text shadow for visibility */
 }
 
 /************ Skill Responsive Adjustments ************/
@@ -614,15 +698,19 @@ h1 {
   .skill-bx {
     padding: 40px 30px;
   }
+
   .skill h2 {
     font-size: 38px;
   }
+
   .skill p {
     font-size: 16px;
   }
+
   .skill-slider {
     width: 90%;
   }
+
   .meter-container {
     width: 150px;
     height: 150px;
@@ -633,9 +721,11 @@ h1 {
   .skill h2 {
     font-size: 32px;
   }
+
   .skill p {
     font-size: 14px;
   }
+
   .meter-container {
     width: 130px;
     height: 130px;
@@ -646,9 +736,11 @@ h1 {
   .skill h2 {
     font-size: 28px;
   }
+
   .skill p {
     font-size: 12px;
   }
+
   .meter-container {
     width: 100px;
     height: 100px;
@@ -667,12 +759,15 @@ h1 {
   font-weight: 700;
   text-align: center;
 }
+
 a {
-  text-decoration: none !important; /* Removes the underline */
+  text-decoration: none !important;
+  /* Removes the underline */
 }
 
 a:hover {
-  text-decoration: none !important; /* Ensures no underline on hover */
+  text-decoration: none !important;
+  /* Ensures no underline on hover */
 }
 
 
@@ -682,10 +777,14 @@ a:hover {
   letter-spacing: 0.8px;
   line-height: 1.5em;
   margin: 14px auto 30px;
-  text-align: justify; /* Changed from center to justify */
-  max-width: 80%; /* Increased max-width to make it larger */
-  width: 100%; /* Ensures the text uses available space */
-  padding: 0 15px; /* Optional padding to ensure text doesn't touch the sides */
+  text-align: justify;
+  /* Changed from center to justify */
+  max-width: 80%;
+  /* Increased max-width to make it larger */
+  width: 100%;
+  /* Ensures the text uses available space */
+  padding: 0 15px;
+  /* Optional padding to ensure text doesn't touch the sides */
 }
 
 
@@ -735,7 +834,8 @@ a:hover {
 }
 
 .project .nav-pills .nav-link:hover::before {
-  left: 100%; /* Shine moves across */
+  left: 100%;
+  /* Shine moves across */
 }
 
 /* Active Button Style */
@@ -755,43 +855,58 @@ a:hover {
 
 /* Container for the project cards */
 .scrollable-projects {
-  height: 490px;  /* Adjust this value to fit your design needs */
-  overflow-x: hidden;  /* Removes vertical scrollbar */
-  overflow-y: hidden;  /* Removes vertical scrollbar */
+  height: 490px;
+  /* Adjust this value to fit your design needs */
+  overflow-x: hidden;
+  /* Removes vertical scrollbar */
+  overflow-y: hidden;
+  /* Removes vertical scrollbar */
   margin-bottom: 30px;
-  padding-right: 10px;  /* Prevent scrollbar overlap */
+  padding-right: 10px;
+  /* Prevent scrollbar overlap */
   display: flex;
   flex-direction: column;
 }
+
 /* Show the scrollbar when the user hovers over the section */
 .scrollable-projects:hover {
-  overflow-y: scroll;  /* Show the vertical scrollbar on hover */
+  overflow-y: scroll;
+  /* Show the vertical scrollbar on hover */
 }
 
 /* Custom Scrollbar Styles */
 .scrollable-projects::-webkit-scrollbar {
-  width: 8px;  /* Narrow scrollbar */
+  width: 8px;
+  /* Narrow scrollbar */
 }
 
 .scrollable-projects::-webkit-scrollbar-thumb {
-  background-color:  grey;  /* Subtle, transparent thumb */
-  border-radius: 30px;  /* Rounded thumb */
-  transition: background-color 0.3s ease;  /* Smooth transition effect */
+  background-color: grey;
+  /* Subtle, transparent thumb */
+  border-radius: 30px;
+  /* Rounded thumb */
+  transition: background-color 0.3s ease;
+  /* Smooth transition effect */
 }
 
 .scrollable-projects::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(0, 139, 104, 0.8);  /* Darker thumb color on hover */
+  background-color: rgba(0, 139, 104, 0.8);
+  /* Darker thumb color on hover */
 }
 
 .scrollable-projects::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);  /* Light, subtle track color */
-  border-radius: 30px;  /* Rounded track */
+  background: rgba(0, 0, 0, 0.1);
+  /* Light, subtle track color */
+  border-radius: 30px;
+  /* Rounded track */
 }
 
 /* Optional: Adding a shadow effect to the scrollbar for a more modern look */
 .scrollable-projects::-webkit-scrollbar {
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);  /* Shadow for depth */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+  /* Shadow for depth */
 }
+
 .scroll-container {
   margin-top: 20px;
   padding-top: 20px;
@@ -810,6 +925,7 @@ a:hover {
   box-sizing: border-box;
   margin-bottom: 30px;
 }
+
 @media (max-width: 768px) {
   .scrollable-projects .col-md-4 {
     flex: 0 0 48%;
@@ -847,23 +963,28 @@ a:hover {
 }
 
 .project .card-row .proj-imgbx .proj-txtx h4 {
-  font-size: 2vw; /* Responsive font size */
+  font-size: 2vw;
+  /* Responsive font size */
 }
 
 .project .card-row .proj-imgbx .proj-txtx span {
-  font-size: 1.2vw; /* Responsive font size */
+  font-size: 1.2vw;
+  /* Responsive font size */
 }
 
 /* Responsive Design Adjustments */
 @media (max-width: 768px) {
   .project .card-row .proj-imgbx {
-    flex: 1 1 calc(50% - 20px); /* 2 cards per row on smaller screens */
+    flex: 1 1 calc(50% - 20px);
+    /* 2 cards per row on smaller screens */
   }
 
 }
+
 @media (max-width: 480px) {
   .project .card-row .proj-imgbx {
-    flex: 1 1 100%; /* 1 card per row on very small screens */
+    flex: 1 1 100%;
+    /* 1 card per row on very small screens */
   }
 }
 
@@ -919,7 +1040,8 @@ a:hover {
   color: white;
   font-style: italic;
   font-weight: 300;
-  font-size: 0.8vw; /* Relative font size */
+  font-size: 0.8vw;
+  /* Relative font size */
   letter-spacing: 0.8px;
 }
 
@@ -942,16 +1064,20 @@ a:hover {
   top: 50%;
   opacity: 1;
 }
+
 /* Responsive Design Adjustments */
 @media (max-width: 768px) {
   .proj-imgbx .proj-txtx span {
-    font-size: 0.9vw; /* Relative font size */
+    font-size: 0.9vw;
+    /* Relative font size */
   }
 
 }
+
 @media (max-width: 480px) {
   .proj-imgbx .proj-txtx span {
-    font-size: 2.8vw; /* Relative font size */
+    font-size: 2.8vw;
+    /* Relative font size */
   }
 }
 
@@ -1021,41 +1147,50 @@ a:hover {
 
 .proj-btn.disabled {
   pointer-events: none;
-  opacity: 0.5; /* Optional: Dim the button to show it's disabled */
+  opacity: 0.5;
+  /* Optional: Dim the button to show it's disabled */
 }
 
 
 /* Media Query for tablets and smaller screens */
 @media (max-width: 768px) {
   .proj-btn {
-    padding: 8px 16px;  /* Adjust padding for smaller screens */
+    padding: 8px 16px;
+    /* Adjust padding for smaller screens */
   }
 
   .proj-btn .col-title h4 {
-    font-size: 1.25rem;  /* Reduce font size for smaller screens */
-    padding: 6px 10px;   /* Adjust padding for smaller screens */
+    font-size: 1.25rem;
+    /* Reduce font size for smaller screens */
+    padding: 6px 10px;
+    /* Adjust padding for smaller screens */
   }
 
   /* Hover effect for title */
   .proj-btn .col-title h4:hover {
-    transform: scale(1.02); /* Slightly reduce hover scaling */
+    transform: scale(1.02);
+    /* Slightly reduce hover scaling */
   }
 }
 
 /* Media Query for mobile screens */
 @media (max-width: 480px) {
   .proj-btn {
-    padding: 6px 12px;  /* Reduce padding for very small screens */
+    padding: 6px 12px;
+    /* Reduce padding for very small screens */
   }
 
   .proj-btn .col-title h4 {
-    font-size: 1.1rem;   /* Further reduce font size for mobile screens */
-    padding: 4px 8px;    /* Adjust padding for mobile screens */
+    font-size: 1.1rem;
+    /* Further reduce font size for mobile screens */
+    padding: 4px 8px;
+    /* Adjust padding for mobile screens */
   }
 
   /* Hover effect for title */
   .proj-btn .col-title h4:hover {
-    transform: scale(1.01); /* Further reduce hover scaling */
+    transform: scale(1.01);
+    /* Further reduce hover scaling */
   }
 }
 
@@ -1063,18 +1198,23 @@ a:hover {
 
 /************ Contact Css ************/
 .contact {
-  background: linear-gradient(to bottom, #111111, #0d0d0d); /* Gradient from dark gray to black */
+  background: linear-gradient(to bottom, #111111, #0d0d0d);
+  /* Gradient from dark gray to black */
   padding: 60px 0 50px 0;
 }
+
 .contact img {
   width: 92%;
 }
+
 .contact h2 {
-	font-size: 45px;
-	font-weight: 700;
+  font-size: 45px;
+  font-weight: 700;
   margin-bottom: 30px;
 }
-.contact form input, .contact form textarea {
+
+.contact form input,
+.contact form textarea {
   width: 100%;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -1087,32 +1227,43 @@ a:hover {
   letter-spacing: 0.8px;
   transition: 0.3s ease-in-out;
 }
-.contact form input:focus, .contact form textarea:focus {
+
+.contact form input:focus,
+.contact form textarea:focus {
   background: rgba(255, 255, 255, 1);
   color: #121212;
 }
-.contact form input::placeholder, .contact form textarea::placeholder {
+
+.contact form input::placeholder,
+.contact form textarea::placeholder {
   font-size: 16px;
   font-weight: 400;
   color: #fff;
 }
-.contact form input:focus::placeholder, .contact form textarea:focus::placeholder {
+
+.contact form input:focus::placeholder,
+.contact form textarea:focus::placeholder {
   color: #121212;
   opacity: 0.8;
 }
 
 .contact form button {
   font-weight: 700;
-  color: #fff; /* White text */
-  background-color: #2a2a2a; /* Button background color to match .prof-btn */
+  color: #fff;
+  /* White text */
+  background-color: #2a2a2a;
+  /* Button background color to match .prof-btn */
   padding: 14px 48px;
   font-size: 18px;
   margin-top: 25px;
-  border: none; /* Remove border */
-  border-radius: 50px; /* Rounded corners */
+  border: none;
+  /* Remove border */
+  border-radius: 50px;
+  /* Rounded corners */
   cursor: pointer;
   position: relative;
-  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  transition: all 0.3s ease;
+  /* Smooth transition for hover effects */
 }
 
 .contact form button span {
@@ -1121,14 +1272,18 @@ a:hover {
 }
 
 .contact form button:hover {
-  transform: scale(1.05); /* Slightly enlarge on hover */
-  background-color: rgba(0, 139, 104, 0.8); /* Hover background color to match .prof-btn */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Add hover shadow */
+  transform: scale(1.05);
+  /* Slightly enlarge on hover */
+  background-color: rgba(0, 139, 104, 0.8);
+  /* Hover background color to match .prof-btn */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  /* Add hover shadow */
 }
 
 .contact form button::before {
   content: "";
-  background: #121212; /* Dark background for the button before hover */
+  background: #121212;
+  /* Dark background for the button before hover */
   width: 0;
   height: 100%;
   position: absolute;
@@ -1144,36 +1299,46 @@ a:hover {
 
 /************ Section Styles ************/
 .professional-section-container {
-  padding: 50px 20px; /* Padding around the section */
-  background: linear-gradient(to bottom, #0d0d0d, black); /* Gradient from dark gray to black */
+  padding: 50px 20px;
+  /* Padding around the section */
+  background: linear-gradient(to bottom, #0d0d0d, black);
+  /* Gradient from dark gray to black */
   display: flex;
-  justify-content: center; /* Center the content horizontally */
-  align-items: center; /* Center the content vertically */
+  justify-content: center;
+  /* Center the content horizontally */
+  align-items: center;
+  /* Center the content vertically */
 }
 
 /************ Box Styles ************/
 .professional-section-box {
-  padding: 20px; /* Add padding inside the box */
+  padding: 20px;
+  /* Add padding inside the box */
   background: rgba(255, 255, 255, 0.05);
   border-radius: 28px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  max-width: 1240px; /* Max width to control the size of the box */
-  width: 100%; /* Ensures it takes up full width up to max-width */
+  max-width: 1240px;
+  /* Max width to control the size of the box */
+  width: 100%;
+  /* Ensures it takes up full width up to max-width */
   margin-left: auto;
-  margin-right: auto; /* Center the box horizontally */
+  margin-right: auto;
+  /* Center the box horizontally */
 }
 
 .professional-section-box h3 {
   font-size: 2rem;
   margin-bottom: 15px;
-  color: #fff; /* White text for the heading */
+  color: #fff;
+  /* White text for the heading */
   text-align: center;
 }
 
 .professional-section-box p {
   font-size: 1rem;
   margin-bottom: 20px;
-  color: #ddd; /* Lighter text color for the description */
+  color: #ddd;
+  /* Lighter text color for the description */
   text-align: center;
 
 }
@@ -1188,41 +1353,57 @@ a:hover {
 
 /************ Button Styles ************/
 .buttons-container {
-  display: flex; /* Arrange buttons side by side */
-  justify-content: center; /* Center the buttons horizontally */
-  align-items: center; /* Align buttons vertically */
-  gap: 20px; /* Add space between the buttons */
-  margin: 20px auto; /* Center the container and add top margin */
-  width: 100%; /* Ensure the container spans the full width */
+  display: flex;
+  /* Arrange buttons side by side */
+  justify-content: center;
+  /* Center the buttons horizontally */
+  align-items: center;
+  /* Align buttons vertically */
+  gap: 20px;
+  /* Add space between the buttons */
+  margin: 20px auto;
+  /* Center the container and add top margin */
+  width: 100%;
+  /* Ensure the container spans the full width */
 }
 
 .prof-btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 16px 32px; /* Adjust padding for larger buttons */
-  background-color: #2a2a2a; /* Button background color */
-  border: none; /* Remove default border */
-  border-radius: 50px; /* Add rounded corners */
+  padding: 16px 32px;
+  /* Adjust padding for larger buttons */
+  background-color: #2a2a2a;
+  /* Button background color */
+  border: none;
+  /* Remove default border */
+  border-radius: 50px;
+  /* Add rounded corners */
   cursor: pointer;
-  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  transition: all 0.3s ease;
+  /* Smooth transition for hover effects */
 }
 
 .prof-btn a {
-  text-decoration: none; /* Remove underline from links */
+  text-decoration: none;
+  /* Remove underline from links */
 }
 
 .prof-btn h4 {
   color: #fff;
-  font-size: 1.2rem; /* Adjust font size for larger buttons */
+  font-size: 1.2rem;
+  /* Adjust font size for larger buttons */
   font-weight: 500;
   margin: 0;
 }
 
 .prof-btn:hover {
-  transform: scale(1.05); /* Slightly enlarge on hover */
-  background-color: rgba(0, 139, 104, 0.8); /* Change background color on hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Add hover shadow */
+  transform: scale(1.05);
+  /* Slightly enlarge on hover */
+  background-color: rgba(0, 139, 104, 0.8);
+  /* Change background color on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  /* Add hover shadow */
 }
 
 /************ Visume pop up ************/
@@ -1248,6 +1429,7 @@ a:hover {
   width: 100%;
   position: relative;
 }
+
 /* Button to close the modal */
 .close-modal-btn {
   position: absolute;
@@ -1258,8 +1440,10 @@ a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5); /* Slightly darker background */
-  border-radius: 50%; /* Circular button */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Slightly darker background */
+  border-radius: 50%;
+  /* Circular button */
   border: none;
   cursor: pointer;
   color: white;
@@ -1268,17 +1452,21 @@ a:hover {
 }
 
 .close-modal-btn:hover {
-  background-color: rgba(0, 0, 0, 0.7); /* Darker background on hover */
-  transform: scale(1.1); /* Slightly increase size on hover */
+  background-color: rgba(0, 0, 0, 0.7);
+  /* Darker background on hover */
+  transform: scale(1.1);
+  /* Slightly increase size on hover */
 }
 
 .close-modal-btn:active {
-  transform: scale(1.05); /* Slight reduction in size on click */
+  transform: scale(1.05);
+  /* Slight reduction in size on click */
 }
 
 /* Add the "X" symbol */
 .close-modal-btn::before {
-  content: '×'; /* The "X" symbol */
+  content: '×';
+  /* The "X" symbol */
   font-size: 30px;
   font-weight: bold;
 }
@@ -1286,16 +1474,20 @@ a:hover {
 /************ Responsive Adjustments ************/
 @media (max-width: 768px) {
   .buttons-container {
-    flex-direction: column; /* Stack buttons vertically on smaller screens */
-    gap: 15px; /* Adjust spacing */
+    flex-direction: column;
+    /* Stack buttons vertically on smaller screens */
+    gap: 15px;
+    /* Adjust spacing */
   }
 
   .prof-btn {
-    padding: 12px 24px; /* Adjust padding for smaller screens */
+    padding: 12px 24px;
+    /* Adjust padding for smaller screens */
   }
 
   .prof-btn h4 {
-    font-size: 1rem; /* Adjust font size for smaller screens */
+    font-size: 1rem;
+    /* Adjust font size for smaller screens */
   }
 }
 
@@ -1312,7 +1504,8 @@ a:hover {
 }
 
 .footer-logo {
-  width: 120px;  /* Adjust logo size */
+  width: 120px;
+  /* Adjust logo size */
 }
 
 .social-icon {
@@ -1331,8 +1524,10 @@ a:hover {
 }
 
 .social-icon-link:hover img {
-  opacity: 0.7; /* Light opacity on hover */
-  transform: scale(1.1); /* Slight zoom effect */
+  opacity: 0.7;
+  /* Light opacity on hover */
+  transform: scale(1.1);
+  /* Slight zoom effect */
 }
 
 .footer-text {
@@ -1359,11 +1554,14 @@ a:hover {
   .footer-logo {
     width: 100px;
   }
+
   .social-icon img {
     width: 25px;
     height: 25px;
   }
-  .footer-text, .footer-quote {
+
+  .footer-text,
+  .footer-quote {
     font-size: 12px;
   }
 }
@@ -1400,6 +1598,228 @@ a:hover {
   text-align: center;
   margin-top: 40px;
   margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #008b68;
+}
+
+/* Premium Glassmorphic Card Container */
+.divided-card {
+  background: rgba(18, 18, 18, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px; /* Balanced rounded corners */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  width: 100%;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  height: 100%; /* Take full height of container */
+}
+
+.divided-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 139, 104, 0.5);
+  box-shadow: 0 15px 40px rgba(0, 139, 104, 0.2);
+}
+
+/* Image container (Stretches to fill the rest of the card space) */
+.divided-card .proj-imgbx {
+  flex-grow: 1; /* Make the white image container fill all remaining space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  background-color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  min-height: 140px; /* Minimum base height for image area */
+}
+
+.divided-card .proj-imgbx img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  padding: 12px;
+  transition: transform 0.6s ease;
+}
+
+.divided-card:hover .proj-imgbx img {
+  transform: scale(1.05);
+}
+
+/* Card Body Content (Small compact area, edge-to-edge for text, no extra space) */
+.divided-card .card-body {
+  padding: 8px 10px; /* snuggled padding */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: rgba(18, 18, 18, 0.45);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  flex-grow: 0; /* Keep it compact - no extra space! */
+  width: 100%;
+  height: 64px; /* CONSTANT height to force all card dividers to align in a perfect straight row! */
+  min-height: 64px;
+}
+
+.divided-card .card-title-link {
+  text-decoration: none !important;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divided-card .card-title {
+  font-size: 12.5px; /* Extremely clean and balanced font size */
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 !important;
+  line-height: 1.3;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+}
+
+.divided-card .card-title-link:hover .card-title {
+  color: #00dfa2; /* Glowing Teal hover effect on clickable titles */
+  transform: scale(1.01);
+}
+
+/************ Responsive Adjustments ************/
+@media (max-width: 768px) {
+  .buttons-container {
+    flex-direction: column;
+    /* Stack buttons vertically on smaller screens */
+    gap: 15px;
+    /* Adjust spacing */
+  }
+
+  .prof-btn {
+    padding: 12px 24px;
+    /* Adjust padding for smaller screens */
+  }
+
+  .prof-btn h4 {
+    font-size: 1rem;
+    /* Adjust font size for smaller screens */
+  }
+}
+
+
+
+/************ Footer Css ************/
+.footer {
+  padding: 40px 0 30px 0;
+  background-color: #000;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+
+.footer-logo {
+  width: 120px;
+  /* Adjust logo size */
+}
+
+.social-icon {
+  margin-top: 20px;
+}
+
+.social-icon-link {
+  margin: 0 10px;
+  transition: transform 0.3s ease;
+}
+
+.social-icon-link img {
+  width: 30px;
+  height: 30px;
+  transition: opacity 0.3s ease;
+}
+
+.social-icon-link:hover img {
+  opacity: 0.7;
+  /* Light opacity on hover */
+  transform: scale(1.1);
+  /* Slight zoom effect */
+}
+
+.footer-text {
+  font-weight: 400;
+  font-size: 14px;
+  color: #B8B8B8;
+  letter-spacing: 0.5px;
+  margin-top: 20px;
+}
+
+.footer-quote {
+  font-weight: 500;
+  font-size: 16px;
+  color: #F4F4F4;
+  margin-top: 15px;
+  font-style: italic;
+}
+
+.footer .social-icon a {
+  text-decoration: none;
+}
+
+@media (max-width: 576px) {
+  .footer-logo {
+    width: 100px;
+  }
+
+  .social-icon img {
+    width: 25px;
+    height: 25px;
+  }
+
+  .footer-text,
+  .footer-quote {
+    font-size: 12px;
+  }
+}
+
+/* ============================================================================
+   DIVIDED PAGE LAYOUT STYLES
+   ============================================================================ */
+
+.section-title {
+  font-size: 34px;
+  /* Scaled down for a modern, compact layout */
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #fff 0%, rgba(255, 255, 255, 0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-subtitle {
+  color: #B8B8B8;
+  font-size: 15px;
+  /* Scaled down */
+  letter-spacing: 0.8px;
+  line-height: 1.6em;
+  margin: 14px auto 35px;
+  /* Tighter margins */
+  text-align: center;
+  max-width: 65%;
+}
+
+.divided-subheading {
+  font-size: 24px;
+  /* Scaled down for a professional look */
+  font-weight: 700;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   color: #008b68;
@@ -1500,26 +1920,16 @@ a:hover {
 
 .skills-header {
   text-align: left;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   max-width: 800px;
-}
-
-.skills-tag {
-  color: #00dfa2; /* Glowing Teal Tag */
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 12px;
-  font-family: 'Centra', sans-serif;
 }
 
 .skills-title {
   color: #fff;
-  font-size: 64px;
+  font-size: 34px;
+  /* Scaled down for a modern, compact layout */
   font-weight: 700;
-  margin: 0 0 16px 0;
+  margin: 0 0 8px 0;
   font-family: 'Centra', sans-serif;
   letter-spacing: -0.5px;
   text-shadow: 0 0 20px rgba(0, 223, 162, 0.15);
@@ -1527,21 +1937,41 @@ a:hover {
 
 .skills-subtitle {
   color: #8c8c8c;
-  font-size: 19px;
+  font-size: 15px;
+  /* Scaled down */
   letter-spacing: 0.5px;
   margin: 0;
   font-weight: 400;
   line-height: 1.5;
 }
 
-/* Glassmorphic Pill Cards */
+/* Category Subheadings */
+.skills-category-title {
+  font-size: 17px;
+  /* Scaled down for sleek dashboard layout */
+  font-weight: 700;
+  color: #00dfa2;
+  /* Glowing Teal Accent */
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 25px;
+  margin-bottom: 14px;
+  text-align: left;
+  border-left: 3px solid #00dfa2;
+  padding-left: 10px;
+  font-family: 'Centra', sans-serif;
+}
+
+/* Compact Glassmorphic Pill Cards */
 .skill-pill-card {
   background: rgba(13, 13, 13, 0.65);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 18px;
-  padding: 24px 30px;
+  border-radius: 14px;
+  /* Slightly tighter border radius */
+  padding: 14px 20px;
+  /* Scaled down padding */
   transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
@@ -1549,35 +1979,38 @@ a:hover {
 }
 
 .skill-pill-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   border-color: rgba(0, 223, 162, 0.35);
-  box-shadow: 0 15px 35px rgba(0, 223, 162, 0.12);
+  box-shadow: 0 10px 25px rgba(0, 223, 162, 0.12);
 }
 
 .skill-pill-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .skill-pill-name {
   color: #ffffff;
-  font-size: 18px;
+  font-size: 15px;
+  /* Scaled down */
   font-weight: 600;
   letter-spacing: 0.2px;
 }
 
 .skill-pill-percentage {
-  color: #00dfa2; /* Beautiful bright teal percentage */
-  font-size: 16px;
+  color: #00dfa2;
+  font-size: 14px;
+  /* Scaled down */
   font-weight: 700;
   letter-spacing: 0.5px;
 }
 
-/* Horizontal Progress Bar */
+/* Compact Horizontal Progress Bar */
 .skill-pill-bar-track {
-  height: 6px;
+  height: 4px;
+  /* Scaled down bar height */
   width: 100%;
   background: rgba(255, 255, 255, 0.08);
   border-radius: 10px;

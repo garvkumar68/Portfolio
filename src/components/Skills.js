@@ -4,7 +4,7 @@ import axios from "axios";
 import 'animate.css';
 
 export const Skills = () => {
-  const [skills, setSkills] = useState([]); // State for skills data
+  const [skillsCategories, setSkillsCategories] = useState([]); // State for categorized skills data
 
   // Fetch skills data from GitHub
   useEffect(() => {
@@ -12,7 +12,18 @@ export const Skills = () => {
       try {
         const url = "https://raw.githubusercontent.com/garvkumar68/Portfolio/json-data/skillsData.json";
         const response = await axios.get(url);
-        setSkills(response.data.skills);
+        
+        // Handle categorized layout, fallback to legacy flat structure if needed
+        if (response.data.categories) {
+          setSkillsCategories(response.data.categories);
+        } else if (response.data.skills) {
+          setSkillsCategories([
+            {
+              title: "Technical Expertise",
+              skills: response.data.skills
+            }
+          ]);
+        }
       } catch (err) {
         console.error('Error fetching skills from GitHub', err);
       }
@@ -30,24 +41,38 @@ export const Skills = () => {
         </div>
 
         <div className="skills-grid-container">
-          <Row className="g-4">
-            {skills.map((skill, index) => (
-              <Col xs={12} md={6} lg={4} key={index} className="animate__animated animate__fadeInUp" style={{ animationDelay: `${index * 0.05}s` }}>
-                <div className="skill-pill-card">
-                  <div className="skill-pill-info">
-                    <span className="skill-pill-name">{skill.name}</span>
-                    <span className="skill-pill-percentage">{skill.progress}%</span>
-                  </div>
-                  <div className="skill-pill-bar-track">
-                    <div 
-                      className="skill-pill-bar-fill" 
-                      style={{ width: `${skill.progress}%` }}
-                    />
-                  </div>
-                </div>
-              </Col>
-            ))}
-          </Row>
+          {skillsCategories.map((category, catIndex) => (
+            <div key={catIndex} className="skills-category-group mb-5">
+              <h3 className="skills-category-title animate__animated animate__fadeInLeft">
+                {category.title}
+              </h3>
+              <Row className="g-3">
+                {category.skills.map((skill, index) => (
+                  <Col 
+                    xs={12} 
+                    md={6} 
+                    lg={4} 
+                    key={index} 
+                    className="animate__animated animate__fadeInUp" 
+                    style={{ animationDelay: `${index * 0.03}s` }}
+                  >
+                    <div className="skill-pill-card">
+                      <div className="skill-pill-info">
+                        <span className="skill-pill-name">{skill.name}</span>
+                        <span className="skill-pill-percentage">{skill.progress}%</span>
+                      </div>
+                      <div className="skill-pill-bar-track">
+                        <div 
+                          className="skill-pill-bar-fill" 
+                          style={{ width: `${skill.progress}%` }}
+                        />
+                      </div>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+            </div>
+          ))}
         </div>
       </Container>
     </section>
