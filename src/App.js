@@ -26,7 +26,6 @@ const ScrollToTop = () => {
 const HomePage = () => {
   return (
     <>
-      <BlackHole targetId="blackhole-placeholder" />
       <NavBar />
       <Banner />
     </>
@@ -81,6 +80,7 @@ function App() {
     <Router basename="/Portfolio">
       <ScrollToTop />
       <div className="App">
+        <BlackHole targetId="blackhole-placeholder" />
         <MinimalistStarfield />
         <Routes>
           <Route path="/" element={<HomePage />} />

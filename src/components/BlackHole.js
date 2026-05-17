@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import * as THREE from 'three/webgpu';
 import { pass, uniform, Fn, Loop, Break, If, screenUV,
   vec2, vec3, vec4, float,
@@ -10,6 +11,15 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 export const BlackHole = ({ targetId }) => {
   const mountRef = useRef(null);
+  const location = useLocation();
+  const pathname = location.pathname;
+  const isHome = pathname === "/Portfolio" || pathname === "/Portfolio/" || pathname === "/" || pathname.endsWith("/Portfolio") || pathname.endsWith("/Portfolio/");
+
+  const isRunningRef = useRef(isHome);
+
+  useEffect(() => {
+    isRunningRef.current = isHome;
+  }, [isHome]);
 
   useEffect(() => {
     // ============================================================================
@@ -428,7 +438,7 @@ export const BlackHole = ({ targetId }) => {
       const isHome = pathname === "/Portfolio" || pathname === "/Portfolio/" || pathname === "/" || pathname.endsWith("/Portfolio") || pathname.endsWith("/Portfolio/");
       if (!isHome) {
         if (mountRef.current) {
-          mountRef.current.style.opacity = 1.0;
+          mountRef.current.style.opacity = 0.0;
           mountRef.current.style.pointerEvents = 'none';
         }
         return;
@@ -455,37 +465,41 @@ export const BlackHole = ({ targetId }) => {
     function animate() {
       animationFrameId = requestAnimationFrame(animate);
 
+      if (!isRunningRef.current) {
+        if (mountRef.current && mountRef.current.style.opacity !== "0") {
+          mountRef.current.style.opacity = "0";
+        }
+        return; // Exits instantly, consuming 0% GPU/CPU!
+      }
+
       const currentTime = performance.now();
       const deltaTime = Math.min((currentTime - lastFrameTime) / 1000, 0.033);
       lastFrameTime = currentTime;
 
-      const pathname = window.location.pathname;
-      const isHome = pathname === "/Portfolio" || pathname === "/Portfolio/" || pathname === "/" || pathname.endsWith("/Portfolio") || pathname.endsWith("/Portfolio/");
-
-      if (isHome) {
-        uniforms.showBlackHole.value = 1.0;
-        
-        // Skip rendering entirely when fully scrolled away on homepage (save GPU)
+      uniforms.showBlackHole.value = 1.0;
+      
+      // Update opacity on home page based on scroll
+      if (mountRef.current) {
         const scrollY = window.scrollY || window.pageYOffset;
-        if (scrollY >= fadeEndScroll) return;
+        const t = Math.min(Math.max((scrollY - fadeStartScroll) / (fadeEndScroll - fadeStartScroll), 0), 1);
+        mountRef.current.style.opacity = 1 - t;
+      }
 
-        if (targetId) {
-          const targetEl = document.getElementById(targetId);
-          if (targetEl) {
-            const rect = targetEl.getBoundingClientRect();
-            const px = rect.left + rect.width / 2;
-            // Shift up by 8% of viewport height
-            const py = rect.top + rect.height / 2 - window.innerHeight * 0.08;
-            const uvX = px / window.innerWidth;
-            const uvY = 1.0 - (py / window.innerHeight);
+      // Skip rendering entirely when fully scrolled away on homepage (save GPU)
+      const scrollY = window.scrollY || window.pageYOffset;
+      if (scrollY >= fadeEndScroll) return;
 
-            uniforms.screenOffset.value.set(uvX * 2 - 1, uvY * 2 - 1);
-          }
-        }
-      } else {
-        uniforms.showBlackHole.value = 0.0;
-        if (mountRef.current && mountRef.current.style.opacity !== "1") {
-          mountRef.current.style.opacity = "1";
+      if (targetId) {
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          const rect = targetEl.getBoundingClientRect();
+          const px = rect.left + rect.width / 2;
+          // Shift up by 8% of viewport height
+          const py = rect.top + rect.height / 2 - window.innerHeight * 0.08;
+          const uvX = px / window.innerWidth;
+          const uvY = 1.0 - (py / window.innerHeight);
+
+          uniforms.screenOffset.value.set(uvX * 2 - 1, uvY * 2 - 1);
         }
       }
 
