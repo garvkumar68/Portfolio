@@ -188,6 +188,10 @@ span.navbar-text {
   margin-left: 14px;
 }
 
+span.navbar-text .social-icon {
+  margin-top: 0 !important;
+}
+
 .social-icon a {
   width: 32px !important;
   /* Smaller icon circle dimensions */
@@ -530,7 +534,7 @@ h1 {
   color: #fff;
   font-weight: 700;
   font-size: 19px;
-  margin-top: 50px;
+  margin-top: 2px;
   letter-spacing: 1px;
   display: flex;
   align-items: center;
