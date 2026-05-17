@@ -12,6 +12,7 @@ import { Contact } from "./components/Contact";
 import { BlackHole } from "./components/BlackHole";
 import { MinimalistStarfield } from "./components/MinimalistStarfield";
 import { SideNav } from "./components/SideNav";
+import { ScrollHint } from "./components/ScrollHint";
 import { useEffect } from "react";
 
 // Scroll to Top on route change helper
@@ -78,7 +79,7 @@ const ScrollNavigator = () => {
 
     const handleTouchStart = (e) => {
       touchStartY = e.touches[0].clientY;
-      touchEndY = e.touches[0].clientY; // prevent accidental swipe if only tapped
+      touchEndY = e.touches[0].clientY;
     };
 
     const handleTouchMove = (e) => {
@@ -95,11 +96,12 @@ const ScrollNavigator = () => {
       const isAtTop = window.scrollY <= 2;
       const isAtBottom = Math.abs((window.innerHeight + window.scrollY) - document.documentElement.scrollHeight) <= 2;
 
-      const deltaY = touchStartY - touchEndY; // Positive means swiped up (scrolled down)
+      const deltaY = touchStartY - touchEndY; // positive = swiped up (go next)
 
-      if (deltaY > 50 && isAtBottom) {
+      // Lower threshold (25px) = much easier to trigger
+      if (deltaY > 25 && isAtBottom) {
         navigateToNext(currentIndex);
-      } else if (deltaY < -50 && isAtTop) {
+      } else if (deltaY < -25 && isAtTop) {
         navigateToPrev(currentIndex);
       }
 
@@ -186,6 +188,7 @@ function App() {
         <BlackHole targetId="blackhole-placeholder" />
         <MinimalistStarfield />
         <SideNav />
+        <ScrollHint />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/skills" element={<SkillsPage />} />

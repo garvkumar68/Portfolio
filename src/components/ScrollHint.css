@@ -1,0 +1,68 @@
+/* Only active on mobile */
+@media (max-width: 768px) {
+
+  .pull-hint {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.15s ease;
+  }
+
+  /* Positioned at the bottom edge when pulling to next page */
+  .pull-hint-down {
+    bottom: 20px;
+    animation: pullBounceDown 0.5s ease-in-out infinite alternate;
+  }
+
+  /* Positioned at the top edge when pulling back to prev page */
+  .pull-hint-up {
+    top: 90px;
+    animation: pullBounceUp 0.5s ease-in-out infinite alternate;
+  }
+
+  .pull-hint-arrow-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    /* Opacity and scale grow with pull amount via CSS var */
+    background: rgba(0, 223, 162, calc(var(--pull, 0%) * 0.003));
+    border: 2px solid rgba(0, 223, 162, calc(0.3 + var(--pull, 0%) * 0.007));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0, 223, 162, calc(var(--pull, 0%) * 0.005));
+    /* Scale up slightly as pull increases */
+    transform: scale(calc(0.85 + var(--pull, 0%) * 0.0015));
+    transition: transform 0.1s ease, background 0.1s ease, border-color 0.1s ease;
+  }
+
+  .pull-hint-arrow-svg {
+    width: 22px;
+    height: 22px;
+    opacity: calc(0.4 + var(--pull, 0%) * 0.006);
+    transition: opacity 0.1s ease;
+  }
+
+  @keyframes pullBounceDown {
+    from { transform: translateX(-50%) translateY(0); }
+    to   { transform: translateX(-50%) translateY(6px); }
+  }
+
+  @keyframes pullBounceUp {
+    from { transform: translateX(-50%) translateY(0); }
+    to   { transform: translateX(-50%) translateY(-6px); }
+  }
+}
+
+/* Hidden on desktop */
+@media (min-width: 769px) {
+  .pull-hint {
+    display: none !important;
+  }
+}
