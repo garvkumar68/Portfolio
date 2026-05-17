@@ -5,6 +5,8 @@ import { NavBar } from "./components/NavBar";
 import { Banner } from "./components/Banner";
 import { Skills } from "./components/Skills";
 import { Projects } from "./components/Projects";
+import { Experience } from "./components/Experience";
+import { Achievements } from "./components/Achievements";
 import { Contact } from "./components/Contact";
 import { ProfessionalSection } from './components/ProfessionalSection';
 import { BlackHole } from "./components/BlackHole";
@@ -41,21 +43,21 @@ const SkillsPage = () => (
 const ProjectsPage = () => (
   <div className="page-container animate__animated animate__fadeIn">
     <NavBar />
-    <Projects defaultActiveTab="first" />
+    <Projects />
   </div>
 );
 
 const ExperiencePage = () => (
   <div className="page-container animate__animated animate__fadeIn">
     <NavBar />
-    <Projects defaultActiveTab="third" />
+    <Experience />
   </div>
 );
 
 const AchievementsPage = () => (
   <div className="page-container animate__animated animate__fadeIn">
     <NavBar />
-    <Projects defaultActiveTab="second" />
+    <Achievements />
   </div>
 );
 
