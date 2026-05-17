@@ -16,10 +16,38 @@ export const BlackHole = ({ targetId }) => {
   const isHome = pathname === "/Portfolio" || pathname === "/Portfolio/" || pathname === "/" || pathname.endsWith("/Portfolio") || pathname.endsWith("/Portfolio/");
 
   const isRunningRef = useRef(isHome);
+  const controlsRef = useRef(null);
+  const cameraRef = useRef(null);
 
   useEffect(() => {
     isRunningRef.current = isHome;
-  }, [isHome]);
+    
+    if (isHome && controlsRef.current && cameraRef.current) {
+      setTimeout(() => {
+        let domElement = document.getElementById(targetId);
+        if (!domElement) return;
+        
+        // Cleanly dispose old controls
+        controlsRef.current.dispose();
+        
+        // Re-instantiate OrbitControls bound to the fresh DOM element
+        const newControls = new OrbitControls(cameraRef.current, domElement);
+        newControls.enableDamping = true;
+        newControls.dampingFactor = 0.05;
+        newControls.rotateSpeed = -0.5;
+        newControls.enableZoom = false;
+        newControls.enablePan = false;
+        newControls.minDistance = 20.8;
+        newControls.maxDistance = 20.8;
+        newControls.mouseButtons = {
+          LEFT: THREE.MOUSE.ROTATE,
+          MIDDLE: null,
+          RIGHT: THREE.MOUSE.ROTATE
+        };
+        controlsRef.current = newControls;
+      }, 80);
+    }
+  }, [isHome, targetId]);
 
   useEffect(() => {
     // ============================================================================
@@ -384,6 +412,7 @@ export const BlackHole = ({ targetId }) => {
     let camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
     camera.position.set(0, -2, -18);
     camera.lookAt(0, 0, 0);
+    cameraRef.current = camera;
 
     // Update uniform initially
     uniforms.resolution.value.set(width, height);
@@ -400,6 +429,7 @@ export const BlackHole = ({ targetId }) => {
     if (!domElement) domElement = renderer.domElement;
     
     let controls = new OrbitControls(camera, domElement);
+    controlsRef.current = controls;
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.rotateSpeed = -0.5;
@@ -503,7 +533,9 @@ export const BlackHole = ({ targetId }) => {
         }
       }
 
-      controls.update();
+      if (controlsRef.current) {
+        controlsRef.current.update();
+      }
       uniforms.time.value += deltaTime;
       updateCamera();
 
@@ -553,7 +585,7 @@ export const BlackHole = ({ targetId }) => {
       }
       geometry.dispose();
       material.dispose();
-      if (controls) controls.dispose();
+      if (controlsRef.current) controlsRef.current.dispose();
     };
   }, []);
 
