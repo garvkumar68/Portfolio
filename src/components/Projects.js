@@ -49,9 +49,6 @@ export const Projects = () => {
                                                                      e.target.src = process.env.PUBLIC_URL + "/assets/fallback-image/fallback-image.png";
                                                                  }}
                                                              />
-                                                             <div className="proj-txtx">
-                                                                 <span>{project.description}</span>
-                                                             </div>
                                                          </div>
                                                          <div className="card-body">
                                                              {project.link && project.link.trim() ? (
@@ -60,6 +57,14 @@ export const Projects = () => {
                                                                  </a>
                                                              ) : (
                                                                  <h4 className="card-title">{project.title}</h4>
+                                                             )}
+                                                             {project.description && (
+                                                                 <p className="card-description">{project.description}</p>
+                                                             )}
+                                                             {project.link && project.link.trim() && (
+                                                                 <a href={project.link.trim()} target="_blank" rel="noopener noreferrer" className="card-action-btn">
+                                                                     View Project &rarr;
+                                                                 </a>
                                                              )}
                                                          </div>
                                                      </div>

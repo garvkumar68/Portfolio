@@ -53,7 +53,7 @@ export const Banner = () => {
       return () => clearInterval(ticker);
     }
   },  // eslint-disable-next-line
-      [text, delta, data.titles]); // Dependency on text, delta, and titles
+    [text, delta, data.titles]); // Dependency on text, delta, and titles
 
   const tick = () => {
     if (!data || !data.titles || data.titles.length === 0) {
@@ -63,8 +63,8 @@ export const Banner = () => {
     const i = loopNum % data.titles.length;
     const fullText = data.titles[i];
     const updatedText = isDeleting
-        ? fullText.substring(0, text.length - 1)
-        : fullText.substring(0, text.length + 1);
+      ? fullText.substring(0, text.length - 1)
+      : fullText.substring(0, text.length + 1);
 
     setText(updatedText);
 
@@ -82,63 +82,63 @@ export const Banner = () => {
 
   // Render Loading or Content
   return (
-      <section className="banner" id="home">
-        <Container>
-          <Row className="align-items-center">
-            <Col xs={12} md={6} xl={7}>
-              <TrackVisibility>
-                {({ isVisible }) => (
-                    <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                      <span className="tagline">Let's Automate the Future</span>
-                      <h1 className="display-4">Hi! I'm Garv Kumar</h1>
-                      <div className="typing-effect">
+    <section className="banner" id="home">
+      <Container>
+        <Row className="align-items-center">
+          <Col xs={12} md={6} xl={7}>
+            <TrackVisibility>
+              {({ isVisible }) => (
+                <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
+                  <span className="tagline">From Data to Decisions with AI</span>
+                  <h1 className="display-4">I'm <span style={{ color: 'var(--accent-color, #57ff8c)' }}>Garv Kumar</span></h1>
+                  <div className="typing-effect">
                     <span
-                        className="txt-rotate"
-                        dataPeriod="500"
-                        data-rotate='["Software Engineer","Computer Vision Engineer", "Data Analyst", "IoT Engineer","Business Analyst", "ML Engineer", "AutoCad Fusion 360" ]'
-                        style={{ color: '#D3D3D3' }}  /* Inline style to change text color */
+                      className="txt-rotate"
+                      dataPeriod="500"
+                      data-rotate='["Software Engineer","Computer Vision Engineer", "Data Analyst", "IoT Engineer","Business Analyst", "ML Engineer", "AutoCad Fusion 360" ]'
+                      style={{ color: '#D3D3D3' }}  /* Inline style to change text color */
                     >
                       <span className="wrap">{text}</span>
                     </span>
-                      </div>
-                      <p className="lead">{loading ? "Loading..." : data.description}</p>
-                      <div className="banner-buttons d-flex align-items-center flex-wrap gap-3 mt-4">
-                        <button
-                            className="btn btn-outline-light btn-lg"
-                            onClick={() => window.open(profLinks.resume_PDF || '#', '_blank')}
-                            disabled={!profLinks.resume_PDF}
-                        >
-                          Resume
-                        </button>
-                        <button
-                            className="btn btn-outline-light btn-lg"
-                            onClick={() => window.open(profLinks.visume_video ? profLinks.visume_video.replace('/embed/', '/watch?v=') : '#', '_blank')}
-                            disabled={!profLinks.visume_video}
-                        >
-                          Visume
-                        </button>
-                        <button
-                            className="btn btn-outline-light btn-lg"
-                            onClick={() => window.open('https://www.linkedin.com/in/garv-kumar-aa09b0213', '_blank')}
-                        >
-                          Let's Connect <ArrowRightCircle size={25} />
-                        </button>
-                      </div>
-                    </div>
-                )}
-              </TrackVisibility>
-            </Col>
-            <Col xs={12} md={6} xl={5}>
-              <TrackVisibility>
-                {({ isVisible }) => (
-                    <div className={isVisible ? "animate__animated animate__fadeIn" : ""} style={{ height: '400px', width: '100%' }}>
-                      <div id="blackhole-placeholder" style={{ width: '100%', height: '100%' }}></div>
-                    </div>
-                )}
-              </TrackVisibility>
-            </Col>
-          </Row>
-        </Container>
-      </section>
+                  </div>
+                  <p className="lead">{loading ? "Loading..." : data.description}</p>
+                  <div className="banner-buttons d-flex align-items-center flex-wrap gap-3 mt-4">
+                    <button
+                      className="btn btn-outline-light btn-lg"
+                      onClick={() => window.open(profLinks.resume_PDF || '#', '_blank')}
+                      disabled={!profLinks.resume_PDF}
+                    >
+                      Resume
+                    </button>
+                    <button
+                      className="btn btn-outline-light btn-lg"
+                      onClick={() => window.open(profLinks.visume_video ? profLinks.visume_video.replace('/embed/', '/watch?v=') : '#', '_blank')}
+                      disabled={!profLinks.visume_video}
+                    >
+                      Visume
+                    </button>
+                    <button
+                      className="btn btn-outline-light btn-lg"
+                      onClick={() => window.open('https://www.linkedin.com/in/garv-kumar-aa09b0213', '_blank')}
+                    >
+                      Let's Connect <ArrowRightCircle size={25} />
+                    </button>
+                  </div>
+                </div>
+              )}
+            </TrackVisibility>
+          </Col>
+          <Col xs={12} md={6} xl={5}>
+            <TrackVisibility>
+              {({ isVisible }) => (
+                <div className={isVisible ? "animate__animated animate__fadeIn" : ""} style={{ height: '400px', width: '100%' }}>
+                  <div id="blackhole-placeholder" style={{ width: '100%', height: '100%' }}></div>
+                </div>
+              )}
+            </TrackVisibility>
+          </Col>
+        </Row>
+      </Container>
+    </section>
   );
 };

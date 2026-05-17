@@ -48,9 +48,6 @@ export const Achievements = () => {
                                                                     e.target.src = process.env.PUBLIC_URL + "/assets/fallback-image/fallback-image.png";
                                                                 }}
                                                             />
-                                                            <div className="proj-txtx">
-                                                                <span>{story.description}</span>
-                                                            </div>
                                                         </div>
                                                         <div className="card-body">
                                                             {story.link && story.link.trim() ? (
@@ -59,6 +56,14 @@ export const Achievements = () => {
                                                                 </a>
                                                             ) : (
                                                                 <h4 className="card-title">{story.title}</h4>
+                                                            )}
+                                                            {story.description && (
+                                                                <p className="card-description">{story.description}</p>
+                                                            )}
+                                                            {story.link && story.link.trim() && (
+                                                                <a href={story.link.trim()} target="_blank" rel="noopener noreferrer" className="card-action-btn">
+                                                                    View Details &rarr;
+                                                                </a>
                                                             )}
                                                         </div>
                                                     </div>

@@ -1,6 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { useMediaQuery } from 'react-responsive';
 import { NavBar } from "./components/NavBar";
 import { Banner } from "./components/Banner";
 import { Skills } from "./components/Skills";
@@ -13,7 +14,7 @@ import { BlackHole } from "./components/BlackHole";
 import { MinimalistStarfield } from "./components/MinimalistStarfield";
 import { SideNav } from "./components/SideNav";
 import { ScrollHint } from "./components/ScrollHint";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // Scroll to Top on route change helper
 const ScrollToTop = () => {
@@ -38,12 +39,36 @@ const routesOrder = [
 const ScrollNavigator = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+
+  // Custom overscroll glows matching the green theme color (#00dfa2 / #57ff8c)
+  const [showTopGlow, setShowTopGlow] = useState(false);
+  const [showBottomGlow, setShowBottomGlow] = useState(false);
+
+  const triggerTopGlow = () => {
+    setShowTopGlow(true);
+    setTimeout(() => setShowTopGlow(false), 500);
+  };
+
+  const triggerBottomGlow = () => {
+    setShowBottomGlow(true);
+    setTimeout(() => setShowBottomGlow(false), 500);
+  };
 
   useEffect(() => {
     let isNavigating = false;
     let timeout;
     let touchStartY = 0;
     let touchEndY = 0;
+    
+    // Trackpad inertia absorption
+    let isAtBoundary = false;
+    let boundaryHitTime = 0;
+    
+    // Mobile gesture tracking
+    let touchStartedAtBoundary = false;
+    let touchStartedAtTop = false;
+    let touchStartedAtBottom = false;
 
     const navigateToNext = (currentIndex) => {
       if (currentIndex !== -1 && currentIndex < routesOrder.length - 1) {
@@ -67,52 +92,102 @@ const ScrollNavigator = () => {
       const currentPath = location.pathname;
       const currentIndex = routesOrder.indexOf(currentPath);
 
-      const isAtTop = window.scrollY <= 2;
-      const isAtBottom = Math.abs((window.innerHeight + window.scrollY) - document.documentElement.scrollHeight) <= 2;
+      const isAtTop = window.scrollY <= 5;
+      const isAtBottom = Math.abs((window.innerHeight + window.scrollY) - document.documentElement.scrollHeight) <= 5;
 
-      if (e.deltaY > 30 && isAtBottom) {
+      const now = Date.now();
+      
+      // Track boundary hit and duration
+      if (isAtTop || isAtBottom) {
+        if (!isAtBoundary) {
+          isAtBoundary = true;
+          boundaryHitTime = now;
+        }
+      } else {
+        isAtBoundary = false;
+        boundaryHitTime = 0;
+      }
+
+      // Visual flash glow bar when trying to scroll past boundaries
+      if (e.deltaY < 0 && isAtTop) {
+        triggerTopGlow();
+      } else if (e.deltaY > 0 && isAtBottom) {
+        triggerBottomGlow();
+      }
+
+      // Safeguard against trackpad scroll inertia page-jumping
+      const timeSinceBoundaryHit = now - boundaryHitTime;
+      if (isAtBoundary && timeSinceBoundaryHit < 400) {
+        return; // Ignore quick/inertial events
+      }
+
+      // Deliberate mouse wheel scroll threshold (60px)
+      if (e.deltaY > 60 && isAtBottom) {
         navigateToNext(currentIndex);
-      } else if (e.deltaY < -30 && isAtTop) {
+      } else if (e.deltaY < -60 && isAtTop) {
         navigateToPrev(currentIndex);
       }
     };
 
     const handleTouchStart = (e) => {
+      const isAtTop = window.scrollY <= 5;
+      const isAtBottom = Math.abs((window.innerHeight + window.scrollY) - document.documentElement.scrollHeight) <= 5;
+      
+      touchStartedAtTop = isAtTop;
+      touchStartedAtBottom = isAtBottom;
+      touchStartedAtBoundary = isAtTop || isAtBottom;
+      
       touchStartY = e.touches[0].clientY;
       touchEndY = e.touches[0].clientY;
     };
 
     const handleTouchMove = (e) => {
       touchEndY = e.touches[0].clientY;
+      
+      // Show dynamic boundary glow while dragging finger
+      if (touchStartedAtBoundary) {
+        const deltaY = touchStartY - touchEndY;
+        if (deltaY < -20 && touchStartedAtTop) {
+          setShowTopGlow(true);
+        } else if (deltaY > 20 && touchStartedAtBottom) {
+          setShowBottomGlow(true);
+        }
+      }
     };
 
     const handleTouchEnd = () => {
+      setShowTopGlow(false);
+      setShowBottomGlow(false);
+
       if (isNavigating) return;
+      
+      // If the swipe started in the middle of a scrollable page, let it scroll normally!
+      if (!touchStartedAtBoundary) return;
       if (!touchStartY || !touchEndY) return;
 
       const currentPath = location.pathname;
       const currentIndex = routesOrder.indexOf(currentPath);
 
-      const isAtTop = window.scrollY <= 2;
-      const isAtBottom = Math.abs((window.innerHeight + window.scrollY) - document.documentElement.scrollHeight) <= 2;
-
       const deltaY = touchStartY - touchEndY; // positive = swiped up (go next)
+      
+      // High deliberate threshold for mobile gestures (130px) to prevent accidental swipe transitions
+      const swipeThreshold = isMobile ? 130 : 100;
 
-      // Lower threshold (25px) = much easier to trigger
-      if (deltaY > 25 && isAtBottom) {
+      if (deltaY > swipeThreshold && touchStartedAtBottom) {
         navigateToNext(currentIndex);
-      } else if (deltaY < -25 && isAtTop) {
+      } else if (deltaY < -swipeThreshold && touchStartedAtTop) {
         navigateToPrev(currentIndex);
       }
 
       touchStartY = 0;
       touchEndY = 0;
+      touchStartedAtBoundary = false;
     };
 
-    window.addEventListener('wheel', handleWheel);
-    window.addEventListener('touchstart', handleTouchStart);
-    window.addEventListener('touchmove', handleTouchMove);
-    window.addEventListener('touchend', handleTouchEnd);
+    window.addEventListener('wheel', handleWheel, { passive: true });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
     
     return () => {
       window.removeEventListener('wheel', handleWheel);
@@ -121,9 +196,14 @@ const ScrollNavigator = () => {
       window.removeEventListener('touchend', handleTouchEnd);
       if (timeout) clearTimeout(timeout);
     };
-  }, [location.pathname, navigate]);
+  }, [location.pathname, navigate, isMobile]);
 
-  return null;
+  return (
+    <>
+      <div className={`overscroll-glow-bar top-glow ${showTopGlow ? 'active' : ''}`} />
+      <div className={`overscroll-glow-bar bottom-glow ${showBottomGlow ? 'active' : ''}`} />
+    </>
+  );
 };
 
 // Home Page Component (Main section only)

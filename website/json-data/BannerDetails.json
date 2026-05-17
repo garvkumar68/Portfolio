@@ -1,14 +1,16 @@
 {
   "titles": [
     "Software Engineer",
+    "AI Engineer",
+    "Machine Learning Engineer",
+    "Python Developer",
     "Computer Vision Engineer", 
     "Data Analyst", 
-    "IoT Engineer",
-    "Business Analyst", 
-    "ML Engineer", 
-    "AutoDesk Fusion 360"
+    "Database Engineer",
+    "Business Analyst"   
   ],
   
-  "description":"AI/ML engineer pushing the boundaries of machine learning, IoT, and computer vision to develop intelligent, real-world solutions. Specializing in automation, generative AI, and embedded systems, with expertise in TensorFlow, PyTorch, OpenCV, and IoT technologies. Projects include autonomous lunar navigation, accident detection systems, and the Murphy system, combining deep learning with real-time processing for high-impact applications. Passionate about AI-driven problem-solving, contributing to research, and building scalable, future-ready technologies that drive meaningful change.",
+  "description":"A passionate AI & Backend Developer with hands-on experience in building Agentic AI systems, Geo-AI platforms, and scalable Machine Learning solutions. Skilled in Python, FastAPI, PostgreSQL, LangChain, RAG pipelines, Computer Vision, and Generative AI, I focus on solving real-world problems through intelligent engineering and AI-driven optimization. I have experience developing scalable AI-powered applications, backend architectures, automation workflows, and context-aware AI systems that improve efficiency, performance, and user experience. Driven by continuous learning and innovation, I aim to create impactful technology solutions across diverse domains.",
   "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740602555/image_hxtdxd.webp"
 }
+
