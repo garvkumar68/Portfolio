@@ -56,7 +56,7 @@ export const Footer = () => {
                 <img src={navIcon4} alt="Email" />
               </a>
             </div>
-            <p className="footer-quote">"From Data to Decisions with AI, together."</p>
+            <p className="footer-quote">"From Data to Solutions with AI, together."</p>
           </Col>
         </Row>
       </Container>

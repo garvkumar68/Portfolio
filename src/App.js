@@ -13,7 +13,6 @@ import { Contact } from "./components/Contact";
 import { BlackHole } from "./components/BlackHole";
 import { MinimalistStarfield } from "./components/MinimalistStarfield";
 import { SideNav } from "./components/SideNav";
-import { ScrollHint } from "./components/ScrollHint";
 import { useEffect, useState } from "react";
 
 // Scroll to Top on route change helper
@@ -268,7 +267,6 @@ function App() {
         <BlackHole targetId="blackhole-placeholder" />
         <MinimalistStarfield />
         <SideNav />
-        <ScrollHint />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/skills" element={<SkillsPage />} />
