@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import axios from "axios"; // Import axios for fetching the JSON data
+import { useNavigate, useLocation } from "react-router-dom";
 
 import navIcon1 from "../assets/img/nav-icon1.svg";
 import navIcon2 from "../assets/img/nav-icon2.svg";
 import navIcon4 from "../assets/img/nav-icon4.svg";
 
 export const NavBar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [activeLink, setActiveLink] = useState("home");
   const [scrolled, setScrolled] = useState(false);
   const [contactInView, setContactInView] = useState(false);
@@ -65,12 +68,26 @@ export const NavBar = () => {
 
   const handleScrollToSection = (sectionId) => {
     setActiveLink(sectionId);
+    if (sectionId === "home") {
+      if (location.pathname === "/" || location.pathname === "/Portfolio" || location.pathname === "/Portfolio/") {
+        const section = document.getElementById("home");
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      } else {
+        navigate("/");
+      }
+      return;
+    }
+
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
+    } else {
+      navigate(`/info#${sectionId}`);
     }
   };
 
