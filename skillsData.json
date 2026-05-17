@@ -1,52 +1,149 @@
 {
-  "skills": [
+  "categories": [
     {
-      "name": "Machine Learning & AI",
-      "progress": 90
+      "title": "AI Engineering & Intelligent Systems",
+      "skills": [
+        {
+          "name": "Machine Learning & Artificial Intelligence",
+          "progress": 92
+        },
+        {
+          "name": "Deep Learning (TensorFlow • PyTorch • Keras)",
+          "progress": 88
+        },
+        {
+          "name": "Generative AI & LLM Engineering",
+          "progress": 90
+        },
+        {
+          "name": "Computer Vision & Detection Systems",
+          "progress": 89
+        },
+        {
+          "name": "Natural Language Processing (NLP)",
+          "progress": 85
+        },
+        {
+          "name": "Agentic AI Workflows & Automation",
+          "progress": 91
+        }
+      ]
     },
     {
-      "name": "Deep Learning (TensorFlow, PyTorch, Keras)",
-      "progress": 85
+      "title": "Geospatial AI & Spatial Intelligence",
+      "skills": [
+        {
+          "name": "PostGIS & Spatial Databases",
+          "progress": 90
+        },
+        {
+          "name": "GeoServer & Geospatial APIs",
+          "progress": 87
+        },
+        {
+          "name": "Spatial Analysis & Geospatial Modelling",
+          "progress": 89
+        },
+        {
+          "name": "GIS + AI Integration",
+          "progress": 93
+        },
+        {
+          "name": "Raster, Vector & 3D Mesh Processing",
+          "progress": 84
+        },
+        {
+          "name": "Urban Intelligence & Digital Twin Systems",
+          "progress": 86
+        }
+      ]
     },
     {
-      "name": "Computer Vision",
-      "progress": 88
+      "title": "Full-Stack Development & Deployment",
+      "skills": [
+        {
+          "name": "Python Backend Engineering",
+          "progress": 91
+        },
+        {
+          "name": "FastAPI & Flask",
+          "progress": 88
+        },
+        {
+          "name": "REST APIs & System Integration",
+          "progress": 87
+        },
+        {
+          "name": "Docker & Linux Deployment",
+          "progress": 82
+        },
+        {
+          "name": "AWS & Cloud Infrastructure",
+          "progress": 78
+        },
+        {
+          "name": "Hugging Face & AI Model Deployment",
+          "progress": 84
+        }
+      ]
     },
     {
-      "name": "Internet of Things",
-      "progress": 85
+      "title": "Software Engineering Fundamentals",
+      "skills": [
+        {
+          "name": "C++ • Python • SQL",
+          "progress": 92
+        },
+        {
+          "name": "Data Structures & Algorithms",
+          "progress": 91
+        },
+        {
+          "name": "Object-Oriented Programming",
+          "progress": 90
+        },
+        {
+          "name": "Git & GitHub",
+          "progress": 89
+        },
+        {
+          "name": "Multithreading & Optimization",
+          "progress": 83
+        },
+        {
+          "name": "System Design & Scalable Thinking",
+          "progress": 82
+        }
+      ]
     },
     {
-      "name": "Programming (C++, Python, MySQL)",
-      "progress": 90
-    },
-    {
-      "name": "Problem-Solving(DSA) & OOPs",
-      "progress": 90
-    },
-    {
-      "name": "Data Science (Pandas, NumPy, Matplotlib, Scikit-learn)",
-      "progress": 87
-    },
-    {
-      "name": "Neural Networks & Deep Learning",
-      "progress": 85
-    },
-    {
-      "name": "Supervised & Unsupervised Learning",
-      "progress": 83
-    },
-    {
-      "name": "Git/GitHub",
-      "progress": 88
-    },
-    {
-      "name": "ML Model Deployment (Hugging Face)",
-      "progress": 80
-    },
-    {
-      "name": "Backend Development (FastAPI, Flask)",
-      "progress": 82
+      "title": "Data Science & AI Tooling",
+      "skills": [
+        {
+          "name": "Pandas • NumPy • Scikit-learn",
+          "progress": 89
+        },
+        {
+          "name": "Data Visualization & Analytics",
+          "progress": 85
+        },
+        {
+          "name": "OpenCV & Image Processing",
+          "progress": 88
+        },
+        {
+          "name": "LangChain & AI Orchestration",
+          "progress": 84
+        },
+        {
+          "name": "Postman & API Testing",
+          "progress": 82
+        },
+        {
+          "name": "LM Studio & Local Inference",
+          "progress": 80
+        }
+      ]
     }
   ]
 }
