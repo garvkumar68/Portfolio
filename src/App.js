@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
 import { Banner } from "./components/Banner";
 import { Skills } from "./components/Skills";
@@ -9,7 +9,6 @@ import { Experience } from "./components/Experience";
 import { Achievements } from "./components/Achievements";
 import { Certifications } from "./components/Certifications";
 import { Contact } from "./components/Contact";
-import { ProfessionalSection } from './components/ProfessionalSection';
 import { BlackHole } from "./components/BlackHole";
 import { useEffect } from "react";
 
@@ -69,13 +68,6 @@ const AchievementsPage = () => (
   </div>
 );
 
-const ResumePage = () => (
-  <div className="page-container animate__animated animate__fadeIn">
-    <NavBar />
-    <ProfessionalSection />
-  </div>
-);
-
 const ReachoutPage = () => (
   <div className="page-container animate__animated animate__fadeIn">
     <NavBar />
@@ -85,7 +77,7 @@ const ReachoutPage = () => (
 
 function App() {
   return (
-    <Router>
+    <Router basename="/Portfolio">
       <ScrollToTop />
       <div className="App">
         <Routes>
@@ -95,7 +87,6 @@ function App() {
           <Route path="/experience" element={<ExperiencePage />} />
           <Route path="/certifications" element={<CertificationsPage />} />
           <Route path="/achievements" element={<AchievementsPage />} />
-          <Route path="/resume" element={<ResumePage />} />
           <Route path="/reachout" element={<ReachoutPage />} />
         </Routes>
       </div>

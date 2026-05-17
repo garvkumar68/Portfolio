@@ -49,7 +49,6 @@ export const NavBar = () => {
     if (path === "/experience") return "experience";
     if (path === "/certifications") return "certifications";
     if (path === "/achievements") return "achievements";
-    if (path === "/resume") return "resume";
     if (path === "/reachout") return "reachout";
     return "";
   };
@@ -59,7 +58,7 @@ export const NavBar = () => {
   return (
       <Navbar expand="lg" className={`navbar-custom ${scrolled ? "scrolled" : ""}`}>
         <Container>
-          <Navbar.Brand href="#/">
+          <Navbar.Brand onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
             {/* Use the dynamically loaded logo */}
             {logoUrl ? (
                 <img src={logoUrl} alt="Logo" className="navbar-logo" />
@@ -107,12 +106,6 @@ export const NavBar = () => {
                   onClick={() => navigate("/achievements")}
               >
                 Achievements
-              </Nav.Link>
-              <Nav.Link
-                  className={activeLink === "resume" ? "active navbar-link" : "navbar-link"}
-                  onClick={() => navigate("/resume")}
-              >
-                Resume
               </Nav.Link>
             </Nav>
             <span className="navbar-text">

@@ -14,24 +14,34 @@ export const Banner = () => {
   const [index, setIndex] = useState(1);
   const [data, setData] = useState({}); // State for banner data
   const [loading, setLoading] = useState(true); // Loading state for the data
+  const [profLinks, setProfLinks] = useState({}); // State for Resume and Visume links
 
-  // Fetch Banner Data
+  // Fetch Banner Data and Professional Links
   useEffect(() => {
     const fetchBannerData = async () => {
       try {
-        // Fetch the BannerDetails.json file directly from the raw URL
         const url = "https://raw.githubusercontent.com/garvkumar68/Portfolio/json-data/BannerDetails.json";
         const response = await axios.get(url);
-
         setData(response.data); // Set the state with fetched data
         setLoading(false); // Set loading to false once data is fetched
       } catch (err) {
         console.error('Error fetching data from GitHub', err);
-        setLoading(false); // Handle error and stop loading
+        setLoading(false);
+      }
+    };
+
+    const fetchProfessionalLinks = async () => {
+      try {
+        const url = "https://raw.githubusercontent.com/garvkumar68/Portfolio/json-data/professionalLinks.json";
+        const response = await axios.get(url);
+        setProfLinks(response.data);
+      } catch (err) {
+        console.error('Error fetching professional links from GitHub', err);
       }
     };
 
     fetchBannerData();
+    fetchProfessionalLinks();
   }, []); // Empty dependency array to fetch data only once when the component mounts
 
   useEffect(() => {
@@ -92,12 +102,28 @@ export const Banner = () => {
                     </span>
                       </div>
                       <p className="lead">{loading ? "Loading..." : data.description}</p>
-                      <button
-                          className="btn btn-outline-light btn-lg"
-                          onClick={() => window.open('https://www.linkedin.com/in/garv-kumar-aa09b0213', '_blank')}
-                      >
-                        Let's Connect <ArrowRightCircle size={25} />
-                      </button>
+                      <div className="banner-buttons d-flex align-items-center flex-wrap gap-3 mt-4">
+                        <button
+                            className="btn btn-outline-light btn-lg"
+                            onClick={() => window.open(profLinks.resume_PDF || '#', '_blank')}
+                            disabled={!profLinks.resume_PDF}
+                        >
+                          Resume
+                        </button>
+                        <button
+                            className="btn btn-outline-light btn-lg"
+                            onClick={() => window.open(profLinks.visume_video ? profLinks.visume_video.replace('/embed/', '/watch?v=') : '#', '_blank')}
+                            disabled={!profLinks.visume_video}
+                        >
+                          Visume
+                        </button>
+                        <button
+                            className="btn btn-outline-light btn-lg"
+                            onClick={() => window.open('https://www.linkedin.com/in/garv-kumar-aa09b0213', '_blank')}
+                        >
+                          Let's Connect <ArrowRightCircle size={25} />
+                        </button>
+                      </div>
                     </div>
                 )}
               </TrackVisibility>
