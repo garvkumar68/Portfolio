@@ -512,7 +512,8 @@ export const BlackHole = ({ targetId }) => {
       if (mountRef.current) {
         const scrollY = window.scrollY || window.pageYOffset;
         const t = Math.min(Math.max((scrollY - fadeStartScroll) / (fadeEndScroll - fadeStartScroll), 0), 1);
-        mountRef.current.style.opacity = 1 - t;
+        const maxOpacity = window.innerWidth <= 768 ? 0.55 : 1;
+        mountRef.current.style.opacity = maxOpacity * (1 - t);
       }
 
       // Skip rendering entirely when fully scrolled away on homepage (save GPU)
