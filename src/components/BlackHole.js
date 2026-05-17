@@ -591,7 +591,7 @@ export const BlackHole = ({ targetId }) => {
       material.dispose();
       if (controlsRef.current) controlsRef.current.dispose();
     };
-  }, []);
+  }, [targetId]);
 
   return (
     <div
