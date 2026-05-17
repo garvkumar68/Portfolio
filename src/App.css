@@ -2725,6 +2725,7 @@ html, body {
     cursor: pointer;
     z-index: 100000003 !important; /* On top of the overlay */
     padding: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
   }
 
   .custom-menu-toggle .bar {
@@ -2733,6 +2734,12 @@ html, body {
     background-color: #ffffff;
     border-radius: 4px;
     transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .custom-menu-toggle.open {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
   }
 
   .custom-menu-toggle.open .bar:nth-child(1) {
