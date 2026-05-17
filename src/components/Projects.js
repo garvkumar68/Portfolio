@@ -4,7 +4,7 @@ import TrackVisibility from 'react-on-screen';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export const Projects = () => {
+export const Projects = ({ defaultActiveTab = "first" }) => {
     const [projects, setProjectsData] = useState([]);
     const [successStories, setSuccessStoriesData] = useState([]);
     const [researchInsights, setResearchInsightsData] = useState([]);
@@ -54,7 +54,7 @@ export const Projects = () => {
                                         <strong> AI</strong>, <strong>Problem Solving</strong>, <strong> IoT</strong>,
                                         <strong> software development</strong>, and more...
                                     </p>
-                                    <Tab.Container id="projects-tabs" defaultActiveKey="first">
+                                    <Tab.Container id="projects-tabs" defaultActiveKey={defaultActiveTab}>
                                         <Nav variant="pills" className="mb-5 justify-content-center align-items-center" id="pills-tab">
                                             <Nav.Item>
                                                 <Nav.Link eventKey="first" className="btn btn-primary">Projects</Nav.Link>
