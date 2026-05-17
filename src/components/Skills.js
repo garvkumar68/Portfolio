@@ -43,7 +43,7 @@ export const Skills = () => {
         <div className="skills-grid-container">
           {skillsCategories.map((category, catIndex) => (
             <div key={catIndex} className="skills-category-group mb-5">
-              <h3 className="skills-category-title animate__animated animate__fadeInLeft">
+              <h3 className="skills-category-title animate__animated animate__fadeIn">
                 {category.title}
               </h3>
               <Row className="g-3">

@@ -340,6 +340,55 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   border-color: transparent;
 }
 
+@media (max-width: 991px) {
+  nav.navbar .navbar-collapse {
+    background: rgba(10, 10, 10, 0.97) !important; /* Elegant solid dark glass backdrop */
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-radius: 12px;
+    padding: 24px 20px;
+    margin-top: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    position: relative;
+    z-index: 9999;
+  }
+  
+  nav.navbar .navbar-nav {
+    align-items: center !important;
+    width: 100%;
+  }
+
+  nav.navbar .navbar-nav .nav-link.navbar-link {
+    padding: 12px 0 !important;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  nav.navbar .navbar-nav .nav-link.navbar-link:last-child {
+    border-bottom: none;
+  }
+
+  span.navbar-text {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  span.navbar-text .social-icon {
+    margin-left: 0 !important;
+    margin-bottom: 18px;
+    justify-content: center;
+  }
+
+  .navbar-text button {
+    width: 80%;
+    margin-left: 0 !important;
+    padding: 10px 20px !important;
+  }
+}
 
 /************ Banner CSS ************/
 
