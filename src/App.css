@@ -2666,6 +2666,255 @@ a:hover {
   transform: translateX(4px) !important;
 }
 
+/* ============================================================================
+   CUSTOM OVERSCROLL GLOW COLLISION ANIMATIONS
+   ============================================================================ */
+html, body {
+  overscroll-behavior-y: contain !important; /* Block mobile browser native pull-to-refresh page reload! */
+}
+
+.overscroll-glow-bar {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  z-index: 999999 !important;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transform: scaleX(0.5);
+  box-sizing: border-box;
+}
+
+.overscroll-glow-bar.top-glow {
+  top: 0;
+  background: linear-gradient(90deg, transparent, #00dfa2, #57ff8c, #00dfa2, transparent) !important;
+  box-shadow: 0 4px 25px rgba(87, 255, 140, 0.95), 0 0 15px rgba(0, 223, 162, 0.7) !important;
+}
+
+.overscroll-glow-bar.bottom-glow {
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, #00dfa2, #57ff8c, #00dfa2, transparent) !important;
+  box-shadow: 0 -4px 25px rgba(87, 255, 140, 0.95), 0 0 15px rgba(0, 223, 162, 0.7) !important;
+}
+
+.overscroll-glow-bar.active {
+  opacity: 1 !important;
+  transform: scaleX(1) !important;
+}
+
+/* ============================================================================
+   PREMIUM CUSTOM FULL-SCREEN MOBILE OVERLAY MENU
+   ============================================================================ */
+@media (max-width: 991px) {
+  /* Hide React-Bootstrap default toggler and collapse */
+  .navbar-custom .navbar-toggler,
+  .navbar-custom .navbar-collapse {
+    display: none !important;
+  }
+
+  /* Custom Menu Toggle Tighter Hamburger Button */
+  .custom-menu-toggle {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 100000003 !important; /* On top of the overlay */
+    padding: 0;
+  }
+
+  .custom-menu-toggle .bar {
+    width: 100%;
+    height: 2.5px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .custom-menu-toggle.open .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .custom-menu-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .custom-menu-toggle.open .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Full Screen Overlapping Overlay */
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(8, 8, 8, 0.98) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    z-index: 100000002 !important; /* Under the hamburger button, but on top of everything else */
+    display: flex;
+    flex-direction: column;
+    transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), visibility 0.4s;
+    opacity: 0;
+    visibility: hidden;
+    padding: 24px 28px;
+    box-sizing: border-box;
+  }
+
+  .mobile-menu-overlay.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Header containing avatar and circular close button */
+  .mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    box-sizing: border-box;
+  }
+
+  .mobile-avatar-container {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(87, 255, 140, 0.45);
+    box-shadow: 0 0 15px rgba(87, 255, 140, 0.25);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mobile-menu-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .mobile-menu-close {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(87, 255, 140, 0.45) !important; /* Green circular close button outline */
+    background: rgba(0, 223, 162, 0.04) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #57ff8c !important;
+    font-size: 24px !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    padding: 0 !important;
+    line-height: 1 !important;
+  }
+
+  .mobile-menu-close:hover {
+    background: rgba(87, 255, 140, 0.15) !important;
+    transform: scale(1.05);
+  }
+
+  /* Menu Body (centered navigation links) */
+  .mobile-menu-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: -30px; /* Shift up for visual balance */
+  }
+
+  .mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+  }
+
+  .mobile-nav-link {
+    font-size: 24px;
+    font-weight: 600;
+    color: #b0b0b0;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+  }
+
+  .mobile-nav-link:hover {
+    color: #ffffff;
+    letter-spacing: 3.5px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  }
+
+  .mobile-nav-link.active {
+    color: #57ff8c !important; /* Highlight current page in accent color */
+    font-weight: 700;
+    text-shadow: 0 0 15px rgba(87, 255, 140, 0.4);
+  }
+
+  /* Social Icons at the Bottom */
+  .mobile-menu-socials {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 45px;
+    width: 100%;
+  }
+
+  .mobile-menu-socials a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-sizing: border-box;
+  }
+
+  .mobile-menu-socials a img {
+    width: 18px;
+    height: 18px;
+    filter: brightness(0) invert(1); /* Force white icons */
+  }
+
+  .mobile-menu-socials a:hover {
+    background: rgba(87, 255, 140, 0.08);
+    border-color: rgba(87, 255, 140, 0.6);
+    transform: translateY(-3px);
+  }
+}
+
+/* Enforce desktop layout rules above 991px */
+@media (min-width: 992px) {
+  .custom-menu-toggle {
+    display: none !important;
+  }
+  .mobile-menu-overlay {
+    display: none !important;
+  }
+}
+
+
+
 
 
 
