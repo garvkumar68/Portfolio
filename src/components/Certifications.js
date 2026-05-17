@@ -60,7 +60,7 @@ export const Certifications = () => {
         }
 
         // Clean up leading/trailing symbols or colons
-        clean = clean.replace(/^[:\s\-]+/, "").replace(/[:\s\-]+$/, "").replace(/\s+/g, " ").trim();
+        clean = clean.replace(/^[:\s-]+/, "").replace(/[:\s-]+$/, "").replace(/\s+/g, " ").trim();
         
         return { issuer, title: clean };
     };
