@@ -20,7 +20,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '20' # Using Node 20 LTS for stability with react-scripts
           cache: 'npm'
 
       - name: Install Dependencies
@@ -30,7 +30,6 @@ jobs:
         run: npm run build
         env:
           NODE_ENV: production
-          CI: false
 
       - name: Copy index.html to 404.html for SPA routing
         run: cp build/index.html build/404.html
