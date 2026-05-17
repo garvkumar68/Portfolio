@@ -89,7 +89,7 @@ export const Banner = () => {
             <TrackVisibility>
               {({ isVisible }) => (
                 <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                  <span className="tagline">From Data to Decisions with AI</span>
+                  <span className="tagline">From Data to Solutions with AI</span>
                   <h1 className="display-4">I'm <span style={{ color: 'var(--accent-color, #57ff8c)' }}>Garv Kumar</span></h1>
                   <div className="typing-effect">
                     <span
