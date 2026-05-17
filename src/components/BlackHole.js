@@ -383,8 +383,8 @@ export const BlackHole = ({ targetId }) => {
     // Disable pan
     controls.enablePan = false;
     // Lock distance fixed (increase to make BH appear smaller)
-    controls.minDistance = 20;
-    controls.maxDistance = 20;
+    controls.minDistance = 20.8;
+    controls.maxDistance = 20.8;
     // Remap right-click to ROTATE (default is PAN)
     controls.mouseButtons = {
       LEFT: THREE.MOUSE.ROTATE,
@@ -404,6 +404,22 @@ export const BlackHole = ({ targetId }) => {
     let lastFrameTime = performance.now();
     let animationFrameId;
 
+    // ── Scroll-based fade: black hole visible only on home section ──
+    const fadeStartScroll = 0;            // px – start fading immediately on scroll
+    const fadeEndScroll   = window.innerHeight * 0.7; // px – fully hidden by 70vh scroll
+
+    function updateOpacity() {
+      const scrollY = window.scrollY || window.pageYOffset;
+      const t = Math.min(Math.max((scrollY - fadeStartScroll) / (fadeEndScroll - fadeStartScroll), 0), 1);
+      const opacity = 1 - t;
+      if (mountRef.current) {
+        mountRef.current.style.opacity = opacity;
+        mountRef.current.style.pointerEvents = opacity < 0.01 ? 'none' : 'none';
+      }
+    }
+    window.addEventListener('scroll', updateOpacity, { passive: true });
+    updateOpacity(); // run once on mount
+
     function updateCamera() {
       uniforms.cameraPosition.value.copy(camera.position);
       const direction = new THREE.Vector3(0, 0, -1);
@@ -414,6 +430,11 @@ export const BlackHole = ({ targetId }) => {
 
     function animate() {
       animationFrameId = requestAnimationFrame(animate);
+
+      // Skip rendering entirely when fully scrolled away (save GPU)
+      const scrollY = window.scrollY || window.pageYOffset;
+      if (scrollY >= fadeEndScroll) return;
+
       const currentTime = performance.now();
       const deltaTime = Math.min((currentTime - lastFrameTime) / 1000, 0.033);
       lastFrameTime = currentTime;
@@ -423,10 +444,11 @@ export const BlackHole = ({ targetId }) => {
         if (targetEl) {
           const rect = targetEl.getBoundingClientRect();
           const px = rect.left + rect.width / 2;
-          const py = rect.top + rect.height / 2;
+          // Shift up by 8% of viewport height
+          const py = rect.top + rect.height / 2 - window.innerHeight * 0.08;
           const uvX = px / window.innerWidth;
           const uvY = 1.0 - (py / window.innerHeight);
-          
+
           uniforms.screenOffset.value.set(uvX * 2 - 1, uvY * 2 - 1);
         }
       }
@@ -474,6 +496,7 @@ export const BlackHole = ({ targetId }) => {
     // Cleanup
     return () => {
       window.removeEventListener('resize', onResize);
+      window.removeEventListener('scroll', updateOpacity);
       cancelAnimationFrame(animationFrameId);
       if (renderer && container) {
         container.removeChild(renderer.domElement);
@@ -485,9 +508,19 @@ export const BlackHole = ({ targetId }) => {
   }, []);
 
   return (
-    <div 
-      ref={mountRef} 
-      style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: -1, pointerEvents: 'none' }}
+    <div
+      ref={mountRef}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: -1,
+        pointerEvents: 'none',
+        opacity: 1,
+        transition: 'opacity 0.3s ease',
+      }}
     />
   );
 };

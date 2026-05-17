@@ -25,6 +25,8 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 75px;
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;   /* IE/Edge */
 }
 
 body {
@@ -34,6 +36,11 @@ body {
   background-color: #000 !important;
   color: #fff !important;
   font-family: 'Centra', sans-serif !important;
+}
+
+/* Hide scrollbar globally (Chrome/Safari/Edge) */
+::-webkit-scrollbar {
+  display: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -274,7 +281,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 /* Banner Section */
 .banner {
   position: relative;
-  padding: 260px 0 100px;
+  padding: 220px 0 80px;
   background: transparent;
   overflow: hidden;
   color: white;
@@ -422,7 +429,7 @@ h1 {
 
 /* Title Styling */
 .banner h1 {
-  font-size: 65px;
+  font-size: 62px;
   font-weight: 700;
   letter-spacing: 1px;
   line-height: 1.2;
@@ -433,7 +440,7 @@ h1 {
 /* Paragraph Styling */
 .banner p {
   color: #B8B8B8;
-  font-size: 18px;
+  font-size: 17px;
   letter-spacing: 1px;
   line-height: 1.5em;
   width: 96%;
@@ -444,8 +451,8 @@ h1 {
 .banner button {
   color: #fff;
   font-weight: 700;
-  font-size: 20px;
-  margin-top: 60px;
+  font-size: 19px;
+  margin-top: 50px;
   letter-spacing: 1px;
   display: flex;
   align-items: center;
@@ -491,7 +498,7 @@ h1 {
 .typing-effect {
   display: block;
   margin-top: 10px;
-  font-size: 3rem;
+  font-size: 2.88rem;
   font-weight: bold;
   color: #fff;
 }
