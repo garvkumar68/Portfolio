@@ -595,6 +595,7 @@ export const BlackHole = ({ targetId }) => {
   return (
     <div
       ref={mountRef}
+      className="blackhole-canvas-container"
       style={{
         position: 'fixed',
         top: 0,
