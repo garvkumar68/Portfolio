@@ -53,7 +53,7 @@ body {
   min-height: 100vh;
   position: relative;
   z-index: 2;
-  background-color: #000;
+  background: transparent !important;
 }
 
 /* Eliminate excessive gap under the header on all subpages */
@@ -2027,4 +2027,195 @@ a:hover {
   background: linear-gradient(90deg, #00b4d8 0%, #00dfa2 100%);
   border-radius: 10px;
   transition: width 1.5s cubic-bezier(0.1, 0.8, 0.1, 1.0);
+}
+
+/* ============================================================================
+   CERTIFICATIONS PAGE STYLES (MATCHING SCREENSHOT)
+   ============================================================================ */
+
+.certifications-section {
+  padding: 40px 0 80px;
+  position: relative;
+  background-color: #000;
+  z-index: 2;
+}
+
+.certifications-header {
+  text-align: left;
+  margin-bottom: 40px;
+  max-width: 800px;
+}
+
+.certifications-title {
+  color: #fff;
+  font-size: 56px; /* Matching the huge glowing title */
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  font-family: 'Centra', sans-serif;
+  letter-spacing: -1px;
+  text-shadow: 0 0 25px rgba(0, 223, 162, 0.25);
+}
+
+.certifications-subtitle {
+  color: #8c8c8c;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.certifications-grid {
+  margin-top: 20px;
+}
+
+/* Flex Row Premium Card */
+.cert-card {
+  background: rgba(13, 13, 13, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.cert-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 223, 162, 0.35);
+  box-shadow: 0 12px 25px rgba(0, 223, 162, 0.15);
+}
+
+/* Left part: Logo */
+.cert-card-logo-container {
+  width: 76px;
+  height: 76px;
+  min-width: 76px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #fff; /* Pure white background to frame provider logos cleanly */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.cert-card-logo {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Right part: content */
+.cert-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+/* Issuer Tag */
+.cert-card-issuer {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #00dfa2; /* Bright glowing teal */
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cert-card-issuer-icon {
+  font-size: 14px;
+}
+
+/* Title */
+.cert-card-title {
+  color: #ffffff;
+  font-size: 16.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 6px 0 10px 0;
+  font-family: 'Centra', sans-serif;
+  letter-spacing: 0.2px;
+}
+
+/* Action Link */
+.cert-card-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #8c8c8c;
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  width: fit-content;
+  text-decoration: none !important;
+}
+
+.cert-card-action:hover {
+  color: #00dfa2;
+}
+
+.cert-card-action-icon {
+  font-size: 13px;
+}
+
+/* ============================================================================
+   GLOBAL STARS BACKGROUND TRANSPARENCY
+   ============================================================================ */
+
+.page-container,
+.skills-section,
+.project,
+.contact,
+.professional-section-container,
+.certifications-section {
+  background: transparent !important;
+}
+
+/* ============================================================================
+   MINIMALIST GLOBAL STARFIELD FOR SUBPAGES
+   ============================================================================ */
+.starfield-global {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Very soft blurry ambient cosmic blobs */
+.cosmic-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  transform: translate(-50%, -50%);
+  filter: blur(90px); /* Balanced blur to make blobs clearly visible and elegant */
+  opacity: 0.95;
+  animation: blobFloat 40s ease-in-out infinite alternate;
+}
+
+@keyframes blobFloat {
+  0% {
+    transform: translate(-50%, -50%) translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) translate(100px, 50px) scale(1.15);
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(-80px, -40px) scale(0.9);
+  }
 }

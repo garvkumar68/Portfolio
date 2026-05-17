@@ -154,7 +154,8 @@ export const BlackHole = ({ targetId }) => {
       resolution: uniform(new THREE.Vector2(100, 100)), // dummy, updated on resize
       cameraPosition: uniform(new THREE.Vector3(0, -2, -18)),
       cameraTarget: uniform(new THREE.Vector3(0, 0, 0)),
-      screenOffset: uniform(new THREE.Vector2(0, 0))
+      screenOffset: uniform(new THREE.Vector2(0, 0)),
+      showBlackHole: uniform(1.0)
     };
 
     // ============================================================================
@@ -276,61 +277,9 @@ export const BlackHole = ({ targetId }) => {
         camForward.mul(fov).add(camRight.mul(screenPos.x)).add(camUp.mul(screenPos.y))
       ).toVar('rayDir');
 
-      const rayPos = camPos.toVar('rayPos');
-      const prevPos = camPos.toVar('prevPos');
-      const color = vec3(0.0, 0.0, 0.0).toVar('color');
-      const alpha = float(0.0).toVar('alpha');
-      const escaped = float(0.0).toVar('escaped');
-      const captured = float(0.0).toVar('captured');
-      const innerR = uniforms.diskInnerRadius;
-      const outerR = uniforms.diskOuterRadius;
+      const finalColorNode = vec4(0.0).toVar('finalColorNode');
 
-      Loop(32, () => {
-        If(escaped.greaterThan(0.5).or(captured.greaterThan(0.5)).or(alpha.greaterThan(0.99)), () => {
-          Break();
-        });
-
-        const r = length(rayPos);
-
-        If(r.lessThan(rs.mul(1.01)), () => {
-          captured.assign(1.0);
-          Break();
-        });
-
-        If(r.greaterThan(100.0), () => {
-          escaped.assign(1.0);
-          Break();
-        });
-
-        const toCenter = rayPos.negate().div(r);
-        const bendStrength = rs.div(r.mul(r)).mul(uniforms.stepSize).mul(uniforms.gravitationalLensing);
-        rayDir.addAssign(toCenter.mul(bendStrength));
-        rayDir.assign(normalize(rayDir));
-
-        prevPos.assign(rayPos);
-        rayPos.addAssign(rayDir.mul(uniforms.stepSize));
-
-        const crossedPlane = prevPos.y.mul(rayPos.y).lessThan(0.0);
-        If(crossedPlane.and(alpha.lessThan(0.99)), () => {
-          const t = prevPos.y.negate().div(rayPos.y.sub(prevPos.y));
-          const hitPos = mix(prevPos, rayPos, t);
-          const hitR = sqrt(hitPos.x.mul(hitPos.x).add(hitPos.z.mul(hitPos.z)));
-          const inDisk = hitR.greaterThan(innerR).and(hitR.lessThan(outerR));
-          If(inDisk, () => {
-            const hitAngle = atan(hitPos.z, hitPos.x);
-            const diskResult = accretionDiskColor(hitR, hitAngle, uniforms.time, rayDir);
-            const remainingAlpha = float(1.0).sub(alpha);
-            color.addAssign(diskResult.xyz.mul(diskResult.w).mul(remainingAlpha));
-            alpha.addAssign(remainingAlpha.mul(diskResult.w));
-          });
-        });
-      });
-
-      If(captured.lessThan(0.5), () => {
-        escaped.assign(1.0);
-      });
-
-      If(escaped.greaterThan(0.5).and(alpha.lessThan(0.99)), () => {
+      If(uniforms.showBlackHole.lessThan(0.5), () => {
         const bgColor = uniforms.starBackgroundColor.toVar('bgColor');
         If(uniforms.starsEnabled.greaterThan(0.5), () => {
           bgColor.addAssign(starField(rayDir));
@@ -338,11 +287,77 @@ export const BlackHole = ({ targetId }) => {
         If(uniforms.nebulaEnabled.greaterThan(0.5), () => {
           bgColor.addAssign(nebulaField(rayDir));
         });
-        color.addAssign(bgColor.mul(float(1.0).sub(alpha)));
+        finalColorNode.assign(vec4(pow(bgColor, vec3(1.0 / 2.2)), 1.0));
+      }).Else(() => {
+        const rayPos = camPos.toVar('rayPos');
+        const prevPos = camPos.toVar('prevPos');
+        const color = vec3(0.0, 0.0, 0.0).toVar('color');
+        const alpha = float(0.0).toVar('alpha');
+        const escaped = float(0.0).toVar('escaped');
+        const captured = float(0.0).toVar('captured');
+        const innerR = uniforms.diskInnerRadius;
+        const outerR = uniforms.diskOuterRadius;
+
+        Loop(32, () => {
+          If(escaped.greaterThan(0.5).or(captured.greaterThan(0.5)).or(alpha.greaterThan(0.99)), () => {
+            Break();
+          });
+
+          const r = length(rayPos);
+
+          If(r.lessThan(rs.mul(1.01)), () => {
+            captured.assign(1.0);
+            Break();
+          });
+
+          If(r.greaterThan(100.0), () => {
+            escaped.assign(1.0);
+            Break();
+          });
+
+          const toCenter = rayPos.negate().div(r);
+          const bendStrength = rs.div(r.mul(r)).mul(uniforms.stepSize).mul(uniforms.gravitationalLensing);
+          rayDir.addAssign(toCenter.mul(bendStrength));
+          rayDir.assign(normalize(rayDir));
+
+          prevPos.assign(rayPos);
+          rayPos.addAssign(rayDir.mul(uniforms.stepSize));
+
+          const crossedPlane = prevPos.y.mul(rayPos.y).lessThan(0.0);
+          If(crossedPlane.and(alpha.lessThan(0.99)), () => {
+            const t = prevPos.y.negate().div(rayPos.y.sub(prevPos.y));
+            const hitPos = mix(prevPos, rayPos, t);
+            const hitR = sqrt(hitPos.x.mul(hitPos.x).add(hitPos.z.mul(hitPos.z)));
+            const inDisk = hitR.greaterThan(innerR).and(hitR.lessThan(outerR));
+            If(inDisk, () => {
+              const hitAngle = atan(hitPos.z, hitPos.x);
+              const diskResult = accretionDiskColor(hitR, hitAngle, uniforms.time, rayDir);
+              const remainingAlpha = float(1.0).sub(alpha);
+              color.addAssign(diskResult.xyz.mul(diskResult.w).mul(remainingAlpha));
+              alpha.addAssign(remainingAlpha.mul(diskResult.w));
+            });
+          });
+        });
+
+        If(captured.lessThan(0.5), () => {
+          escaped.assign(1.0);
+        });
+
+        If(escaped.greaterThan(0.5).and(alpha.lessThan(0.99)), () => {
+          const bgColor = uniforms.starBackgroundColor.toVar('bgColor');
+          If(uniforms.starsEnabled.greaterThan(0.5), () => {
+            bgColor.addAssign(starField(rayDir));
+          });
+          If(uniforms.nebulaEnabled.greaterThan(0.5), () => {
+            bgColor.addAssign(nebulaField(rayDir));
+          });
+          color.addAssign(bgColor.mul(float(1.0).sub(alpha)));
+        });
+
+        finalColorNode.assign(vec4(pow(color, vec3(1.0 / 2.2)), 1.0));
       });
 
-      const finalColor = pow(color, vec3(1.0 / 2.2));
-      return vec4(finalColor, 1.0);
+      return finalColorNode;
     })();
 
     // ============================================================================
@@ -409,12 +424,21 @@ export const BlackHole = ({ targetId }) => {
     const fadeEndScroll   = window.innerHeight * 0.7; // px – fully hidden by 70vh scroll
 
     function updateOpacity() {
+      const pathname = window.location.pathname;
+      const isHome = pathname === "/Portfolio" || pathname === "/Portfolio/" || pathname === "/" || pathname.endsWith("/Portfolio") || pathname.endsWith("/Portfolio/");
+      if (!isHome) {
+        if (mountRef.current) {
+          mountRef.current.style.opacity = 1.0;
+          mountRef.current.style.pointerEvents = 'none';
+        }
+        return;
+      }
       const scrollY = window.scrollY || window.pageYOffset;
       const t = Math.min(Math.max((scrollY - fadeStartScroll) / (fadeEndScroll - fadeStartScroll), 0), 1);
       const opacity = 1 - t;
       if (mountRef.current) {
         mountRef.current.style.opacity = opacity;
-        mountRef.current.style.pointerEvents = opacity < 0.01 ? 'none' : 'none';
+        mountRef.current.style.pointerEvents = 'none';
       }
     }
     window.addEventListener('scroll', updateOpacity, { passive: true });
@@ -431,25 +455,37 @@ export const BlackHole = ({ targetId }) => {
     function animate() {
       animationFrameId = requestAnimationFrame(animate);
 
-      // Skip rendering entirely when fully scrolled away (save GPU)
-      const scrollY = window.scrollY || window.pageYOffset;
-      if (scrollY >= fadeEndScroll) return;
-
       const currentTime = performance.now();
       const deltaTime = Math.min((currentTime - lastFrameTime) / 1000, 0.033);
       lastFrameTime = currentTime;
 
-      if (targetId) {
-        const targetEl = document.getElementById(targetId);
-        if (targetEl) {
-          const rect = targetEl.getBoundingClientRect();
-          const px = rect.left + rect.width / 2;
-          // Shift up by 8% of viewport height
-          const py = rect.top + rect.height / 2 - window.innerHeight * 0.08;
-          const uvX = px / window.innerWidth;
-          const uvY = 1.0 - (py / window.innerHeight);
+      const pathname = window.location.pathname;
+      const isHome = pathname === "/Portfolio" || pathname === "/Portfolio/" || pathname === "/" || pathname.endsWith("/Portfolio") || pathname.endsWith("/Portfolio/");
 
-          uniforms.screenOffset.value.set(uvX * 2 - 1, uvY * 2 - 1);
+      if (isHome) {
+        uniforms.showBlackHole.value = 1.0;
+        
+        // Skip rendering entirely when fully scrolled away on homepage (save GPU)
+        const scrollY = window.scrollY || window.pageYOffset;
+        if (scrollY >= fadeEndScroll) return;
+
+        if (targetId) {
+          const targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            const rect = targetEl.getBoundingClientRect();
+            const px = rect.left + rect.width / 2;
+            // Shift up by 8% of viewport height
+            const py = rect.top + rect.height / 2 - window.innerHeight * 0.08;
+            const uvX = px / window.innerWidth;
+            const uvY = 1.0 - (py / window.innerHeight);
+
+            uniforms.screenOffset.value.set(uvX * 2 - 1, uvY * 2 - 1);
+          }
+        }
+      } else {
+        uniforms.showBlackHole.value = 0.0;
+        if (mountRef.current && mountRef.current.style.opacity !== "1") {
+          mountRef.current.style.opacity = "1";
         }
       }
 

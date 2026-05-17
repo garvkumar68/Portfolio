@@ -10,6 +10,7 @@ import { Achievements } from "./components/Achievements";
 import { Certifications } from "./components/Certifications";
 import { Contact } from "./components/Contact";
 import { BlackHole } from "./components/BlackHole";
+import { MinimalistStarfield } from "./components/MinimalistStarfield";
 import { useEffect } from "react";
 
 // Scroll to Top on route change helper
@@ -80,6 +81,7 @@ function App() {
     <Router basename="/Portfolio">
       <ScrollToTop />
       <div className="App">
+        <MinimalistStarfield />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/skills" element={<SkillsPage />} />
