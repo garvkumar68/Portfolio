@@ -13,7 +13,15 @@ export const Experience = () => {
             try {
                 const url = 'https://raw.githubusercontent.com/garvkumar68/Portfolio/json-data/experience.json';
                 const response = await axios.get(url);
-                setProfessionalExp(response.data);
+                // Support both new structure {workExperience:[...]} and legacy flat array
+                const data = response.data;
+                if (data && data.workExperience) {
+                    setProfessionalExp(data.workExperience);
+                } else if (Array.isArray(data)) {
+                    setProfessionalExp(data.filter(item =>
+                        !item.title.toLowerCase().includes("certification")
+                    ));
+                }
             } catch (err) {
                 console.error('Error fetching experience data from GitHub', err);
             }
@@ -50,9 +58,7 @@ export const Experience = () => {
                                     <h3 className="divided-subheading">Work & Research Experience</h3>
                                     <div className="divided-grid mb-5">
                                         <Row className="g-4 justify-content-start">
-                                            {professionalExp
-                                                .filter(item => !item.title.toLowerCase().includes("certification*") && !item.title.toLowerCase().includes("certification"))
-                                                .map((item, index) => (
+                                            {professionalExp.map((item, index) => (
                                                 <Col xs={12} sm={6} md={4} lg={3} key={index} className="d-flex align-items-stretch">
                                                     <div className="divided-card">
                                                         <div className="proj-imgbx">
@@ -64,9 +70,6 @@ export const Experience = () => {
                                                                     e.target.src = process.env.PUBLIC_URL + "/assets/fallback-image/fallback-image.png";
                                                                 }}
                                                             />
-                                                            <div className="proj-txtx">
-                                                                <span>{item.description}</span>
-                                                            </div>
                                                         </div>
                                                         <div className="card-body">
                                                             {item.link && item.link.trim() ? (
@@ -75,6 +78,14 @@ export const Experience = () => {
                                                                 </a>
                                                             ) : (
                                                                 <h4 className="card-title">{item.title}</h4>
+                                                            )}
+                                                            {item.description && (
+                                                                <p className="card-description">{item.description}</p>
+                                                            )}
+                                                            {item.link && item.link.trim() && (
+                                                                <a href={item.link.trim()} target="_blank" rel="noopener noreferrer" className="card-action-btn">
+                                                                    View Document &rarr;
+                                                                </a>
                                                             )}
                                                         </div>
                                                     </div>
@@ -99,9 +110,6 @@ export const Experience = () => {
                                                                     e.target.src = process.env.PUBLIC_URL + "/assets/fallback-image/fallback-image.png";
                                                                 }}
                                                             />
-                                                            <div className="proj-txtx">
-                                                                <span>{item.description}</span>
-                                                            </div>
                                                         </div>
                                                         <div className="card-body">
                                                             {item.link && item.link.trim() ? (
@@ -110,6 +118,14 @@ export const Experience = () => {
                                                                 </a>
                                                             ) : (
                                                                 <h4 className="card-title">{item.title}</h4>
+                                                            )}
+                                                            {item.description && (
+                                                                <p className="card-description">{item.description}</p>
+                                                            )}
+                                                            {item.link && item.link.trim() && (
+                                                                <a href={item.link.trim()} target="_blank" rel="noopener noreferrer" className="card-action-btn">
+                                                                    View Website &rarr;
+                                                                </a>
                                                             )}
                                                         </div>
                                                     </div>

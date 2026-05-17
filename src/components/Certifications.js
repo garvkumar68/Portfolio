@@ -13,14 +13,18 @@ export const Certifications = () => {
             try {
                 const url = 'https://raw.githubusercontent.com/garvkumar68/Portfolio/json-data/experience.json';
                 const response = await axios.get(url);
-                
-                // Filter only items that contain certification keyword
-                const certData = response.data.filter(item => 
-                    item.title.toLowerCase().includes("certification*") || 
-                    item.title.toLowerCase().includes("certification")
-                );
-                
-                setCertifications(certData);
+                const data = response.data;
+
+                // Support new {certifications:[...]} structure and legacy flat array
+                if (data && data.certifications) {
+                    setCertifications(data.certifications);
+                } else if (Array.isArray(data)) {
+                    const certData = data.filter(item =>
+                        item.title.toLowerCase().includes("certification*") ||
+                        item.title.toLowerCase().includes("certification")
+                    );
+                    setCertifications(certData);
+                }
             } catch (err) {
                 console.error('Error fetching certifications from GitHub', err);
             }
@@ -103,6 +107,13 @@ export const Certifications = () => {
                                                                     <span>{issuer}</span>
                                                                 </div>
                                                                 <h4 className="cert-card-title">{title}</h4>
+                                                                {item.stack && (
+                                                                    <div className="cert-card-stack">
+                                                                        {item.stack.split(',').map((tag, i) => (
+                                                                            <span key={i} className="cert-stack-tag">{tag.trim()}</span>
+                                                                        ))}
+                                                                    </div>
+                                                                )}
                                                                 {item.link && item.link.trim() && (
                                                                     <a
                                                                         href={item.link.trim()}
