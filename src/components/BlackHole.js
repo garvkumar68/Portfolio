@@ -433,19 +433,19 @@ export const BlackHole = ({ targetId }) => {
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.rotateSpeed = -0.5;
-    // Disable scroll zoom so page can scroll normally
     controls.enableZoom = false;
-    // Disable pan
     controls.enablePan = false;
-    // Lock distance fixed (increase to make BH appear smaller)
     controls.minDistance = 20.8;
     controls.maxDistance = 20.8;
-    // Remap right-click to ROTATE (default is PAN)
     controls.mouseButtons = {
       LEFT: THREE.MOUSE.ROTATE,
       MIDDLE: null,
       RIGHT: THREE.MOUSE.ROTATE
     };
+    // On mobile: fully disable interaction so touch swipes scroll the page instead
+    if (window.innerWidth <= 768) {
+      controls.enabled = false;
+    }
 
     const geometry = new THREE.SphereGeometry(100, 32, 32);
     geometry.scale(-1, 1, 1);
