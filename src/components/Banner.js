@@ -20,7 +20,7 @@ export const Banner = () => {
     const fetchBannerData = async () => {
       try {
         // Fetch the BannerDetails.json file directly from the raw URL
-        const url = "https://raw.githubusercontent.com/Rathoreatri03/Protfolio_website/Json_data/BannerDetails.json";
+        const url = "https://raw.githubusercontent.com/garvkumar68/Portfolio/json-data/BannerDetails.json";
         const response = await axios.get(url);
 
         setData(response.data); // Set the state with fetched data
@@ -99,13 +99,13 @@ export const Banner = () => {
               <TrackVisibility>
                 {({ isVisible }) => (
                     <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                      <span className="tagline">Let's Innovate the Future</span>
-                      <h1 className="display-4">Hi! I'm Atri Rathore</h1>
+                      <span className="tagline">Let's Automate the Future</span>
+                      <h1 className="display-4">Hi! I'm Garv Kumar</h1>
                       <div className="typing-effect">
                     <span
                         className="txt-rotate"
                         dataPeriod="500"
-                        data-rotate='[ "Computer Vision Engineer", "Data Analyst", "Business Analyst", "ML Engineer", "ML Developer", "Model Trainer", "Blender Artist" ]'
+                        data-rotate='["Software Engineer","Computer Vision Engineer", "Data Analyst", "IoT Engineer","Business Analyst", "ML Engineer", "AutoCad Fusion 360" ]'
                         style={{ color: '#D3D3D3' }}  /* Inline style to change text color */
                     >
                       <span className="wrap">{text}</span>
@@ -114,9 +114,9 @@ export const Banner = () => {
                       <p className="lead">{loading ? "Loading..." : data.description}</p>
                       <button
                           className="btn btn-outline-light btn-lg"
-                          onClick={() => window.open('https://www.linkedin.com/in/rathoreatri03/', '_blank')}
+                          onClick={() => window.open('https://www.linkedin.com/in/garv-kumar-aa09b0213', '_blank')}
                       >
-                        Let’s Connect <ArrowRightCircle size={25} />
+                        Let's Connect <ArrowRightCircle size={25} />
                       </button>
                     </div>
                 )}
@@ -125,7 +125,7 @@ export const Banner = () => {
             <Col xs={12} md={6} xl={5}>
               <TrackVisibility>
                 {({ isVisible }) => (
-                    <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
+                    <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                       <img src={data.imgUrl} alt="Header Img" className="img-fluid" />
                     </div>
                 )}

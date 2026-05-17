@@ -12,7 +12,7 @@ export const Skills = () => {
     const fetchSkillsData = async () => {
       try {
         // Fetch the skillsData.json file directly from the raw URL
-        const url = "https://raw.githubusercontent.com/Rathoreatri03/Protfolio_website/Json_data/skillsData.json";
+        const url = "https://raw.githubusercontent.com/garvkumar68/Portfolio/json-data/skillsData.json"
         const response = await axios.get(url);
 
         setSkills(response.data.skills); // Set the state with the fetched skills data

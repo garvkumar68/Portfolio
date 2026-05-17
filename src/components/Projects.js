@@ -14,14 +14,15 @@ export const Projects = () => {
         const fetchDataFromGitHub = async () => {
             try {
                 const fetchData = async (fileName) => {
-                    const url = `https://raw.githubusercontent.com/Rathoreatri03/Protfolio_website/Json_data/${fileName}`;
+                    const url = `https://raw.githubusercontent.com/garvkumar68/Portfolio/json-data/${fileName}`;
+                    
                     const response = await axios.get(url);
                     return response.data; // Directly return the JSON data
                 };
                 const projectsData = await fetchData('projects.json');
                 const successStoriesData = await fetchData('successStories.json');
-                const researchInsightsData = await fetchData('researchInsights.json');
-                const experienceData = await fetchData('experience.json');
+                const researchInsightsData = await fetchData('experience.json');
+                const experienceData = await fetchData('education.json');
 
                 setProjectsData(projectsData);
                 setSuccessStoriesData(successStoriesData);
@@ -46,10 +47,12 @@ export const Projects = () => {
                                     <h2>Contributions</h2>
                                     <p>
                                         In this section, there is a variety of impactful <strong>projects</strong>,
-                                        <strong>success stories</strong>, cutting-edge <strong>research</strong>, and valuable
-                                        <strong> experiences</strong>. This space highlights our commitment to advancing technology,
-                                        solving real-world challenges, and pushing the boundaries of innovation in fields such as
-                                        <strong> AI</strong>, <strong>robotics</strong>, <strong> IoT</strong>, and more.
+                                        <strong>Achievements</strong>, <strong>research</strong>, and valuable
+                                        <strong> experiences</strong>. 
+                                        This space highlights my abilities and innovation in advancing technology,
+                                        such as
+                                        <strong> AI</strong>, <strong>Problem Solving</strong>, <strong> IoT</strong>,
+                                        <strong> software development</strong>, and more...
                                     </p>
                                     <Tab.Container id="projects-tabs" defaultActiveKey="first">
                                         <Nav variant="pills" className="mb-5 justify-content-center align-items-center" id="pills-tab">
@@ -57,13 +60,13 @@ export const Projects = () => {
                                                 <Nav.Link eventKey="first" className="btn btn-primary">Projects</Nav.Link>
                                             </Nav.Item>
                                             <Nav.Item>
-                                                <Nav.Link eventKey="second" className="btn btn-primary">Success Stories</Nav.Link>
+                                                <Nav.Link eventKey="second" className="btn btn-primary">Achievements</Nav.Link>
                                             </Nav.Item>
                                             <Nav.Item>
-                                                <Nav.Link eventKey="third" className="btn btn-primary">Research Insights</Nav.Link>
+                                                <Nav.Link eventKey="third" className="btn btn-primary">Experience</Nav.Link>
                                             </Nav.Item>
                                             <Nav.Item>
-                                                <Nav.Link eventKey="fourth" className="btn btn-primary">Experience</Nav.Link>
+                                                <Nav.Link eventKey="fourth" className="btn btn-primary">Education</Nav.Link>
                                             </Nav.Item>
                                         </Nav>
                                         <Tab.Content id="slideInUp" className={isVisible ? "animate__animated animate__slideInUp" : ""}>
@@ -120,9 +123,12 @@ export const Projects = () => {
                                                                         <span>{story.description}</span>
                                                                     </div>
                                                                 </div>
-                                                                <button className="proj-btn">
+                                                                <button
+                                                                    className={`proj-btn ${!story.link.trim() ? 'disabled' : ''}`}>
                                                                     <div className="col-title">
-                                                                        <a href={story.link} target="_blank" rel="noopener noreferrer">
+                                                                        <a href={story.link.trim() || '#'}
+                                                                           target="_blank"
+                                                                           rel="noopener noreferrer">
                                                                             <h4>{story.title}</h4>
                                                                         </a>
                                                                     </div>
@@ -152,9 +158,12 @@ export const Projects = () => {
                                                                         <span>{research.description}</span>
                                                                     </div>
                                                                 </div>
-                                                                <button className="proj-btn">
+                                                                <button
+                                                                    className={`proj-btn ${!research.link.trim() ? 'disabled' : ''}`}>
                                                                     <div className="col-title">
-                                                                        <a href={research.link} target="_blank" rel="noopener noreferrer">
+                                                                        <a href={research.link.trim() || '#'}
+                                                                           target="_blank"
+                                                                           rel="noopener noreferrer">
                                                                             <h4>{research.title}</h4>
                                                                         </a>
                                                                     </div>
@@ -184,9 +193,12 @@ export const Projects = () => {
                                                                         <span>{exp.description}</span>
                                                                     </div>
                                                                 </div>
-                                                                <button className="proj-btn">
+                                                                <button
+                                                                    className={`proj-btn ${!exp.link.trim() ? 'disabled' : ''}`}>
                                                                     <div className="col-title">
-                                                                        <a href={exp.link} target="_blank" rel="noopener noreferrer">
+                                                                        <a href={exp.link.trim() || '#'}
+                                                                           target="_blank"
+                                                                           rel="noopener noreferrer">
                                                                             <h4>{exp.title}</h4>
                                                                         </a>
                                                                     </div>

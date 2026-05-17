@@ -1,5 +1,5 @@
 {
-  "homepage": "https://Rathoreatri03.github.io/Protfolio_website",
+  "homepage": "https://garvkumar68.github.io/Portfolio/",
   "name": "personal-portfolio",
   "version": "0.1.0",
   "private": true,
@@ -8,6 +8,7 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "animate.css": "^4.1.1",
+    "axios": "^1.16.1",
     "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
     "express": "^4.18.1",

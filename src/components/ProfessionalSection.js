@@ -11,7 +11,7 @@ export const ProfessionalSection = () => {
     useEffect(() => {
         const fetchProfessionalLinks = async () => {
             try {
-                const url = 'https://raw.githubusercontent.com/Rathoreatri03/Protfolio_website/Json_data/professionalLinks.json';
+                const url = 'https://raw.githubusercontent.com/garvkumar68/Portfolio/json-data/professionalLinks.json';
                 const response = await axios.get(url);
                 setLinks(response.data); // Fixing the data assignment
             } catch (err) {

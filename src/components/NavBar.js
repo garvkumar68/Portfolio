@@ -4,9 +4,7 @@ import axios from "axios"; // Import axios for fetching the JSON data
 
 import navIcon1 from "../assets/img/nav-icon1.svg";
 import navIcon2 from "../assets/img/nav-icon2.svg";
-import navIcon3 from "../assets/img/nav-icon3.svg";
 import navIcon4 from "../assets/img/nav-icon4.svg";
-import navIcon5 from "../assets/img/nav-icon5.svg";
 
 export const NavBar = () => {
   const [activeLink, setActiveLink] = useState("home");
@@ -19,7 +17,7 @@ export const NavBar = () => {
     const fetchLogoData = async () => {
       try {
         const response = await axios.get(
-            "https://raw.githubusercontent.com/Rathoreatri03/Protfolio_website/Json_data/logo.json"
+            "https://raw.githubusercontent.com/garvkumar68/Portfolio/json-data/logo.json"
         );
         setLogoUrl(response.data.logo_url); // Set the logo URL from the JSON
       } catch (error) {
@@ -113,20 +111,14 @@ export const NavBar = () => {
             </Nav>
             <span className="navbar-text">
             <div className="social-icon">
-              <a href="https://www.linkedin.com/in/rathoreatri03/" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.linkedin.com/in/garv-kumar-aa09b0213" target="_blank" rel="noopener noreferrer">
                 <img src={navIcon1} alt="LinkedIn" className="social-icon-img" />
               </a>
-              <a href="https://github.com/Rathoreatri03" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/garvkumar68" target="_blank" rel="noopener noreferrer">
                 <img src={navIcon2} alt="GitHub" className="social-icon-img" />
               </a>
-              <a href="https://www.instagram.com/rathoreatri_03/" target="_blank" rel="noopener noreferrer">
-                <img src={navIcon3} alt="Instagram" className="social-icon-img" />
-              </a>
-              <a href="mailto:rahoreatri@gmail.com" target="_blank" rel="noopener noreferrer">
+              <a href="mailto:garvkumar68@gmail.com" target="_blank" rel="noopener noreferrer">
                 <img src={navIcon4} alt="Email" className="social-icon-img" />
-              </a>
-              <a href="https://x.com/rathoreatri03" target="_blank" rel="noopener noreferrer">
-                <img src={navIcon5} alt="X (Twitter)" className="social-icon-img" />
               </a>
             </div>
             <button

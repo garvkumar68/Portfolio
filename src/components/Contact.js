@@ -29,7 +29,7 @@ export const Contact = () => {
     setButtonText("Sending...");
 
     // Submit the form data to Formspree
-    let response = await fetch("https://formspree.io/f/xpwzelbd", {
+    let response = await fetch("https://formspree.io/f/xjkgnbnn", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
