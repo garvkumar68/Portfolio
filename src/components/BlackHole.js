@@ -519,7 +519,10 @@ export const BlackHole = ({ targetId }) => {
       const scrollY = window.scrollY || window.pageYOffset;
       if (scrollY >= fadeEndScroll) return;
 
-      if (targetId) {
+      if (window.innerWidth <= 768) {
+        // Mobile layout: center horizontally, shift slightly up to look magnificent behind text
+        uniforms.screenOffset.value.set(0, 0.12);
+      } else if (targetId) {
         const targetEl = document.getElementById(targetId);
         if (targetEl) {
           const rect = targetEl.getBoundingClientRect();
