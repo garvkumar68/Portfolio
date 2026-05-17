@@ -591,6 +591,7 @@ export const BlackHole = ({ targetId }) => {
       material.dispose();
       if (controlsRef.current) controlsRef.current.dispose();
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

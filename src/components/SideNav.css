@@ -34,16 +34,6 @@
 
 @media (max-width: 768px) {
   .side-nav {
-    left: 15px;
-    gap: 14px;
-  }
-  
-  .nav-dot {
-    width: 10px;
-    height: 10px;
-  }
-  
-  .nav-dot.active {
-    width: 28px;
+    display: none !important;
   }
 }

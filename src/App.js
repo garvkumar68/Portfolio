@@ -41,6 +41,24 @@ const ScrollNavigator = () => {
   useEffect(() => {
     let isNavigating = false;
     let timeout;
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    const navigateToNext = (currentIndex) => {
+      if (currentIndex !== -1 && currentIndex < routesOrder.length - 1) {
+        isNavigating = true;
+        navigate(routesOrder[currentIndex + 1]);
+        timeout = setTimeout(() => { isNavigating = false; }, 800);
+      }
+    };
+
+    const navigateToPrev = (currentIndex) => {
+      if (currentIndex > 0) {
+        isNavigating = true;
+        navigate(routesOrder[currentIndex - 1]);
+        timeout = setTimeout(() => { isNavigating = false; }, 800);
+      }
+    };
 
     const handleWheel = (e) => {
       if (isNavigating) return;
@@ -48,31 +66,57 @@ const ScrollNavigator = () => {
       const currentPath = location.pathname;
       const currentIndex = routesOrder.indexOf(currentPath);
 
-      // Add a small tolerance for scroll height comparison
       const isAtTop = window.scrollY <= 2;
       const isAtBottom = Math.abs((window.innerHeight + window.scrollY) - document.documentElement.scrollHeight) <= 2;
 
-      // Ensure a reasonable scroll delta threshold
       if (e.deltaY > 30 && isAtBottom) {
-        // Scrolling down and at the bottom of the page
-        if (currentIndex !== -1 && currentIndex < routesOrder.length - 1) {
-          isNavigating = true;
-          navigate(routesOrder[currentIndex + 1]);
-          timeout = setTimeout(() => { isNavigating = false; }, 800); // Lock navigation for a short duration
-        }
+        navigateToNext(currentIndex);
       } else if (e.deltaY < -30 && isAtTop) {
-        // Scrolling up and at the top of the page
-        if (currentIndex > 0) {
-          isNavigating = true;
-          navigate(routesOrder[currentIndex - 1]);
-          timeout = setTimeout(() => { isNavigating = false; }, 800); // Lock navigation for a short duration
-        }
+        navigateToPrev(currentIndex);
       }
     };
 
+    const handleTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY;
+      touchEndY = e.touches[0].clientY; // prevent accidental swipe if only tapped
+    };
+
+    const handleTouchMove = (e) => {
+      touchEndY = e.touches[0].clientY;
+    };
+
+    const handleTouchEnd = () => {
+      if (isNavigating) return;
+      if (!touchStartY || !touchEndY) return;
+
+      const currentPath = location.pathname;
+      const currentIndex = routesOrder.indexOf(currentPath);
+
+      const isAtTop = window.scrollY <= 2;
+      const isAtBottom = Math.abs((window.innerHeight + window.scrollY) - document.documentElement.scrollHeight) <= 2;
+
+      const deltaY = touchStartY - touchEndY; // Positive means swiped up (scrolled down)
+
+      if (deltaY > 50 && isAtBottom) {
+        navigateToNext(currentIndex);
+      } else if (deltaY < -50 && isAtTop) {
+        navigateToPrev(currentIndex);
+      }
+
+      touchStartY = 0;
+      touchEndY = 0;
+    };
+
     window.addEventListener('wheel', handleWheel);
+    window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('touchend', handleTouchEnd);
+    
     return () => {
       window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
       if (timeout) clearTimeout(timeout);
     };
   }, [location.pathname, navigate]);
