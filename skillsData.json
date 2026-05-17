@@ -30,31 +30,31 @@
       ]
     },
     {
-      "title": "Geospatial AI & Spatial Intelligence",
+      "title": "Data Science & AI Tooling",
       "skills": [
         {
-          "name": "PostGIS & Spatial Databases",
-          "progress": 90
-        },
-        {
-          "name": "GeoServer & Geospatial APIs",
-          "progress": 87
-        },
-        {
-          "name": "Spatial Analysis & Geospatial Modelling",
+          "name": "Pandas • NumPy • Scikit-learn",
           "progress": 89
         },
         {
-          "name": "GIS + AI Integration",
-          "progress": 93
+          "name": "Data Visualization & Analytics",
+          "progress": 85
         },
         {
-          "name": "Raster, Vector & 3D Mesh Processing",
+          "name": "OpenCV & Image Processing",
+          "progress": 88
+        },
+        {
+          "name": "LangChain & AI Orchestration",
           "progress": 84
         },
         {
-          "name": "Urban Intelligence & Digital Twin Systems",
-          "progress": 86
+          "name": "Postman & API Testing",
+          "progress": 82
+        },
+        {
+          "name": "LM Studio & Local Inference",
+          "progress": 80
         }
       ]
     },
@@ -115,35 +115,35 @@
           "progress": 82
         }
       ]
-    },
-    {
-      "title": "Data Science & AI Tooling",
+    },{
+      "title": "Geospatial AI & Spatial Intelligence",
       "skills": [
         {
-          "name": "Pandas • NumPy • Scikit-learn",
+          "name": "PostGIS & Spatial Databases",
+          "progress": 90
+        },
+        {
+          "name": "GeoServer & Geospatial APIs",
+          "progress": 87
+        },
+        {
+          "name": "Spatial Analysis & Geospatial Modelling",
           "progress": 89
         },
         {
-          "name": "Data Visualization & Analytics",
-          "progress": 85
+          "name": "GIS + AI Integration",
+          "progress": 93
         },
         {
-          "name": "OpenCV & Image Processing",
-          "progress": 88
-        },
-        {
-          "name": "LangChain & AI Orchestration",
+          "name": "Raster, Vector & 3D Mesh Processing",
           "progress": 84
         },
         {
-          "name": "Postman & API Testing",
-          "progress": 82
-        },
-        {
-          "name": "LM Studio & Local Inference",
-          "progress": 80
+          "name": "Urban Intelligence & Digital Twin Systems",
+          "progress": 86
         }
       ]
-    }
+    },
+
   ]
 }
