@@ -7,12 +7,14 @@ import { Projects } from "./components/Projects";
 import { Contact } from "./components/Contact";
 import { ProfessionalSection } from './components/ProfessionalSection';
 import { Footer } from "./components/Footer";
+import { BlackHole } from "./components/BlackHole";
 
 
 
 function App() {
   return (
     <div className="App">
+      <BlackHole targetId="blackhole-placeholder" />
       <NavBar />
       <Banner />
       <Skills />

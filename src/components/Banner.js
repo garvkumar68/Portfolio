@@ -70,26 +70,6 @@ export const Banner = () => {
     setDelta(isDeleting ? 100 : 150); // Faster typing when deleting
   };
 
-  // Create Stars in the Background
-  const createStars = () => {
-    const starField = document.querySelector(".starfield");
-    if (!starField) return;
-
-    for (let i = 0; i < 100; i++) {
-      const star = document.createElement("div");
-      star.className = "star";
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.top = `${Math.random() * 100}%`; // Spread stars vertically
-      star.style.animationDelay = `${Math.random() * 5}s`;
-      starField.appendChild(star);
-    }
-  };
-
-  // Initialize stars on mount
-  useEffect(() => {
-    createStars();
-  }, []);
-
   // Render Loading or Content
   return (
       <section className="banner" id="home">
@@ -125,15 +105,14 @@ export const Banner = () => {
             <Col xs={12} md={6} xl={5}>
               <TrackVisibility>
                 {({ isVisible }) => (
-                    <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                      <img src={data.imgUrl} alt="Header Img" className="img-fluid" />
+                    <div className={isVisible ? "animate__animated animate__fadeIn" : ""} style={{ height: '400px', width: '100%' }}>
+                      <div id="blackhole-placeholder" style={{ width: '100%', height: '100%' }}></div>
                     </div>
                 )}
               </TrackVisibility>
             </Col>
           </Row>
         </Container>
-        <div className="starfield"></div>
       </section>
   );
 };
