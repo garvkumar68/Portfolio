@@ -2007,84 +2007,118 @@ a:hover {
   line-height: 1.5;
 }
 
-/* Category Subheadings */
-.skills-category-title {
-  font-size: 17px;
-  /* Scaled down for sleek dashboard layout */
-  font-weight: 700;
-  color: #00dfa2;
-  /* Glowing Teal Accent */
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-top: 25px;
-  margin-bottom: 14px;
-  text-align: left;
-  border-left: 3px solid #00dfa2;
-  padding-left: 10px;
-  font-family: 'Centra', sans-serif;
+/* ============================================================================
+   HUD MINIMALISTIC COCKPIT SKILLS PAGE STYLES
+   ============================================================================ */
+.skills-hud-grid {
+  margin-top: 30px;
 }
 
-/* Compact Glassmorphic Pill Cards */
-.skill-pill-card {
-  background: rgba(13, 13, 13, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 14px;
-  /* Slightly tighter border radius */
-  padding: 14px 20px;
-  /* Scaled down padding */
-  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(10px);
-  display: flex;
-  flex-direction: column;
+.skills-hud-column {
+  background: rgba(10, 10, 10, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 22px 20px;
   height: 100%;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
 }
 
-.skill-pill-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(0, 223, 162, 0.35);
-  box-shadow: 0 10px 25px rgba(0, 223, 162, 0.12);
+.skills-hud-column:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 223, 162, 0.25);
+  box-shadow: 0 8px 30px rgba(0, 223, 162, 0.06);
 }
 
-.skill-pill-info {
+.skills-hud-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  gap: 10px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 10px;
 }
 
-.skill-pill-name {
-  color: #ffffff;
-  font-size: 15px;
-  /* Scaled down */
-  font-weight: 600;
-  letter-spacing: 0.2px;
-}
-
-.skill-pill-percentage {
+.skills-hud-index {
+  font-family: 'Courier New', Courier, monospace;
   color: #00dfa2;
   font-size: 14px;
-  /* Scaled down */
   font-weight: 700;
   letter-spacing: 0.5px;
 }
 
-/* Compact Horizontal Progress Bar */
-.skill-pill-bar-track {
-  height: 4px;
-  /* Scaled down bar height */
-  width: 100%;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
+.skills-hud-title {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0;
 }
 
-.skill-pill-bar-fill {
+.skills-hud-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.skill-hud-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-hud-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 6px;
+}
+
+.skill-hud-name {
+  color: #c8c8c8;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  font-family: 'Courier New', Courier, monospace;
+  white-space: normal;
+  line-height: 1.3;
+  max-width: 82%;
+}
+
+.skill-hud-percentage {
+  color: #57ff8c;
+  font-size: 11.5px;
+  font-weight: 700;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.skill-hud-bar {
+  display: flex;
+  gap: 3px;
+  width: 100%;
+  height: 6px;
+  box-sizing: border-box;
+}
+
+.skill-hud-segment {
+  flex-grow: 1;
   height: 100%;
-  background: linear-gradient(90deg, #00b4d8 0%, #00dfa2 100%);
-  border-radius: 10px;
-  transition: width 1.5s cubic-bezier(0.1, 0.8, 0.1, 1.0);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 1px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-hud-segment.filled {
+  background: #00dfa2;
+  box-shadow: 0 0 6px rgba(0, 223, 162, 0.6);
+}
+
+.skill-hud-segment.filled:nth-last-child(-n+4) {
+  background: #57ff8c;
+  box-shadow: 0 0 6px rgba(87, 255, 140, 0.6);
 }
 
 /* ============================================================================
@@ -2409,32 +2443,48 @@ a:hover {
     font-size: 13px !important;
   }
 
-  .skills-category-title {
-    font-size: 13px !important;
-    letter-spacing: 1px;
-    margin-top: 18px;
-    margin-bottom: 10px;
+  .skills-hud-grid {
+    margin-top: 15px !important;
   }
 
-  .skills-category-group {
-    margin-bottom: 16px !important;
+  .skills-hud-column {
+    padding: 14px 12px !important;
+    margin-bottom: 12px;
   }
 
-  .skill-pill-card {
-    padding: 10px 14px !important;
-    border-radius: 10px;
+  .skills-hud-header {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+    padding-bottom: 6px !important;
   }
 
-  .skill-pill-name {
-    font-size: 13px !important;
-  }
-
-  .skill-pill-percentage {
+  .skills-hud-index {
     font-size: 12px !important;
+    line-height: 1.3 !important;
   }
 
-  .skill-pill-bar-track {
-    height: 3px !important;
+  .skills-hud-title {
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  .skill-hud-name {
+    font-size: 9.5px !important;
+    max-width: 78% !important;
+    line-height: 1.25 !important;
+  }
+
+  .skill-hud-percentage {
+    font-size: 9.5px !important;
+  }
+
+  .skill-hud-bar {
+    gap: 2px !important;
+    height: 5px !important;
+    margin-top: 2px !important;
   }
 
   /* --- Certifications Section --- */
