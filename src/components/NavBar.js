@@ -14,6 +14,10 @@ export const NavBar = () => {
   const [logoUrl, setLogoUrl] = useState(""); // State to store the logo URL
   const [isOpen, setIsOpen] = useState(false); // Mobile menu toggle state
 
+  const pathname = location.pathname;
+  const isHome = pathname === "/Portfolio" || pathname === "/Portfolio/" || pathname === "/" || pathname.endsWith("/Portfolio") || pathname.endsWith("/Portfolio/");
+  const isNavbarScrolled = !isHome || scrolled;
+
   useEffect(() => {
     // Fetch logo URL from the JSON
     const fetchLogoData = async () => {
@@ -67,8 +71,8 @@ export const NavBar = () => {
   };
 
   return (
-      <Navbar expand="lg" className={`navbar-custom ${scrolled ? "scrolled" : ""}`}>
-        <Container className="d-flex justify-content-between align-items-center position-relative">
+      <Navbar expand="lg" className={`navbar-custom ${isNavbarScrolled ? "scrolled" : ""}`}>
+        <Container fluid className="d-flex justify-content-between align-items-center position-relative ps-1 pe-4 ps-md-2 pe-md-5">
           <Navbar.Brand onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
             {logoUrl ? (
                 <img src={logoUrl} alt="Logo" className="navbar-logo" />

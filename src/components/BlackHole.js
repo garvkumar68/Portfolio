@@ -27,9 +27,6 @@ export const BlackHole = ({ targetId }) => {
         let domElement = document.getElementById(targetId);
         if (!domElement) return;
         
-        // Cleanly dispose old controls
-        controlsRef.current.dispose();
-        
         // Re-instantiate OrbitControls bound to the fresh DOM element
         const newControls = new OrbitControls(cameraRef.current, domElement);
         newControls.enableDamping = true;
@@ -39,6 +36,8 @@ export const BlackHole = ({ targetId }) => {
         newControls.enablePan = false;
         newControls.minDistance = 20.8;
         newControls.maxDistance = 20.8;
+        newControls.autoRotate = true;
+        newControls.autoRotateSpeed = 0.3;
         newControls.mouseButtons = {
           LEFT: THREE.MOUSE.ROTATE,
           MIDDLE: null,
@@ -437,6 +436,8 @@ export const BlackHole = ({ targetId }) => {
     controls.enablePan = false;
     controls.minDistance = 20.8;
     controls.maxDistance = 20.8;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.3;
     controls.mouseButtons = {
       LEFT: THREE.MOUSE.ROTATE,
       MIDDLE: null,
@@ -484,12 +485,49 @@ export const BlackHole = ({ targetId }) => {
     window.addEventListener('scroll', updateOpacity, { passive: true });
     updateOpacity(); // run once on mount
 
+    // ============================================================================
+    // MOUSE TRACKING
+    // ============================================================================
+    let targetMouseX = 0;
+    let targetMouseY = 0;
+    let mouseX = 0;
+    let mouseY = 0;
+
+    const onMouseMove = (event) => {
+      // Normalize mouse coordinates to [-1, 1]
+      targetMouseX = (event.clientX / window.innerWidth) * 2 - 1;
+      targetMouseY = (event.clientY / window.innerHeight) * 2 - 1;
+    };
+    window.addEventListener('mousemove', onMouseMove);
+
     function updateCamera() {
-      uniforms.cameraPosition.value.copy(camera.position);
-      const direction = new THREE.Vector3(0, 0, -1);
-      direction.applyQuaternion(camera.quaternion);
-      const target = camera.position.clone().add(direction.multiplyScalar(10));
-      uniforms.cameraTarget.value.copy(target);
+      if (window.innerWidth > 768) {
+        const camPos = camera.position.clone();
+        
+        // Calculate camera local axes for premium 3D parallax view tilt
+        const localRight = new THREE.Vector3(1, 0, 0).applyQuaternion(camera.quaternion).normalize();
+        const localUp = new THREE.Vector3(0, 1, 0).applyQuaternion(camera.quaternion).normalize();
+        
+        // Orbit the camera view in 3D around the origin (pitch & yaw rotations)
+        const angleX = mouseY * 0.45;
+        const angleY = mouseX * 0.45;
+        
+        camPos.applyAxisAngle(localRight, angleX);
+        camPos.applyAxisAngle(localUp, angleY);
+        
+        uniforms.cameraPosition.value.copy(camPos);
+        
+        // Point the raymarcher towards the black hole's center
+        const dirToCenter = new THREE.Vector3(0, 0, 0).sub(camPos).normalize();
+        const targetLook = camPos.clone().add(dirToCenter.multiplyScalar(10));
+        uniforms.cameraTarget.value.copy(targetLook);
+      } else {
+        uniforms.cameraPosition.value.copy(camera.position);
+        const direction = new THREE.Vector3(0, 0, -1);
+        direction.applyQuaternion(camera.quaternion);
+        const target = camera.position.clone().add(direction.multiplyScalar(10));
+        uniforms.cameraTarget.value.copy(target);
+      }
     }
 
     function animate() {
@@ -506,6 +544,15 @@ export const BlackHole = ({ targetId }) => {
       const deltaTime = Math.min((currentTime - lastFrameTime) / 1000, 0.033);
       lastFrameTime = currentTime;
 
+      // Smooth interpolation for mouse movements (slow and steady)
+      if (window.innerWidth > 768) {
+        mouseX += (targetMouseX - mouseX) * 0.03;
+        mouseY += (targetMouseY - mouseY) * 0.03;
+      } else {
+        mouseX = 0;
+        mouseY = 0;
+      }
+
       uniforms.showBlackHole.value = 1.0;
       
       // Update opacity on home page based on scroll
@@ -521,17 +568,19 @@ export const BlackHole = ({ targetId }) => {
       if (scrollY >= fadeEndScroll) return;
 
       if (window.innerWidth <= 768) {
-        // Mobile layout: center horizontally, shift slightly up to look magnificent behind text
-        uniforms.screenOffset.value.set(0, 0.12);
+        // Mobile layout: adjusted halfway (10% lower than original -0.38, 10% higher than -0.18)
+        uniforms.screenOffset.value.set(0, -0.28);
       } else if (targetId) {
         const targetEl = document.getElementById(targetId);
         if (targetEl) {
           const rect = targetEl.getBoundingClientRect();
           const px = rect.left + rect.width / 2;
-          // Shift up by 8% of viewport height
-          const py = rect.top + rect.height / 2 - window.innerHeight * 0.08;
+          // Shifted down by 10% of viewport height (halfway between original -0.22 and recent -0.02)
+          const py = rect.top + rect.height / 2 - window.innerHeight * 0.12;
+          
           const uvX = px / window.innerWidth;
-          const uvY = 1.0 - (py / window.innerHeight);
+          // WebGPU screenUV.y is 0 at Top and 1 at Bottom. No inversion needed.
+          const uvY = py / window.innerHeight;
 
           uniforms.screenOffset.value.set(uvX * 2 - 1, uvY * 2 - 1);
         }
@@ -583,6 +632,7 @@ export const BlackHole = ({ targetId }) => {
     return () => {
       window.removeEventListener('resize', onResize);
       window.removeEventListener('scroll', updateOpacity);
+      window.removeEventListener('mousemove', onMouseMove);
       cancelAnimationFrame(animationFrameId);
       if (renderer && container) {
         container.removeChild(renderer.domElement);

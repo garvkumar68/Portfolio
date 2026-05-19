@@ -46,12 +46,12 @@ const ScrollNavigator = () => {
 
   const triggerTopGlow = () => {
     setShowTopGlow(true);
-    setTimeout(() => setShowTopGlow(false), 500);
+    setTimeout(() => setShowTopGlow(false), 700);
   };
 
   const triggerBottomGlow = () => {
     setShowBottomGlow(true);
-    setTimeout(() => setShowBottomGlow(false), 500);
+    setTimeout(() => setShowBottomGlow(false), 700);
   };
 
   useEffect(() => {
@@ -60,9 +60,11 @@ const ScrollNavigator = () => {
     let touchStartY = 0;
     let touchEndY = 0;
     
-    // Trackpad inertia absorption
+    // Trackpad and scroll boundary cooldown tracking
     let isAtBoundary = false;
     let boundaryHitTime = 0;
+    
+
     
     // Mobile gesture tracking
     let touchStartedAtBoundary = false;
@@ -72,16 +74,40 @@ const ScrollNavigator = () => {
     const navigateToNext = (currentIndex) => {
       if (currentIndex !== -1 && currentIndex < routesOrder.length - 1) {
         isNavigating = true;
-        navigate(routesOrder[currentIndex + 1]);
-        timeout = setTimeout(() => { isNavigating = false; }, 800);
+        // Lock body and html scroll immediately to absorb all precision mouse/trackpad inertia
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+        
+        // Wait 250ms to let the green boundary glow completely fill and shine before the route slides
+        timeout = setTimeout(() => {
+          navigate(routesOrder[currentIndex + 1]);
+          timeout = setTimeout(() => { 
+            isNavigating = false;
+            // Cleanly restore scroll functionality once transition is complete
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+          }, 1000);
+        }, 250);
       }
     };
 
     const navigateToPrev = (currentIndex) => {
       if (currentIndex > 0) {
         isNavigating = true;
-        navigate(routesOrder[currentIndex - 1]);
-        timeout = setTimeout(() => { isNavigating = false; }, 800);
+        // Lock body and html scroll immediately to absorb all precision mouse/trackpad inertia
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+        
+        // Wait 250ms to let the green boundary glow completely fill and shine before the route slides
+        timeout = setTimeout(() => {
+          navigate(routesOrder[currentIndex - 1]);
+          timeout = setTimeout(() => { 
+            isNavigating = false;
+            // Cleanly restore scroll functionality once transition is complete
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+          }, 1000);
+        }, 250);
       }
     };
 
@@ -95,8 +121,8 @@ const ScrollNavigator = () => {
       const isAtBottom = Math.abs((window.innerHeight + window.scrollY) - document.documentElement.scrollHeight) <= 5;
 
       const now = Date.now();
-      
-      // Track boundary hit and duration
+
+      // Track boundary arrival state
       if (isAtTop || isAtBottom) {
         if (!isAtBoundary) {
           isAtBoundary = true;
@@ -107,23 +133,18 @@ const ScrollNavigator = () => {
         boundaryHitTime = 0;
       }
 
-      // Visual flash glow bar when trying to scroll past boundaries
-      if (e.deltaY < 0 && isAtTop) {
-        triggerTopGlow();
-      } else if (e.deltaY > 0 && isAtBottom) {
+      // Safeguard: when first arriving at the top or bottom of a page, absorb inertia for 500ms 
+      // before allowing any transitions. This lets users scroll to the bottom of the content safely!
+      if (isAtBoundary && (now - boundaryHitTime < 500)) {
+        return;
+      }
+
+      // Deliberate mouse wheel scroll threshold (100px) to prevent accidental quick transitions
+      if (e.deltaY > 100 && isAtBottom) {
         triggerBottomGlow();
-      }
-
-      // Safeguard against trackpad scroll inertia page-jumping
-      const timeSinceBoundaryHit = now - boundaryHitTime;
-      if (isAtBoundary && timeSinceBoundaryHit < 400) {
-        return; // Ignore quick/inertial events
-      }
-
-      // Deliberate mouse wheel scroll threshold (60px)
-      if (e.deltaY > 60 && isAtBottom) {
         navigateToNext(currentIndex);
-      } else if (e.deltaY < -60 && isAtTop) {
+      } else if (e.deltaY < -100 && isAtTop) {
+        triggerTopGlow();
         navigateToPrev(currentIndex);
       }
     };
@@ -194,6 +215,10 @@ const ScrollNavigator = () => {
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleTouchEnd);
       if (timeout) clearTimeout(timeout);
+      
+      // Ensure scroll is fully restored on unmount/cleanup
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     };
   }, [location.pathname, navigate, isMobile]);
 
