@@ -9,7 +9,7 @@ export const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState("");
-  const [delta, setDelta] = useState(150); // Typing speed
+  const [delta, setDelta] = useState(60); // Starting typing speed
   // eslint-disable-next-line
   const [index, setIndex] = useState(1);
   const [data, setData] = useState({}); // State for banner data
@@ -70,14 +70,16 @@ export const Banner = () => {
 
     if (!isDeleting && updatedText === fullText) {
       setIsDeleting(true);
+      setDelta(2500); // Pause for 2.5 seconds at the end of typing
       setIndex((prevIndex) => prevIndex - 1);
     } else if (isDeleting && updatedText === "") {
       setIsDeleting(false);
       setLoopNum(loopNum + 1);
+      setDelta(400); // Brief pause before starting the next word
       setIndex(1);
+    } else {
+      setDelta(isDeleting ? 30 : 60); // Deleting is super fast (30ms), typing is fast (60ms)
     }
-
-    setDelta(isDeleting ? 100 : 150); // Faster typing when deleting
   };
 
   // Render Loading or Content
@@ -94,7 +96,7 @@ export const Banner = () => {
                   <div className="typing-effect">
                     <span
                       className="txt-rotate"
-                      dataPeriod="500"
+                      data-period="500"
                       data-rotate='["Software Engineer","Computer Vision Engineer", "Data Analyst", "IoT Engineer","Business Analyst", "ML Engineer", "AutoCad Fusion 360" ]'
                       style={{ color: '#D3D3D3' }}  /* Inline style to change text color */
                     >
@@ -128,7 +130,7 @@ export const Banner = () => {
               )}
             </TrackVisibility>
           </Col>
-          <Col xs={12} md={6} xl={5}>
+          <Col xs={12} md={6} xl={5} className="d-none d-md-block">
             <TrackVisibility>
               {({ isVisible }) => (
                 <div className={isVisible ? "animate__animated animate__fadeIn" : ""} style={{ height: '400px', width: '100%' }}>

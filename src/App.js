@@ -72,16 +72,34 @@ const ScrollNavigator = () => {
     const navigateToNext = (currentIndex) => {
       if (currentIndex !== -1 && currentIndex < routesOrder.length - 1) {
         isNavigating = true;
+        // Lock body and html scroll to absorb all precision mouse/trackpad inertia
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+        
         navigate(routesOrder[currentIndex + 1]);
-        timeout = setTimeout(() => { isNavigating = false; }, 800);
+        timeout = setTimeout(() => { 
+          isNavigating = false;
+          // Cleanly restore scroll functionality once inertia has ended
+          document.body.style.overflow = '';
+          document.documentElement.style.overflow = '';
+        }, 1000); // 1000ms is the sweet spot to fully absorb swipe transitions
       }
     };
 
     const navigateToPrev = (currentIndex) => {
       if (currentIndex > 0) {
         isNavigating = true;
+        // Lock body and html scroll to absorb all precision mouse/trackpad inertia
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+        
         navigate(routesOrder[currentIndex - 1]);
-        timeout = setTimeout(() => { isNavigating = false; }, 800);
+        timeout = setTimeout(() => { 
+          isNavigating = false;
+          // Cleanly restore scroll functionality once inertia has ended
+          document.body.style.overflow = '';
+          document.documentElement.style.overflow = '';
+        }, 1000); // 1000ms is the sweet spot to fully absorb swipe transitions
       }
     };
 
@@ -194,6 +212,10 @@ const ScrollNavigator = () => {
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleTouchEnd);
       if (timeout) clearTimeout(timeout);
+      
+      // Ensure scroll is fully restored on unmount/cleanup
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     };
   }, [location.pathname, navigate, isMobile]);
 

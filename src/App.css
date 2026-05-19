@@ -395,7 +395,10 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 /* Banner Section */
 .banner {
   position: relative;
-  padding: 220px 0 80px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0 80px;
   background: transparent;
   overflow: hidden;
   color: white;
@@ -2308,7 +2311,7 @@ a:hover {
     transform: translate(-50%, -50%) translate(100px, 50px) scale(1.15);
   }
   100% {
-    transform: translate(-50%, -50%) translate(-80px, -40px) scale(0.9);
+    transform: translate(-50%, -50%) translate(-80px, -40px) scale(0.9);  
   }
 }
 
@@ -2316,52 +2319,72 @@ a:hover {
    MOBILE RESPONSIVENESS FOR BANNER (HOME PAGE)
    ============================================================================ */
 @media (max-width: 768px) {
+  /* --- Navbar & Logo Mobile Scaling --- */
+  nav.navbar {
+    padding: 8px 0 !important;
+  }
+  
+  .navbar-logo {
+    height: 48px !important;
+    width: 48px !important;
+    border-width: 1.5px !important;
+  }
+  
+  .custom-menu-toggle {
+    margin-top: 0 !important;
+  }
+
   .banner {
-    padding: 120px 0 50px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 100px 0 40px !important;
   }
   
   .banner h1 {
-    font-size: 42px;
-    margin-bottom: 15px;
+    font-size: 30px !important;
+    margin-bottom: 12px !important;
     line-height: 1.1;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
   }
   
   .typing-effect {
-    font-size: 26px !important;
+    font-size: 20px !important;
+    margin-top: 5px !important;
   }
   
   .txt-rotate {
-    font-size: 26px !important;
+    font-size: 20px !important;
   }
   
   .banner .tagline {
-    font-size: 14px;
-    padding: 6px 16px;
-    margin-bottom: 12px;
+    font-size: 12px !important;
+    padding: 4px 14px !important;
+    margin-bottom: 12px !important;
   }
   
   .banner p.lead {
-    font-size: 14px !important;
-    line-height: 1.6em;
-    margin-top: 15px;
-    width: 100%;
-    text-align: left;
+    font-size: 13.5px !important;
+    line-height: 1.5em !important;
+    margin-top: 12px !important;
+    width: 100% !important;
+    text-align: justify !important;
   }
   
   .banner .banner-buttons {
-    margin-top: 25px;
-    gap: 12px !important;
-    justify-content: flex-start;
+    margin-top: 15px !important;
+    gap: 10px !important;
+    justify-content: flex-start !important;
   }
   
   .banner button {
-    font-size: 14px !important;
-    padding: 8px 18px !important;
+    font-size: 13.5px !important;
+    padding: 8px 16px !important;
   }
   
   .banner button svg {
-    font-size: 18px !important;
-    margin-left: 6px !important;
+    font-size: 16px !important;
+    margin-left: 5px !important;
   }
 }
 
@@ -2974,4 +2997,4 @@ html, body {
 
 
 
-
+
