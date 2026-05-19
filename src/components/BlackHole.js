@@ -521,17 +521,19 @@ export const BlackHole = ({ targetId }) => {
       if (scrollY >= fadeEndScroll) return;
 
       if (window.innerWidth <= 768) {
-        // Mobile layout: center horizontally, shift slightly up to look magnificent behind text
-        uniforms.screenOffset.value.set(0, 0.12);
+        // Mobile layout: shift up to middle region between center and top (negative Y offset shifts UP)
+        uniforms.screenOffset.value.set(0, -0.38);
       } else if (targetId) {
         const targetEl = document.getElementById(targetId);
         if (targetEl) {
           const rect = targetEl.getBoundingClientRect();
           const px = rect.left + rect.width / 2;
-          // Shift up by 8% of viewport height
-          const py = rect.top + rect.height / 2 - window.innerHeight * 0.08;
+          // Shift up by 22% of viewport height (middle region between center and top)
+          const py = rect.top + rect.height / 2 - window.innerHeight * 0.22;
+          
           const uvX = px / window.innerWidth;
-          const uvY = 1.0 - (py / window.innerHeight);
+          // WebGPU screenUV.y is 0 at Top and 1 at Bottom. No inversion needed.
+          const uvY = py / window.innerHeight;
 
           uniforms.screenOffset.value.set(uvX * 2 - 1, uvY * 2 - 1);
         }
