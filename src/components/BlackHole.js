@@ -568,15 +568,15 @@ export const BlackHole = ({ targetId }) => {
       if (scrollY >= fadeEndScroll) return;
 
       if (window.innerWidth <= 768) {
-        // Mobile layout: shift up to middle region between center and top (negative Y offset shifts UP)
-        uniforms.screenOffset.value.set(0, -0.38);
+        // Mobile layout: adjusted halfway (10% lower than original -0.38, 10% higher than -0.18)
+        uniforms.screenOffset.value.set(0, -0.28);
       } else if (targetId) {
         const targetEl = document.getElementById(targetId);
         if (targetEl) {
           const rect = targetEl.getBoundingClientRect();
           const px = rect.left + rect.width / 2;
-          // Shift up by 22% of viewport height (middle region between center and top)
-          const py = rect.top + rect.height / 2 - window.innerHeight * 0.22;
+          // Shifted down by 10% of viewport height (halfway between original -0.22 and recent -0.02)
+          const py = rect.top + rect.height / 2 - window.innerHeight * 0.12;
           
           const uvX = px / window.innerWidth;
           // WebGPU screenUV.y is 0 at Top and 1 at Bottom. No inversion needed.

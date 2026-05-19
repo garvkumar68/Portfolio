@@ -130,28 +130,37 @@ nav.navbar {
   top: 0;
   z-index: 9999;
   transition: 0.32s ease-in-out;
+  background: transparent !important;
+  background-color: transparent !important;
 }
 
 nav.navbar.scrolled {
   padding: 8px 0;
   /* Balanced thin scroll padding */
-  background-color: #000000;
+  background: transparent !important;
+  background-color: transparent !important;
 }
 
 .navbar-logo {
-  height: 84px !important;
-  /* Even bigger, high-profile personal branding */
-  width: 84px !important;
+  height: 72px !important;
+  /* Elegant, responsive size */
+  width: 72px !important;
   border-radius: 50% !important;
   object-fit: cover !important;
-  border: 2.5px solid rgba(255, 255, 255, 0.25) !important;
+  border: 2px solid rgba(0, 223, 162, 0.35) !important;
   display: block;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-logo:hover {
+  transform: scale(1.05);
+  border-color: rgba(0, 223, 162, 0.8) !important;
+  box-shadow: 0 4px 20px rgba(0, 223, 162, 0.4);
 }
 
 .navbar-link.active {
-  color: #007bff;
-  /* Active link color */
+  color: rgba(0, 223, 162, 0.95) !important;
   font-weight: bold;
 }
 
@@ -174,7 +183,35 @@ nav.navbar .navbar-nav .nav-link.navbar-link {
 nav.navbar .navbar-nav a.nav-link.navbar-link:hover,
 nav.navbar .navbar-nav a.nav-link.navbar-link.active {
   opacity: 1;
-  color: rgba(0, 139, 104, 0.8) !important;
+  color: rgba(0, 223, 162, 0.95) !important;
+}
+
+@media (min-width: 992px) {
+  nav.navbar .navbar-collapse {
+    background: #080c09 !important; /* Fully opaque deep dark green-black background to prevent scrolled content bleed-through */
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1.5px solid rgba(0, 223, 162, 0.25) !important; /* Beautiful green thin border */
+    border-radius: 50px !important; /* Perfect rounded pill layout */
+    padding: 8px 24px 8px 30px !important; /* Balanced internal padding */
+    margin-left: auto !important;
+    flex-grow: 0 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex !important;
+    align-items: center !important;
+    transition: all 0.3s ease-in-out;
+  }
+
+  nav.navbar .navbar-nav {
+    margin-right: 15px !important; /* Spacing between nav links and socials */
+  }
+
+  nav.navbar .navbar-nav .nav-link.navbar-link {
+    font-size: 15px !important; /* compact elegant size */
+    padding: 0 12px !important;
+    opacity: 0.75;
+    transition: all 0.3s ease;
+  }
 }
 
 span.navbar-text {
@@ -213,7 +250,7 @@ span.navbar-text .social-icon {
   width: 32px !important;
   height: 32px !important;
   position: absolute;
-  background-color: rgba(0, 139, 104, 0.8);
+  background-color: rgba(0, 223, 162, 0.85);
   border-radius: 50%;
   transform: scale(0);
   transition: 0.3s ease-in-out;
@@ -234,23 +271,23 @@ span.navbar-text .social-icon {
   filter: brightness(0) saturate(100%) invert(0%) sepia(7%) saturate(98%) hue-rotate(346deg) brightness(95%) contrast(86%);
 }
 
-/* Shrinking the Reach Out Button */
+/* Custom Styled Reach Out Button */
 .navbar-text button {
   font-weight: 600;
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  border: 1px solid rgba(0, 223, 162, 0.4) !important;
   padding: 8px 18px !important;
   /* Clean, compact padding */
   font-size: 13px !important;
-  /* Sleek, high-impact font size */
+  /* Sleek font size */
   margin-left: 12px;
   position: relative;
-  background-color: transparent;
-  border-radius: 14px !important;
-  /* Beautiful rounded rectangle corners */
-  transition: 0.3s ease-in-out, background 0.3s ease, color 0.3s ease;
+  background-color: rgba(0, 223, 162, 0.05) !important;
+  border-radius: 20px !important;
+  /* Matching rounded corners */
+  transition: all 0.3s ease-in-out;
   overflow: hidden;
-  /* Contain effects */
+  z-index: 1;
 }
 
 /* Shine Effect for Button */
@@ -270,10 +307,11 @@ span.navbar-text .social-icon {
 
 /* Hover Effects */
 .navbar-text button:hover {
-  background: linear-gradient(90deg, rgba(0, 139, 104, 0.8), #00695c 111.58%);
+  background: linear-gradient(90deg, rgba(0, 223, 162, 0.85), #00b386 111.58%) !important;
   color: black !important;
   /* Change text color on hover */
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 4px 15px rgba(0, 223, 162, 0.3);
 }
 
 /* Shine Effect on Hover */

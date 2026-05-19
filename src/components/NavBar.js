@@ -72,7 +72,7 @@ export const NavBar = () => {
 
   return (
       <Navbar expand="lg" className={`navbar-custom ${isNavbarScrolled ? "scrolled" : ""}`}>
-        <Container className="d-flex justify-content-between align-items-center position-relative">
+        <Container fluid className="d-flex justify-content-between align-items-center position-relative ps-1 pe-4 ps-md-2 pe-md-5">
           <Navbar.Brand onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
             {logoUrl ? (
                 <img src={logoUrl} alt="Logo" className="navbar-logo" />
