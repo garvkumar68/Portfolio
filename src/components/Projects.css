@@ -55,23 +55,25 @@
     0 0 15px rgba(0, 223, 162, 0.2);
 }
 
-/* Image fills all except the caption bar height on active */
+/* Image covers full width when inactive, shrinks to 60% when active */
 .ps-blade__bg {
   position: absolute;
   inset: 0;
-  bottom: 0;
+  width: 100%;
   background-size: cover;
   background-position: center;
   transform: scale(1.05);
-  transition: transform 1.2s ease, filter 600ms ease, bottom 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 1.2s ease, filter 600ms ease, width 600ms cubic-bezier(0.22, 1, 0.36, 1);
   filter: saturate(1.1) brightness(0.75);
 }
 
-/* On active desktop: image covers top area, leaves 130px for caption */
+/* On active desktop: image covers 55% on left, full to frame (no black borders) */
 .ps-blade--active .ps-blade__bg {
-  bottom: 130px;
-  transform: scale(1.02);
+  width: 55%;
+  transform: scale(1); /* No zoom */
   filter: saturate(1.15) brightness(0.95);
+  background-size: cover;
+  background-position: center;
 }
 
 /* Scrim only on inactive blades for the number badge readability */
@@ -110,24 +112,26 @@
   pointer-events: none;
 }
 
-/* Caption panel — solid dark bar at bottom, separate from image */
+/* Caption panel — sits on the right 40% of the active blade */
 .ps-blade__content {
   position: absolute;
   bottom: 0;
-  left: 0;
+  top: 0;
   right: 0;
-  height: 130px;
-  padding: 12px 18px 14px;
+  left: 55%;
+  width: 45%;
+  height: 100%;
+  padding: 40px 30px;
   background: #080c09;
-  border-top: 1px solid rgba(0, 223, 162, 0.2);
+  border-left: 1px solid rgba(0, 223, 162, 0.2);
   color: #fff;
   opacity: 0;
-  transform: translateY(6px);
+  transform: translateX(12px);
   transition: opacity 400ms ease 200ms, transform 400ms ease 200ms;
   pointer-events: auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   z-index: 2;
 }
 .ps-blade--active .ps-blade__content {
@@ -139,7 +143,9 @@
 .ps-blade__text-group {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
 .ps-blade__tag {
@@ -157,22 +163,28 @@
 }
 
 .ps-blade__title {
-  font-size: clamp(14px, 1.6vw, 20px) !important;
+  font-size: clamp(18px, 2.2vw, 24px) !important;
   font-weight: 700;
   line-height: 1.2 !important;
   letter-spacing: -0.01em !important;
   text-align: left !important;
-  margin: 0 0 2px;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
   color: #ffffff;
   display: block;
 }
 
 .ps-blade__tagline {
-  font-size: 11.5px !important;
+  font-size: 13px !important;
   font-weight: 500;
   color: rgba(0, 223, 162, 0.85);
-  margin: 0 0 2px;
-  line-height: 1.2 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  line-height: 1.3 !important;
   letter-spacing: normal !important;
   text-align: left !important;
   display: block;
@@ -182,8 +194,11 @@
 .ps-blade__desc {
   font-size: 11px !important;
   color: rgba(209, 209, 209, 0.8);
-  margin: 0;
-  line-height: 1.3 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  line-height: 1.4 !important;
   letter-spacing: normal !important;
   text-align: left !important;
   display: block;
@@ -347,7 +362,7 @@
   
   /* Active blade: image section + caption panel below */
   .ps-blade--active {
-    height: 280px;
+    height: auto;
     min-height: 280px;
     border-color: rgba(0, 223, 162, 0.75);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.8);
@@ -363,10 +378,12 @@
     filter: saturate(1) brightness(0.6);
   }
 
-  /* Active blade — image only covers the top 55%, NOT all of blade */
+  /* Active blade — image has fixed height, allowing content to grow */
   .ps-blade--active .ps-blade__bg {
-    height: 55%;
-    top: 0;
+    position: relative;
+    width: 100%;
+    height: 180px; /* Fixed height for image */
+    top: auto;
     bottom: auto;
     filter: saturate(1.1) brightness(0.95);
   }
@@ -376,23 +393,26 @@
     display: none;
   }
 
-  /* Caption panel: a solid dark section below the image */
+  /* Caption panel: dynamic height based on text */
   .ps-blade__content {
     position: relative; /* override absolute desktop positioning */
     inset: auto;
-    margin-top: auto; /* push to bottom, after image takes top 55% */
-    height: 45%;
-    padding: 10px 14px 12px;
+    left: 0;
+    width: 100%;
+    margin-top: 0;
+    height: auto;
+    flex: 1; /* allow it to grow */
+    padding: 12px 14px 16px;
     background: #080c09;
+    border-left: none;
     border-top: 1px solid rgba(0, 223, 162, 0.25);
     opacity: 0;
     transform: translateY(6px);
     transition: opacity 350ms ease 150ms, transform 350ms ease 150ms;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 6px;
+    gap: 8px;
   }
   .ps-blade--active .ps-blade__content {
     opacity: 1;
@@ -400,7 +420,9 @@
   }
 
   .ps-blade__text-group {
+    justify-content: flex-start;
     gap: 1px;
+    margin-bottom: 0;
   }
 
   .ps-blade__tag {

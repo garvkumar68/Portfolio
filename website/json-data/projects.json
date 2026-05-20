@@ -3,30 +3,35 @@
     "title": "AstroTerra",
     "description": "Autonomous lunar rover navigation and hazard detection system utilizing deep learning to map craters via Chandrayaan-2 OHRC imagery. Integrates the A* algorithm for real-time, obstacle-free path planning.",
     "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740846553/astroterra_sibr0f.png",
-    "link": "https://github.com/garvkumar68/AstroTerra"
+    "link": "https://github.com/garvkumar68/AstroTerra",
+    "stack_title": "Aerospace"
   },  
   {
     "title": "Accident Crash Detection Emergency System",
     "description": "IoT and AI-powered vehicle black box combining multi-sensor telemetry with computer vision for collision analysis. Automatically identifies surrounding vehicles and dispatches instant emergency alerts via SMTP.",
     "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740846553/ace_nume3m.png",
-    "link": "https://github.com/garvkumar68/Accident-Crash-Detection-Emergency-System"
+    "link": "https://github.com/garvkumar68/Accident-Crash-Detection-Emergency-System",
+    "stack_title": "AI / ML & IoT"
   },
   {
     "title": "Brain Wizard",
     "description": "AI-driven mental health assistant integrating natural language processing and Generative AI for real-time speech and text support. Employs transformer models for sentiment analysis and disorder detection.",
     "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740846553/brainwizard_bnl2sr.jpg",
-    "link": "https://garvkumar68.github.io/BrainWizard-website/"
+    "link": "https://garvkumar68.github.io/BrainWizard-website/",
+    "stack_title": "Agentic AI & LLMs"
   },
   {
     "title": "Smart Cleaning Robot for High-Rise Buildings",
     "description": "Wire-powered autonomous cleaning robot featuring an aerodynamic aluminum chassis designed in Autodesk Fusion 360. Eliminates battery e-waste while ensuring continuous, high-efficiency vertical surface maintenance.",
     "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740846553/highriser_lsrapk.png",
-    "link": "https://github.com/garvkumar68/HIGH-RISER-ROBOT-3D-DESIGN"
+    "link": "https://github.com/garvkumar68/HIGH-RISER-ROBOT-3D-DESIGN",
+    "stack_title": "Autocad Fusion 360"
   },  
   {
     "title": "The Murphy System",
     "description": "Multi-disease diagnosis ecosystem combining ensemble machine learning, CNNs, and NLP. Integrates automated screening for brain tumors and breast cancer alongside symptom-based predictive diagnostics.",
     "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740846553/murphy_ewp45s.png",
-    "link": "https://garvkumar68.github.io/Murphy-System/"
+    "link": "https://garvkumar68.github.io/Murphy-System/",
+    "stack_title": "AI / ML"
   }
 ]

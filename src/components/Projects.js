@@ -58,18 +58,8 @@ export const Projects = () => {
             const tagline = parts[0] ? parts[0] + (parts[0].endsWith('.') ? '' : '.') : "Innovative technology showcase.";
             const restOfDesc = parts.slice(1).join('. ') || desc;
 
-            // Smart Tag guessing based on keywords
-            const text = `${p.title} ${desc}`.toLowerCase();
-            let tag = "Engineering";
-            if (text.includes("lunar") || text.includes("space") || text.includes("rover")) {
-                tag = "Aerospace";
-            } else if (text.includes("learning") || text.includes("ai") || text.includes("vision") || text.includes("intelligence") || text.includes("model")) {
-                tag = "AI / ML";
-            } else if (text.includes("iot") || text.includes("sensor") || text.includes("hardware") || text.includes("embedded") || text.includes("telemetry") || text.includes("black box")) {
-                tag = "IoT & Embedded";
-            } else if (text.includes("web") || text.includes("react") || text.includes("full-stack") || text.includes("app") || text.includes("software")) {
-                tag = "Software";
-            }
+            // Use stack_title from JSON, fallback to "AI / ML"
+            let tag = p.stack_title || "AI / ML";
 
             return {
                 id: p.id || `p-${idx}`,
