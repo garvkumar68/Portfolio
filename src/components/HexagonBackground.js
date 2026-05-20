@@ -9,166 +9,220 @@ export const HexagonBackground = ({ className = "" }) => {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
 
-    let width, height;
-    const hexSize = 32;
-    const gap = 3;
-    const hexH = Math.sqrt(3) * hexSize;
-    const hexW = 2 * hexSize;
-    const colW = hexW * 0.75 + gap;
-    const rowH = hexH + gap;
+    let W = 0, H = 0;
+    const HEX_SIZE = 40;
+    const GAP = 3;
 
-    const hexagons = [];
-    let time = 0;
-    let mouseX = -1000;
-    let mouseY = -1000;
+    let hexes = [];
+    const litHexes = new Map();
+    const FADE_DURATION = 1100;
 
-    // Random glow state
-    let glowTargets = [];
-    let glowTimer = 0;
-    const GLOW_INTERVAL = 80; // frames between re-picks
+    let prevX = null;
+    let prevY = null;
 
-    const handleMouseMove = (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseX = e.clientX - rect.left;
-      mouseY = e.clientY - rect.top;
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
+    function buildGrid() {
+      hexes = [];
+      const w = Math.sqrt(3) * HEX_SIZE;
+      const h = 2 * HEX_SIZE;
+      const cols = Math.ceil(W / w) + 2;
+      const rows = Math.ceil(H / (h * 0.75)) + 2;
+      for (let row = -1; row < rows; row++) {
+        for (let col = -1; col < cols; col++) {
+          const cx = col * w + (row % 2 === 1 ? w / 2 : 0);
+          const cy = row * h * 0.75;
+          hexes.push({ cx, cy });
+        }
+      }
+    }
 
     function resize() {
-      width = canvas.width = canvas.offsetWidth * devicePixelRatio;
-      height = canvas.height = canvas.offsetHeight * devicePixelRatio;
-      ctx.scale(devicePixelRatio, devicePixelRatio);
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      W = rect.width;
+      H = rect.height;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       buildGrid();
     }
 
-    function buildGrid() {
-      hexagons.length = 0;
-      const cols = Math.ceil((width / devicePixelRatio) / colW) + 2;
-      const rows = Math.ceil((height / devicePixelRatio) / rowH) + 2;
-      for (let col = -1; col < cols; col++) {
-        for (let row = -1; row < rows; row++) {
-          const x = col * colW;
-          const y = row * rowH + (col % 2 === 0 ? 0 : rowH / 2);
-          hexagons.push({
-            x,
-            y,
-            phase: Math.random() * Math.PI * 2,
-            speed: 0.3 + Math.random() * 0.5,
-            glowIntensity: 0,
-            glowTarget: 0,
-          });
-        }
-      }
-      pickGlowTargets();
-    }
-
-    function pickGlowTargets() {
-      // Fade out previous targets
-      glowTargets.forEach((i) => {
-        if (hexagons[i]) hexagons[i].glowTarget = 0;
-      });
-
-      // Pick ~4% of hexagons to glow
-      const count = Math.max(4, Math.floor(hexagons.length * 0.04));
-      glowTargets = [];
-      for (let i = 0; i < count; i++) {
-        const idx = Math.floor(Math.random() * hexagons.length);
-        glowTargets.push(idx);
-        hexagons[idx].glowTarget = 0.7 + Math.random() * 0.3;
-      }
-    }
-
-    function hexPath(cx, cy, r) {
-      ctx.beginPath();
+    function hexPts(cx, cy, r) {
+      const pts = [];
       for (let i = 0; i < 6; i++) {
-        const angle = (Math.PI / 180) * (60 * i - 30);
-        const px = cx + r * Math.cos(angle);
-        const py = cy + r * Math.sin(angle);
-        if (i === 0) ctx.moveTo(px, py);
-        else ctx.lineTo(px, py);
+        const a = (Math.PI / 3) * i - Math.PI / 6;
+        pts.push([cx + r * Math.cos(a), cy + r * Math.sin(a)]);
       }
+      return pts;
+    }
+
+    function getHexAt(px, py) {
+      let best = -1, bestD = Infinity;
+      for (let i = 0; i < hexes.length; i++) {
+        const d = Math.hypot(hexes[i].cx - px, hexes[i].cy - py);
+        if (d < HEX_SIZE && d < bestD) { bestD = d; best = i; }
+      }
+      return best;
+    }
+
+    function collectLine(x0, y0, x1, y1) {
+      const steps = Math.ceil(Math.hypot(x1 - x0, y1 - y0) / (HEX_SIZE * 0.35));
+      const n = Math.max(steps, 1);
+      const seen = [];
+      for (let i = 0; i <= n; i++) {
+        const t = i / n;
+        const idx = getHexAt(x0 + (x1 - x0) * t, y0 + (y1 - y0) * t);
+        if (idx >= 0 && !seen.includes(idx)) seen.push(idx);
+      }
+      return seen;
+    }
+
+    function drawHex3D(cx, cy, r, glow) {
+      const outer = hexPts(cx, cy, r);
+      const inner = hexPts(cx, cy, r * 0.82);
+
+      // base fill
+      ctx.beginPath();
+      outer.forEach(([x, y], i) => i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y));
       ctx.closePath();
+      const baseLum = 18 + glow * 38;
+      ctx.fillStyle = `rgb(${baseLum},${baseLum},${baseLum})`;
+      ctx.fill();
+
+      // bevel side faces
+      for (let i = 0; i < 6; i++) {
+        const [ax, ay] = outer[i];
+        const [bx, by] = outer[(i + 1) % 6];
+        const [cx2, cy2] = inner[(i + 1) % 6];
+        const [dx2, dy2] = inner[i];
+        const midAngle = Math.atan2((ay + by) / 2 - cy, (ax + bx) / 2 - cx);
+        const light = (Math.cos(midAngle - Math.PI * 1.3) + 1) / 2;
+        const lum = glow > 0.01
+          ? Math.round(30 + light * 60 + glow * 80)
+          : Math.round(12 + light * 18);
+        const alpha = 0.55 + light * 0.3 + glow * 0.15;
+        ctx.beginPath();
+        ctx.moveTo(ax, ay); ctx.lineTo(bx, by);
+        ctx.lineTo(cx2, cy2); ctx.lineTo(dx2, dy2);
+        ctx.closePath();
+        ctx.fillStyle = `rgba(${lum},${lum},${lum},${alpha})`;
+        ctx.fill();
+      }
+
+      // inner top face with radial shine
+      ctx.beginPath();
+      inner.forEach(([x, y], i) => i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y));
+      ctx.closePath();
+      if (glow > 0.01) {
+        const grad = ctx.createRadialGradient(cx - r * 0.18, cy - r * 0.22, 0, cx, cy, r * 0.82);
+        const hi = Math.round(60 + glow * 180);
+        const mid = Math.round(25 + glow * 60);
+        grad.addColorStop(0,   `rgba(${hi},${hi},${hi},${0.55 + glow * 0.45})`);
+        grad.addColorStop(0.5, `rgba(${mid},${mid},${mid},${0.3 + glow * 0.35})`);
+        grad.addColorStop(1,   `rgba(14,14,14,${0.6 + glow * 0.2})`);
+        ctx.fillStyle = grad;
+      } else {
+        const grad = ctx.createRadialGradient(cx - r * 0.18, cy - r * 0.22, 0, cx, cy, r * 0.82);
+        grad.addColorStop(0,   "rgba(38,38,38,0.9)");
+        grad.addColorStop(0.6, "rgba(22,22,22,0.95)");
+        grad.addColorStop(1,   "rgba(12,12,12,1)");
+        ctx.fillStyle = grad;
+      }
+      ctx.fill();
+
+      // specular highlight
+      if (glow > 0.05) {
+        ctx.beginPath();
+        inner.forEach(([x, y], i) => i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y));
+        ctx.closePath();
+        const spec = ctx.createRadialGradient(
+          cx - r * 0.28, cy - r * 0.3, 0,
+          cx - r * 0.1,  cy - r * 0.1, r * 0.55
+        );
+        spec.addColorStop(0,   `rgba(255,255,255,${glow * 0.28})`);
+        spec.addColorStop(0.5, `rgba(255,255,255,${glow * 0.06})`);
+        spec.addColorStop(1,   "rgba(255,255,255,0)");
+        ctx.fillStyle = spec;
+        ctx.fill();
+      }
+
+      // outer border
+      ctx.beginPath();
+      outer.forEach(([x, y], i) => i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y));
+      ctx.closePath();
+      ctx.strokeStyle = glow > 0.05
+        ? `rgba(${Math.round(80 + glow * 120)},${Math.round(80 + glow * 120)},${Math.round(80 + glow * 120)},${0.4 + glow * 0.5})`
+        : "rgba(255,255,255,0.07)";
+      ctx.lineWidth = glow > 0.05 ? 0.8 + glow : 0.6;
+      ctx.stroke();
     }
 
     function draw() {
-      const W = width / devicePixelRatio;
-      const H = height / devicePixelRatio;
-      ctx.clearRect(0, 0, W, H);
-
-      // Dark background so glows are visible
-      ctx.fillStyle = "rgba(30, 18, 10, 1)";
+      ctx.fillStyle = "#0d0d0d";
       ctx.fillRect(0, 0, W, H);
+      const now = Date.now();
 
-      // Cycle random glows
-      glowTimer++;
-      if (glowTimer >= GLOW_INTERVAL) {
-        glowTimer = 0;
-        pickGlowTargets();
+      for (const [idx, info] of litHexes) {
+        if (now - info.litAt > FADE_DURATION) litHexes.delete(idx);
       }
 
-      for (const hex of hexagons) {
-        // Smooth lerp toward glow target
-        hex.glowIntensity += (hex.glowTarget - hex.glowIntensity) * 0.04;
-
-        // Mouse hover
-        const dx = hex.x - mouseX;
-        const dy = hex.y - mouseY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const maxDist = 130;
-        const hoverFactor = Math.max(0, 1 - dist / maxDist);
-
-        const pulse = Math.sin(time * hex.speed + hex.phase);
-        let brightness = 0.04 + ((pulse + 1) / 2) * 0.1;
-        brightness += hoverFactor * 0.45;
-        const glowBoost = hex.glowIntensity;
-        brightness += glowBoost;
-
-        const isGlowing = glowBoost > 0.05 || hoverFactor > 0.1;
-
-        hexPath(hex.x, hex.y, hexSize - gap / 2);
-
-        if (isGlowing) {
-          // Coffee brown accent — was beige, now swapped
-          ctx.fillStyle = `rgba(111, 78, 55, ${Math.min(1, brightness * 0.85)})`;
-          ctx.fill();
-          ctx.strokeStyle = `rgba(180, 120, 70, ${0.3 + glowBoost * 0.9})`;
-          ctx.lineWidth = 1.5 + glowBoost * 2;
-          ctx.stroke();
-
-          // Extra glow halo for strongly lit hexes
-          if (glowBoost > 0.2) {
-            ctx.shadowColor = "rgba(160, 100, 50, 0.8)";
-            ctx.shadowBlur = 12 + glowBoost * 18;
-            hexPath(hex.x, hex.y, hexSize - gap / 2);
-            ctx.strokeStyle = `rgba(200, 140, 80, ${glowBoost * 0.6})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-            ctx.shadowBlur = 0;
-            ctx.shadowColor = "transparent";
-          }
-        } else {
-          // Beige base — was coffee, now swapped
-          ctx.fillStyle = `rgba(212, 185, 150, ${brightness * 0.55})`;
-          ctx.fill();
-          ctx.strokeStyle = `rgba(212, 185, 150, ${0.08 + brightness * 0.4})`;
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
+      hexes.forEach((hex, i) => {
+        let glow = 0;
+        if (litHexes.has(i)) {
+          const age = (now - litHexes.get(i).litAt) / FADE_DURATION;
+          const t = Math.max(0, 1 - age);
+          glow = t * t * t;
         }
-      }
+        drawHex3D(hex.cx, hex.cy, HEX_SIZE - GAP, glow);
+      });
 
-      time += 0.018;
       animFrameRef.current = requestAnimationFrame(draw);
     }
 
+    function onMove(px, py) {
+      const now = Date.now();
+      const pts = prevX !== null
+        ? collectLine(prevX, prevY, px, py)
+        : [getHexAt(px, py)];
+      for (const idx of pts) {
+        if (idx >= 0) litHexes.set(idx, { litAt: now });
+      }
+      prevX = px;
+      prevY = py;
+    }
+
+    function getCanvasPos(clientX, clientY) {
+      const rect = canvas.getBoundingClientRect();
+      return [clientX - rect.left, clientY - rect.top];
+    }
+
+    const onMouseMove = (e) => {
+      const [x, y] = getCanvasPos(e.clientX, e.clientY);
+      onMove(x, y);
+    };
+    const onMouseLeave = () => { prevX = null; prevY = null; };
+
+    const onTouchMove = (e) => {
+      e.preventDefault();
+      const [x, y] = getCanvasPos(e.touches[0].clientX, e.touches[0].clientY);
+      onMove(x, y);
+    };
+    const onTouchEnd = () => { prevX = null; prevY = null; };
+
+    window.addEventListener("mousemove", onMouseMove);
+    canvas.addEventListener("mouseleave", onMouseLeave);
+    canvas.addEventListener("touchmove", onTouchMove, { passive: false });
+    canvas.addEventListener("touchend", onTouchEnd);
+
     const ro = new ResizeObserver(() => resize());
     ro.observe(canvas);
-
     resize();
     draw();
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousemove", onMouseMove);
+      canvas.removeEventListener("mouseleave", onMouseLeave);
+      canvas.removeEventListener("touchmove", onTouchMove);
+      canvas.removeEventListener("touchend", onTouchEnd);
       ro.disconnect();
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
     };

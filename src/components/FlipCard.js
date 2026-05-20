@@ -44,13 +44,13 @@ const styles = `
     inset: 0;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    border-radius: 20px;
+    border-radius: 16px;
     overflow: hidden;
   }
 
-  /* ── FRONT: pure image, zero text ── */
+  /* ── FRONT: Dark slate base matching canvas ── */
   .flip-card-front {
-    background: #1a1008;
+    background: #0d0d0d;
     padding: 0;
     margin: 0;
   }
@@ -63,33 +63,33 @@ const styles = `
     object-fit: cover;
     object-position: center top;
     display: block;
-    border-radius: 20px;
-    transform: none;
-    transition: none;
+    border-radius: 16px;
     margin: 0;
     padding: 0;
   }
 
-  /* subtle border glow overlay */
+  /* Specular border glow matching hexagon grid lines */
   .flip-card-front::after {
     content: "";
     position: absolute;
     inset: 0;
-    border-radius: 20px;
-    box-shadow: inset 0 0 0 1.5px rgba(212, 185, 150, 0.25);
+    border-radius: 16px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
     pointer-events: none;
     z-index: 1;
   }
 
-  /* ── BACK ── */
+  /* ── BACK: Minimalistic Frosted Acrylic ── */
   .flip-card-back {
-    background: #1a1008;
+    background: rgba(18, 18, 18, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     transform: rotateY(180deg);
     display: flex;
     flex-direction: column;
     padding: 28px 24px 24px;
     box-sizing: border-box;
-    border: 1.5px solid rgba(212, 185, 150, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .fc-back-header {
@@ -104,8 +104,9 @@ const styles = `
     height: 52px;
     border-radius: 50%;
     overflow: hidden;
-    border: 2px solid rgba(212, 185, 150, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     flex-shrink: 0;
+    background: #121212;
   }
 
   .fc-back-avatar {
@@ -119,24 +120,25 @@ const styles = `
     margin: 0 0 2px;
     font-size: 16px;
     font-weight: 600;
-    color: #d4b996;
-    letter-spacing: 0.01em;
+    color: #ffffff;
+    letter-spacing: -0.01em;
   }
 
   .fc-back-handle {
     margin: 0;
     font-size: 12px;
-    color: rgba(212, 185, 150, 0.5);
+    color: rgba(255, 255, 255, 0.4);
   }
 
+  /* ── STATS BLOCK ── */
   .fc-stats {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(212, 185, 150, 0.06);
-    border: 1px solid rgba(212, 185, 150, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 12px;
-    padding: 14px 0;
+    padding: 12px 0;
     margin-bottom: 22px;
   }
 
@@ -145,40 +147,42 @@ const styles = `
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3px;
+    gap: 2px;
   }
 
   .fc-stat-val {
-    font-size: 20px;
-    font-weight: 700;
-    color: #d4b996;
-    line-height: 1;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.2;
   }
 
   .fc-stat-label {
     font-size: 10px;
-    color: rgba(212, 185, 150, 0.45);
+    color: rgba(255, 255, 255, 0.35);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
   }
 
   .fc-stat-divider {
     width: 1px;
-    height: 32px;
-    background: rgba(212, 185, 150, 0.12);
+    height: 24px;
+    background: rgba(255, 255, 255, 0.08);
   }
 
+  /* ── BIO TEXT ── */
   .fc-back-bio {
     flex: 1;
     margin: 0 0 22px;
     font-size: 12.5px;
-    line-height: 1.65;
-    color: rgba(212, 185, 150, 0.6);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.6);
   }
 
+  /* ── SOCIAL BUTTONS ── */
   .fc-socials {
     display: flex;
-    gap: 10px;
+    gap: 8px;
   }
 
   .fc-social-btn {
@@ -187,18 +191,19 @@ const styles = `
     justify-content: center;
     width: 38px;
     height: 38px;
-    border-radius: 10px;
-    background: rgba(212, 185, 150, 0.08);
-    border: 1px solid rgba(212, 185, 150, 0.15);
-    color: rgba(212, 185, 150, 0.7);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.55);
     text-decoration: none;
-    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    transition: all 0.2s ease-in-out;
   }
 
   .fc-social-btn:hover {
-    background: rgba(212, 185, 150, 0.16);
-    color: #d4b996;
-    border-color: rgba(212, 185, 150, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
   }
 `;
 
@@ -230,7 +235,7 @@ export const FlipCard = () => {
       >
         <div className={`flip-card-inner${flipped ? " flipped" : ""}`}>
 
-          {/* ── FRONT: image only, fills entire card ── */}
+          {/* ── FRONT ── */}
           <div className="flip-card-front">
             <img
               src={imgUrl}
@@ -288,19 +293,19 @@ export const FlipCard = () => {
               {socialLinks.linkedin && (
                 <a href={socialLinks.linkedin} target="_blank" rel="noreferrer"
                   className="fc-social-btn" onClick={(e) => e.stopPropagation()} title="LinkedIn">
-                  <FaLinkedin size={17} />
+                  <FaLinkedin size={16} />
                 </a>
               )}
               {socialLinks.github && (
                 <a href={socialLinks.github} target="_blank" rel="noreferrer"
                   className="fc-social-btn" onClick={(e) => e.stopPropagation()} title="GitHub">
-                  <FaGithub size={17} />
+                  <FaGithub size={16} />
                 </a>
               )}
               {socialLinks.twitter && (
                 <a href={socialLinks.twitter} target="_blank" rel="noreferrer"
                   className="fc-social-btn" onClick={(e) => e.stopPropagation()} title="Twitter">
-                  <FaTwitter size={17} />
+                  <FaTwitter size={16} />
                 </a>
               )}
             </div>
