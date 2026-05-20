@@ -65,16 +65,18 @@ function Player({ active, duration, achievements }) {
             <div className={`ach-player__caption ${flipped ? "ach-player__caption--right" : "ach-player__caption--left"}`}>
               <div className="ach-player__caption-inner">
                 <AnimatePresence mode="wait">
-                  <motion.div
-                    key={a.title + "-place"}
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="ach-player__place ach-font-mono"
-                  >
-                    {a.place || "Remote"} · {a.rank || "Winner"}
-                  </motion.div>
+                  {a.theme && (
+                    <motion.div
+                      key={a.title + "-theme"}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                      className="ach-player__theme ach-font-mono"
+                    >
+                      ◆ {a.theme}
+                    </motion.div>
+                  )}
                 </AnimatePresence>
 
                 <h3 key={a.title + "-title"} className="ach-player__title ach-font-display">
@@ -125,9 +127,11 @@ function Player({ active, duration, achievements }) {
         {/* Mobile Stacked Caption */}
         {isMobile && (
           <div className="ach-player__mobile-caption">
-            <div className="ach-player__place ach-font-mono">
-              {a.place || "Remote"} · {a.rank || "Winner"}
-            </div>
+            {a.theme && (
+              <div className="ach-player__theme ach-font-mono">
+                ◆ {a.theme}
+              </div>
+            )}
             <h3 className="ach-player__title ach-font-display" style={{ fontSize: '28px' }}>
               {a.title}
             </h3>
@@ -211,7 +215,7 @@ function AchievementList({ achievements }) {
                 </span>
                 <span className="ach-list__btn-title ach-font-display">
                   {a.title}{" "}
-                  <span className="ach-list__btn-place">— {a.place || "Remote"}</span>
+                  {a.place && <span className="ach-list__btn-place">— {a.place}</span>}
                 </span>
                 <motion.span
                   animate={{ rotate: isOpen ? 45 : 0 }}
@@ -250,6 +254,7 @@ function AchievementList({ achievements }) {
                       </motion.div>
                       <div className="ach-list__content-text">
                         <div className="ach-list__tags ach-font-mono">
+                          {a.theme && <span className="ach-list__tag-theme">{a.theme}</span>}
                           <span className="ach-list__tag-rank">{a.rank || "Winner"}</span>
                           {a.teams && <span className="ach-list__tag-teams">{a.teams}</span>}
                         </div>
@@ -320,10 +325,7 @@ export const Achievements = () => {
 
   return (
     <section className="ach-main" id="achievements-page">
-      {/* fixed HUD overlay */}
-      <div className="ach-hud ach-font-mono">
-        ● Achievements Reel · 2025
-      </div>
+      {/* REMOVED: fixed HUD overlay was visually cluttering the layout */}
 
       {/* HERO TITLE */}
       <div className="ach-hero">

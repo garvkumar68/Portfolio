@@ -7,7 +7,8 @@
     "badge": "01",
     "place": "NSUT, Delhi",
     "rank": "Winner",
-    "teams": "250+ teams"
+    "teams": "250+ teams",
+    "theme": "Astro Terra Aerospace with AI"
   },
   {
     "title": "Code Wizard 2025",
@@ -17,7 +18,8 @@
     "badge": "02",
     "place": "SRM, Delhi",
     "rank": "Top 10",
-    "teams": "400+ teams"
+    "teams": "400+ teams",
+    "theme": "Agentic AI & LLM"
   },
   {
     "title": "INNOV8",
@@ -27,6 +29,7 @@
     "badge": "03",
     "place": "Jaipur",
     "rank": "Top 5",
-    "teams": "160+ teams"
+    "teams": "160+ teams",
+    "theme": "ML & IoT"
   }
 ]

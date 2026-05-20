@@ -56,6 +56,12 @@ body {
   background: transparent !important;
 }
 
+/* Achievements page manages its own layout — kill the global page-container padding */
+.page-container:has(.ach-main) {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
 /* Eliminate excessive gap under the header on all subpages */
 .page-container .project,
 .page-container .skills-section,
