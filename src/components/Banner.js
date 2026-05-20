@@ -4,6 +4,7 @@ import { ArrowRightCircle } from "react-bootstrap-icons";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
 import axios from "axios";
+import { FlipCard } from "./FlipCard";
 
 export const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
@@ -133,8 +134,17 @@ export const Banner = () => {
           <Col xs={12} md={6} xl={5} className="d-none d-md-block">
             <TrackVisibility>
               {({ isVisible }) => (
-                <div className={isVisible ? "animate__animated animate__fadeIn" : ""} style={{ height: '400px', width: '100%' }}>
-                  <div id="blackhole-placeholder" style={{ width: '100%', height: '100%' }}></div>
+                <div
+                  className={isVisible ? "animate__animated animate__fadeIn" : ""}
+                  style={{
+                    height: '420px',
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <FlipCard />
                 </div>
               )}
             </TrackVisibility>

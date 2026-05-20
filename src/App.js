@@ -10,7 +10,7 @@ import { Experience } from "./components/Experience";
 import { Achievements } from "./components/Achievements";
 import { Certifications } from "./components/Certifications";
 import { Contact } from "./components/Contact";
-import { BlackHole } from "./components/BlackHole";
+import { HexagonBackground } from "./components/HexagonBackground";
 import { MinimalistStarfield } from "./components/MinimalistStarfield";
 import { SideNav } from "./components/SideNav";
 import { useEffect, useState } from "react";
@@ -233,7 +233,8 @@ const ScrollNavigator = () => {
 // Home Page Component (Main section only)
 const HomePage = () => {
   return (
-    <div className="animate__animated animate__fadeIn">
+    <div className="animate__animated animate__fadeIn" style={{ position: 'relative' }}>
+      <HexagonBackground />
       <NavBar />
       <Banner />
     </div>
@@ -289,7 +290,7 @@ function App() {
       <ScrollToTop />
       <ScrollNavigator />
       <div className="App">
-        <BlackHole targetId="blackhole-placeholder" />
+
         <MinimalistStarfield />
         <SideNav />
         <Routes>
