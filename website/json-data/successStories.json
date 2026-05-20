@@ -1,20 +1,32 @@
 [
   {
-    "title": "Winner 🏆🥇 SpaceCon 2025 - NSUT, Delhi",
-    "description": "Presented the AstroTerra project and achieved a 1st position among 250+ teams at this prestigious hackathon in Delhi NSUT.",
+    "title": "SpaceCon 2025",
+    "description": "Presented the AstroTerra project and secured 1st position among 250+ competing teams — a defining win that set the tone for everything after.",
     "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740847326/SpaceCon25_w9t5is.png",
-    "link": ""
+    "link": "",
+    "badge": "01",
+    "place": "NSUT, Delhi",
+    "rank": "Winner",
+    "teams": "250+ teams"
   },
   {
-    "title": "Top 10 at Code Wizard 2025",
-    "description": "Presented the Brain Wizard project and achieved top 10th position among 400+ teams at this prestigious hackathon in Dehli SRM college.",
+    "title": "Code Wizard 2025",
+    "description": "Took the Brain Wizard project to the national stage and earned a Top 10 finish out of 400+ teams — a brutal field, a sharper team.",
     "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740847326/CodeWizard_ip7sbb.png",
-    "link": ""
+    "link": "",
+    "badge": "02",
+    "place": "SRM, Delhi",
+    "rank": "Top 10",
+    "teams": "400+ teams"
   },
   {
-    "title": "Top 5 at INNOV8",
-    "description": "Presented the A.C.E project and achieved a top 5 finalist position among 160+ teams at this prestigious hackathon in Jaipur.",
+    "title": "INNOV8",
+    "description": "Presented the A.C.E project and reached the Top 5 finalist position among 160+ teams — fast iteration, clean execution.",
     "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740847326/INNOV8_i0rs0s.jpg",
-    "link": ""
+    "link": "",
+    "badge": "03",
+    "place": "Jaipur",
+    "rank": "Top 5",
+    "teams": "160+ teams"
   }
 ]
