@@ -129,19 +129,15 @@ export const Certifications = () => {
                                         </p>
                                     </div>
                                     <div className="certifications-grid">
-                                        <div style={{ 
-                                            position: "relative", display: "flex", width: "100%", flexDirection: "column", alignItems: "center", justifyContent: "center", overflow: "hidden", padding: "10px 0",
-                                            maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
-                                            WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)"
-                                        }}>
-                                            <Marquee pauseOnHover style={{ '--duration': '60s' }}>
-                                                {firstRow.map(renderCertCard)}
+                                        <div style={{ position: "relative", display: "flex", width: "100%", flexDirection: "column", alignItems: "center", justifyContent: "center", overflow: "hidden", maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)", WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}>
+                                            <Marquee pauseOnHover className="[--duration:60s]" style={{ margin: 0, padding: "5px 0" }}>
+                                                {firstRow.map((cert, index) => renderCertCard(cert, index))}
                                             </Marquee>
-                                            <Marquee reverse pauseOnHover style={{ '--duration': '60s' }}>
-                                                {secondRow.map(renderCertCard)}
+                                            <Marquee reverse pauseOnHover className="[--duration:60s]" style={{ margin: 0, padding: "5px 0" }}>
+                                                {secondRow.map((cert, index) => renderCertCard(cert, index))}
                                             </Marquee>
-                                            <Marquee pauseOnHover style={{ '--duration': '60s' }}>
-                                                {thirdRow.map(renderCertCard)}
+                                            <Marquee pauseOnHover className="[--duration:60s]" style={{ margin: 0, padding: "5px 0" }}>
+                                                {thirdRow.map((cert, index) => renderCertCard(cert, index))}
                                             </Marquee>
                                         </div>
                                     </div>
