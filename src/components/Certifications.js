@@ -76,19 +76,15 @@ export const Certifications = () => {
 
     const renderCertCard = (item, index) => {
         const { issuer, title } = parseCert(item.title);
+        const bgImg = item.imgUrl || process.env.PUBLIC_URL + "/assets/fallback-image/fallback-image.png";
+
         return (
-            <div key={index} className="cert-card" style={{ width: '350px', height: '100%', margin: '0' }}>
-                <div className="cert-card-logo-container">
-                    <img
-                        className="cert-card-logo"
-                        src={(item.imgUrl) || "/assets/fallback-image/fallback-image.png"}
-                        alt={title}
-                        onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = process.env.PUBLIC_URL + "/assets/fallback-image/fallback-image.png";
-                        }}
-                    />
-                </div>
+            <div 
+                key={index} 
+                className="cert-card" 
+                style={{ backgroundImage: `url(${bgImg})` }}
+            >
+                <div className="cert-card-overlay"></div>
                 <div className="cert-card-content">
                     <div className="cert-card-issuer">
                         <FiAward className="cert-card-issuer-icon" />
@@ -133,19 +129,15 @@ export const Certifications = () => {
                                         </p>
                                     </div>
                                     <div className="certifications-grid">
-                                        <div style={{ 
-                                            position: "relative", display: "flex", width: "100%", flexDirection: "column", alignItems: "center", justifyContent: "center", overflow: "hidden", padding: "10px 0",
-                                            maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
-                                            WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)"
-                                        }}>
-                                            <Marquee pauseOnHover style={{ '--duration': '60s' }}>
-                                                {firstRow.map(renderCertCard)}
+                                        <div style={{ position: "relative", display: "flex", width: "100%", flexDirection: "column", alignItems: "center", justifyContent: "center", overflow: "hidden", maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)", WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}>
+                                            <Marquee pauseOnHover className="[--duration:60s]" style={{ margin: 0, padding: "5px 0" }}>
+                                                {firstRow.map((cert, index) => renderCertCard(cert, index))}
                                             </Marquee>
-                                            <Marquee reverse pauseOnHover style={{ '--duration': '60s' }}>
-                                                {secondRow.map(renderCertCard)}
+                                            <Marquee reverse pauseOnHover className="[--duration:60s]" style={{ margin: 0, padding: "5px 0" }}>
+                                                {secondRow.map((cert, index) => renderCertCard(cert, index))}
                                             </Marquee>
-                                            <Marquee pauseOnHover style={{ '--duration': '60s' }}>
-                                                {thirdRow.map(renderCertCard)}
+                                            <Marquee pauseOnHover className="[--duration:60s]" style={{ margin: 0, padding: "5px 0" }}>
+                                                {thirdRow.map((cert, index) => renderCertCard(cert, index))}
                                             </Marquee>
                                         </div>
                                     </div>

@@ -2197,7 +2197,7 @@ a:hover {
 
 .certifications-header {
   text-align: left;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   max-width: 800px;
 }
 
@@ -2221,22 +2221,55 @@ a:hover {
 }
 
 .certifications-grid {
-  margin-top: 20px;
+  margin-top: 0px;
 }
 
 /* Flex Row Premium Card */
 .cert-card {
-  background: rgba(13, 13, 13, 0.65);
+  position: relative;
+  background-color: rgba(13, 13, 13, 0.8);
+  background-size: cover;
+  background-position: center;
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 16px;
-  padding: 24px;
+  padding: 16px; /* Reduced padding to give content more room */
   display: flex;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  width: 260px; /* Reduced width to show multiple on mobile */
+  height: 180px; /* Slightly taller to prevent top overflow */
+  margin: 0;
   transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+/* Responsive adjustment for laptops with smaller viewport heights to ensure 3 rows always fit */
+@media screen and (max-height: 900px), screen and (max-width: 1440px) {
+  .cert-card {
+    height: 165px;
+    padding: 12px;
+    width: 250px;
+  }
+  .cert-card-title {
+    font-size: 10px;
+    line-height: 1.2;
+    margin: 2px 0 4px 0;
+  }
+  .cert-card-issuer {
+    font-size: 8.5px;
+  }
+  .cert-card-action {
+    font-size: 9.5px;
+  }
+  .cert-stack-tag {
+    font-size: 7.5px;
+    padding: 2px 4px;
+  }
+  .cert-card-stack {
+    margin: 4px 0;
+  }
 }
 
 .cert-card:hover {
@@ -2245,35 +2278,22 @@ a:hover {
   box-shadow: 0 12px 25px rgba(0, 223, 162, 0.15);
 }
 
-/* Left part: Logo */
-.cert-card-logo-container {
-  width: 76px;
-  height: 76px;
-  min-width: 76px;
-  border-radius: 12px;
-  overflow: hidden;
-  background-color: #fff; /* Pure white background to frame provider logos cleanly */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 6px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.cert-card-logo {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
+/* Overlay for text readability over background images */
+.cert-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.2) 100%);
+  z-index: 1;
 }
 
 /* Right part: content */
 .cert-card-content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   flex-grow: 1;
+  z-index: 2; /* Ensures text is above the overlay */
+  width: 100%;
 }
 
 /* Issuer Tag */
@@ -2282,10 +2302,11 @@ a:hover {
   align-items: center;
   gap: 6px;
   color: #00dfa2; /* Bright glowing teal */
-  font-size: 11.5px;
+  font-size: 9.5px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.9);
 }
 
 .cert-card-issuer-icon {
@@ -2295,12 +2316,19 @@ a:hover {
 /* Title */
 .cert-card-title {
   color: #ffffff;
-  font-size: 16.5px;
+  font-size: 11.5px; /* Reduced for long titles */
   font-weight: 600;
-  line-height: 1.35;
-  margin: 6px 0 10px 0;
+  line-height: 1.25;
+  margin: 4px 0 8px 0; /* Tighter margins */
   font-family: 'Centra', sans-serif;
   letter-spacing: 0.2px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.8);
+  /* Line clamping to prevent overflow */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Action Link */
@@ -2309,11 +2337,12 @@ a:hover {
   align-items: center;
   gap: 6px;
   color: #8c8c8c;
-  font-size: 13.5px;
+  font-size: 11.5px;
   font-weight: 500;
   transition: color 0.2s ease;
   width: fit-content;
   text-decoration: none !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.9);
 }
 
 .cert-card-action:hover {
@@ -2322,6 +2351,35 @@ a:hover {
 
 .cert-card-action-icon {
   font-size: 13px;
+}
+
+/* Mobile adjustments for certificates */
+@media screen and (max-width: 768px) {
+  .cert-card {
+    width: 180px;
+    height: 140px;
+    padding: 10px;
+  }
+  .cert-card-title {
+    font-size: 9px;
+    line-height: 1.15;
+    margin: 2px 0 4px 0;
+    -webkit-line-clamp: 2; /* Ensure it never exceeds 2 lines on mobile */
+  }
+  .cert-card-issuer {
+    font-size: 7px;
+  }
+  .cert-card-action {
+    font-size: 8px;
+  }
+  .cert-card-stack {
+    margin: 2px 0;
+    gap: 3px;
+  }
+  .cert-stack-tag {
+    font-size: 6.5px;
+    padding: 2px 4px;
+  }
 }
 
 /* ============================================================================
@@ -2669,7 +2727,7 @@ a:hover {
   background: rgba(0, 223, 162, 0.08);
   border: 1px solid rgba(0, 223, 162, 0.2);
   color: #00dfa2;
-  font-size: 10px;
+  font-size: 8.5px;
   font-weight: 600;
   padding: 2px 6px;
   border-radius: 4px;
