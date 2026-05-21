@@ -502,23 +502,20 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 .banner .tagline {
   font-size: 1.5rem;
   color: azure;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.95);
 }
 
 h1 {
   font-size: 3rem;
   margin: 20px 0;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.98), 0 4px 24px rgba(0, 0, 0, 0.95);
 }
 
 .typing-effect {
   font-size: 1.5rem;
   font-weight: bold;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.95);
 }
 
 .banner p.lead {
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 0.95);
+  text-shadow: none;
 }
 
 
@@ -674,6 +671,41 @@ h1 {
   font-size: 2.88rem;
   font-weight: bold;
   color: #fff;
+}
+
+/* Mobile Responsive Adjustments for Banner */
+@media screen and (max-width: 768px) {
+  .banner {
+    padding: 90px 0 40px;
+  }
+  .banner h1 {
+    font-size: 38px;
+    margin-bottom: 12px;
+  }
+  .banner .tagline {
+    font-size: 14px;
+    padding: 6px 14px;
+    margin-bottom: 12px;
+  }
+  .typing-effect {
+    font-size: 1.6rem;
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+  .banner p {
+    font-size: 14px;
+    line-height: 1.4em;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .banner .banner-buttons {
+    justify-content: center;
+    gap: 10px !important;
+  }
+  .banner button {
+    font-size: 14px;
+    padding: 8px 14px;
+  }
 }
 
 /************ Skills Css ************/

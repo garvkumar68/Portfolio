@@ -93,13 +93,13 @@ export const Banner = () => {
               {({ isVisible }) => (
                 <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                   <span className="tagline">From Data to Solutions with AI</span>
-                  <h1 className="display-4">I'm <span style={{ color: 'var(--accent-color, #57ff8c)' }}>Garv Kumar</span></h1>
+                  <h1 className="display-4" style={{ textShadow: '0 0 15px rgba(255, 255, 255, 0.2)' }}>I'm <span style={{ color: '#00dfa2', textShadow: '0 0 15px rgba(0, 223, 162, 0.4)' }}>Garv Kumar</span></h1>
                   <div className="typing-effect">
                     <span
                       className="txt-rotate"
                       data-period="500"
                       data-rotate='["Software Engineer","Computer Vision Engineer", "Data Analyst", "IoT Engineer","Business Analyst", "ML Engineer", "AutoCad Fusion 360" ]'
-                      style={{ color: '#D3D3D3' }}  /* Inline style to change text color */
+                      style={{ color: '#00dfa2', textShadow: '0 0 15px rgba(0, 223, 162, 0.4)' }}  /* Inline style to change text color */
                     >
                       <span className="wrap">{text}</span>
                     </span>
@@ -131,7 +131,7 @@ export const Banner = () => {
               )}
             </TrackVisibility>
           </Col>
-          <Col xs={12} md={6} xl={5} className="d-none d-md-block">
+          <Col xs={12} md={6} xl={5} className="mt-5 mt-md-0 d-flex justify-content-center">
             <TrackVisibility>
               {({ isVisible }) => (
                 <div
