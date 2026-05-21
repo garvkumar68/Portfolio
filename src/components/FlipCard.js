@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { BsStars } from "react-icons/bs";
 import { FaMicrophone, FaPaperPlane } from "react-icons/fa";
+import PixelCard from "./PixelCard";
 const CARD_DATA = {
   name: "Garv Kumar",
   username: "garvkumar68",
@@ -114,7 +115,7 @@ const styles = `
     box-sizing: border-box !important;
     width: 100% !important;
     height: 100% !important;
-    transform: rotateY(180deg) !important;
+    transform: none !important;
     backdrop-filter: blur(16px) !important;
     -webkit-backdrop-filter: blur(16px) !important;
   }
@@ -360,6 +361,49 @@ const styles = `
       right: 8px !important;
     }
   }
+
+  /* Override 3D flip with PixelCard crossfade */
+  .flip-card-wrapper .flip-card-inner {
+    transform: none !important;
+    transition: none !important;
+  }
+  .flip-card-wrapper .flip-card-front,
+  .flip-card-wrapper .flip-card-back {
+    transition: opacity 0.4s ease-in-out !important;
+    transform: none !important;
+    backface-visibility: visible !important;
+    z-index: 1; /* behind pixel canvas which is z-index 2 */
+  }
+  
+  .flip-card-wrapper .flip-card-inner:not(.flipped) .flip-card-back {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  .flip-card-wrapper .flip-card-inner:not(.flipped) .flip-card-front {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .flip-card-wrapper .flip-card-inner.flipped .flip-card-front {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  .flip-card-wrapper .flip-card-inner.flipped .flip-card-back {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  /* Fade out the pixel overlay on the backside so text is readable */
+  .flip-card-wrapper.flipped .pixel-canvas,
+  .flip-card-wrapper:hover .pixel-canvas {
+    opacity: 0.15 !important;
+    transition: opacity 0.8s ease-in-out 0.4s !important;
+  }
+  
+  .flip-card-wrapper:not(:hover) .pixel-canvas {
+    opacity: 1 !important;
+    transition: opacity 0.2s ease-in-out !important;
+  }
 `;
 
 export const FlipCard = () => {
@@ -492,7 +536,12 @@ export const FlipCard = () => {
   return (
     <>
       <style>{styles}</style>
-      <div
+      <PixelCard
+        variant="default"
+        gap={12}
+        speed={45}
+        colors="#00dfa2,#00b386,#008060"
+        noFocus={true}
         className="flip-card-wrapper"
         onMouseEnter={() => setFlipped(true)}
         onMouseLeave={() => setFlipped(false)}
@@ -556,7 +605,7 @@ export const FlipCard = () => {
             </form>
           </div>
         </div>
-      </div>
+      </PixelCard>
     </>
   );
 };
