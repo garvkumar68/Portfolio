@@ -123,6 +123,7 @@ export function DiaTextReveal({
     const el = spanRef.current
     if (!el || !isMulti) return
     setMeasuredWidths(measureWidths(el, texts))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Array.isArray(text) ? text.join("\0") : text])
 
   playRef.current = () => {

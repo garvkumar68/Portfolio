@@ -46,30 +46,40 @@ const styles = `
     padding: 0;
   }
 
-  .fc-vertical-tagline {
+  .fc-bottom-tagline {
     position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    white-space: nowrap;
-    font-size: 9.5px;
-    font-weight: 700;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 10px;
+    font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #00dfa2;
     text-shadow: 0 0 10px rgba(0, 223, 162, 0.4);
     z-index: 3;
     pointer-events: none;
-    font-family: 'Outfit', 'Inter', sans-serif;
-    background: rgba(13, 13, 13, 0.7);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 16px 6px;
-    border-radius: 20px;
-    border: 1px solid rgba(0, 223, 162, 0.2);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    font-family: 'Outfit', 'Inter', monospace;
+    width: 100%;
+    padding: 0 24px;
+  }
+
+  .fc-bottom-tagline::before,
+  .fc-bottom-tagline::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(0, 223, 162, 0.3);
+  }
+
+  .tagline-dot {
+    font-size: 8px;
+    color: #00dfa2;
+    opacity: 0.8;
   }
 
   /* Specular border glow matching hexagon grid lines */
@@ -502,8 +512,8 @@ export const FlipCard = () => {
                 e.target.src = FALLBACK_IMG;
               }}
             />
-            <div className="fc-vertical-tagline">
-              From Data to Solutions with AI
+            <div className="fc-bottom-tagline">
+              <span className="tagline-dot">▪</span> FROM DATA TO SOLUTIONS WITH AI <span className="tagline-dot">▪</span>
             </div>
           </div>
 
