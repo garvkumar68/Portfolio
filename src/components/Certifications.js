@@ -76,19 +76,15 @@ export const Certifications = () => {
 
     const renderCertCard = (item, index) => {
         const { issuer, title } = parseCert(item.title);
+        const bgImg = item.imgUrl || process.env.PUBLIC_URL + "/assets/fallback-image/fallback-image.png";
+
         return (
-            <div key={index} className="cert-card" style={{ width: '350px', height: '100%', margin: '0' }}>
-                <div className="cert-card-logo-container">
-                    <img
-                        className="cert-card-logo"
-                        src={(item.imgUrl) || "/assets/fallback-image/fallback-image.png"}
-                        alt={title}
-                        onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = process.env.PUBLIC_URL + "/assets/fallback-image/fallback-image.png";
-                        }}
-                    />
-                </div>
+            <div 
+                key={index} 
+                className="cert-card" 
+                style={{ backgroundImage: `url(${bgImg})` }}
+            >
+                <div className="cert-card-overlay"></div>
                 <div className="cert-card-content">
                     <div className="cert-card-issuer">
                         <FiAward className="cert-card-issuer-icon" />
