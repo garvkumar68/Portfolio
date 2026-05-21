@@ -1,0 +1,34 @@
+/* Marquee.css */
+.marquee-group {
+  --duration: 40s;
+  --gap: 1.5rem;
+  display: flex;
+  overflow: hidden;
+  padding: 1rem 0;
+}
+
+.animate-marquee {
+  animation: marquee var(--duration) infinite linear;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration) linear infinite;
+}
+
+.marquee-group:hover .group-hover-pause {
+  animation-play-state: paused;
+}
+
+.reverse-marquee {
+  animation-direction: reverse;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-100% - var(--gap))); }
+}
+
+@keyframes marquee-vertical {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(-100% - var(--gap))); }
+}

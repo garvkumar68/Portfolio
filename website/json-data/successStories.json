@@ -2,12 +2,13 @@
   {
     "title": "SpaceCon 2025",
     "description": "Presented the AstroTerra project and secured 1st position among 250+ competing teams — a defining win that set the tone for everything after.",
-    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740847326/SpaceCon25_w9t5is.png",
+    "imgUrl": "https://res.cloudinary.com/dq1yppevs/image/upload/v1779311073/copy_of_whatsapp_image_2026-05-21_at_23204_am_qcu3yt.jpg",
     "link": "",
     "badge": "01",
     "place": "NSUT, Delhi",
     "rank": "Winner",
-    "teams": "250+ teams"
+    "teams": "250+ teams",
+    "theme": "Astro Terra Aerospace with AI"
   },
   {
     "title": "Code Wizard 2025",
@@ -17,7 +18,8 @@
     "badge": "02",
     "place": "SRM, Delhi",
     "rank": "Top 10",
-    "teams": "400+ teams"
+    "teams": "400+ teams",
+    "theme": "Agentic AI & LLM"
   },
   {
     "title": "INNOV8",
@@ -27,6 +29,7 @@
     "badge": "03",
     "place": "Jaipur",
     "rank": "Top 5",
-    "teams": "160+ teams"
+    "teams": "160+ teams",
+    "theme": "ML & IoT"
   }
 ]

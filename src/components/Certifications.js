@@ -4,6 +4,7 @@ import TrackVisibility from 'react-on-screen';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FiAward, FiExternalLink } from 'react-icons/fi';
+import { Marquee } from "./Marquee";
 
 export const Certifications = () => {
     const [certifications, setCertifications] = useState([]);
@@ -69,6 +70,54 @@ export const Certifications = () => {
         return { issuer, title: clean };
     };
 
+    const firstRow = certifications.filter((_, i) => i % 3 === 0);
+    const secondRow = certifications.filter((_, i) => i % 3 === 1);
+    const thirdRow = certifications.filter((_, i) => i % 3 === 2);
+
+    const renderCertCard = (item, index) => {
+        const { issuer, title } = parseCert(item.title);
+        return (
+            <div key={index} className="cert-card" style={{ width: '350px', height: '100%', margin: '0' }}>
+                <div className="cert-card-logo-container">
+                    <img
+                        className="cert-card-logo"
+                        src={(item.imgUrl) || "/assets/fallback-image/fallback-image.png"}
+                        alt={title}
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = process.env.PUBLIC_URL + "/assets/fallback-image/fallback-image.png";
+                        }}
+                    />
+                </div>
+                <div className="cert-card-content">
+                    <div className="cert-card-issuer">
+                        <FiAward className="cert-card-issuer-icon" />
+                        <span>{issuer}</span>
+                    </div>
+                    <h4 className="cert-card-title">{title}</h4>
+                    {item.stack && (
+                        <div className="cert-card-stack">
+                            {item.stack.split(',').map((tag, i) => (
+                                <span key={i} className="cert-stack-tag">{tag.trim()}</span>
+                            ))}
+                        </div>
+                    )}
+                    {item.link && item.link.trim() && (
+                        <a
+                            href={item.link.trim()}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="cert-card-action"
+                        >
+                            <span>View credential</span>
+                            <FiExternalLink className="cert-card-action-icon" />
+                        </a>
+                    )}
+                </div>
+            </div>
+        );
+    };
+
     return (
         <section className="certifications-section" id="certifications-page">
             <Container>
@@ -84,53 +133,21 @@ export const Certifications = () => {
                                         </p>
                                     </div>
                                     <div className="certifications-grid">
-                                        <Row className="g-4 justify-content-start">
-                                            {certifications.map((item, index) => {
-                                                const { issuer, title } = parseCert(item.title);
-                                                return (
-                                                    <Col xs={12} md={6} lg={4} key={index} className="d-flex align-items-stretch">
-                                                        <div className="cert-card">
-                                                            <div className="cert-card-logo-container">
-                                                                <img
-                                                                    className="cert-card-logo"
-                                                                    src={(item.imgUrl) || "/assets/fallback-image/fallback-image.png"}
-                                                                    alt={title}
-                                                                    onError={(e) => {
-                                                                        e.target.onerror = null;
-                                                                        e.target.src = process.env.PUBLIC_URL + "/assets/fallback-image/fallback-image.png";
-                                                                    }}
-                                                                />
-                                                            </div>
-                                                            <div className="cert-card-content">
-                                                                <div className="cert-card-issuer">
-                                                                    <FiAward className="cert-card-issuer-icon" />
-                                                                    <span>{issuer}</span>
-                                                                </div>
-                                                                <h4 className="cert-card-title">{title}</h4>
-                                                                {item.stack && (
-                                                                    <div className="cert-card-stack">
-                                                                        {item.stack.split(',').map((tag, i) => (
-                                                                            <span key={i} className="cert-stack-tag">{tag.trim()}</span>
-                                                                        ))}
-                                                                    </div>
-                                                                )}
-                                                                {item.link && item.link.trim() && (
-                                                                    <a
-                                                                        href={item.link.trim()}
-                                                                        target="_blank"
-                                                                        rel="noopener noreferrer"
-                                                                        className="cert-card-action"
-                                                                    >
-                                                                        <span>View credential</span>
-                                                                        <FiExternalLink className="cert-card-action-icon" />
-                                                                    </a>
-                                                                )}
-                                                            </div>
-                                                        </div>
-                                                    </Col>
-                                                );
-                                            })}
-                                        </Row>
+                                        <div style={{ 
+                                            position: "relative", display: "flex", width: "100%", flexDirection: "column", alignItems: "center", justifyContent: "center", overflow: "hidden", padding: "10px 0",
+                                            maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+                                            WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)"
+                                        }}>
+                                            <Marquee pauseOnHover style={{ '--duration': '60s' }}>
+                                                {firstRow.map(renderCertCard)}
+                                            </Marquee>
+                                            <Marquee reverse pauseOnHover style={{ '--duration': '60s' }}>
+                                                {secondRow.map(renderCertCard)}
+                                            </Marquee>
+                                            <Marquee pauseOnHover style={{ '--duration': '60s' }}>
+                                                {thirdRow.map(renderCertCard)}
+                                            </Marquee>
+                                        </div>
                                     </div>
                                 </div>
                             )}

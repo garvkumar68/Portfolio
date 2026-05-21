@@ -4,14 +4,10 @@ import { ArrowRightCircle } from "react-bootstrap-icons";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
 import axios from "axios";
+import { FlipCard } from "./FlipCard";
+import { DiaTextReveal } from "./DiaTextReveal";
 
 export const Banner = () => {
-  const [loopNum, setLoopNum] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [text, setText] = useState("");
-  const [delta, setDelta] = useState(60); // Starting typing speed
-  // eslint-disable-next-line
-  const [index, setIndex] = useState(1);
   const [data, setData] = useState({}); // State for banner data
   const [loading, setLoading] = useState(true); // Loading state for the data
   const [profLinks, setProfLinks] = useState({}); // State for Resume and Visume links
@@ -44,44 +40,6 @@ export const Banner = () => {
     fetchProfessionalLinks();
   }, []); // Empty dependency array to fetch data only once when the component mounts
 
-  useEffect(() => {
-    if (data && data.titles && data.titles.length > 0) {
-      const ticker = setInterval(() => {
-        tick();
-      }, delta);
-
-      return () => clearInterval(ticker);
-    }
-  },  // eslint-disable-next-line
-    [text, delta, data.titles]); // Dependency on text, delta, and titles
-
-  const tick = () => {
-    if (!data || !data.titles || data.titles.length === 0) {
-      return; // Prevent accessing data if titles are not available
-    }
-
-    const i = loopNum % data.titles.length;
-    const fullText = data.titles[i];
-    const updatedText = isDeleting
-      ? fullText.substring(0, text.length - 1)
-      : fullText.substring(0, text.length + 1);
-
-    setText(updatedText);
-
-    if (!isDeleting && updatedText === fullText) {
-      setIsDeleting(true);
-      setDelta(2500); // Pause for 2.5 seconds at the end of typing
-      setIndex((prevIndex) => prevIndex - 1);
-    } else if (isDeleting && updatedText === "") {
-      setIsDeleting(false);
-      setLoopNum(loopNum + 1);
-      setDelta(400); // Brief pause before starting the next word
-      setIndex(1);
-    } else {
-      setDelta(isDeleting ? 30 : 60); // Deleting is super fast (30ms), typing is fast (60ms)
-    }
-  };
-
   // Render Loading or Content
   return (
     <section className="banner" id="home">
@@ -91,17 +49,16 @@ export const Banner = () => {
             <TrackVisibility>
               {({ isVisible }) => (
                 <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                  <span className="tagline">From Data to Solutions with AI</span>
-                  <h1 className="display-4">I'm <span style={{ color: 'var(--accent-color, #57ff8c)' }}>Garv Kumar</span></h1>
-                  <div className="typing-effect">
-                    <span
-                      className="txt-rotate"
-                      data-period="500"
-                      data-rotate='["Software Engineer","Computer Vision Engineer", "Data Analyst", "IoT Engineer","Business Analyst", "ML Engineer", "AutoCad Fusion 360" ]'
-                      style={{ color: '#D3D3D3' }}  /* Inline style to change text color */
-                    >
-                      <span className="wrap">{text}</span>
-                    </span>
+                  <h1 className="display-4" style={{ textShadow: '0 0 15px rgba(255, 255, 255, 0.2)' }}><span style={{ color: '#00dfa2', textShadow: '0 0 15px rgba(0, 223, 162, 0.4)' }}>Garv Kumar</span></h1>
+                  <div className="typing-effect" style={{ fontSize: '24px', fontWeight: '600', minHeight: '44px', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '12px', marginBottom: '20px' }}>
+                    I'm <DiaTextReveal
+                      text={data.titles && data.titles.length > 0 ? data.titles : ["Software Engineer", "Computer Vision Engineer", "Data Analyst", "IoT Engineer", "Business Analyst", "ML Engineer", "AutoCad Fusion 360"]}
+                      colors={["#A97CF8", "#F38CB8", "#FDCC92"]}
+                      repeat={true}
+                      repeatDelay={4.0}
+                      duration={1.5}
+                      textColor="#00dfa2"
+                    />
                   </div>
                   <p className="lead">{loading ? "Loading..." : data.description}</p>
                   <div className="banner-buttons d-flex align-items-center flex-wrap gap-3 mt-4">
@@ -130,11 +87,20 @@ export const Banner = () => {
               )}
             </TrackVisibility>
           </Col>
-          <Col xs={12} md={6} xl={5} className="d-none d-md-block">
+          <Col xs={12} md={6} xl={5} className="mt-5 mt-md-0 d-flex justify-content-center">
             <TrackVisibility>
               {({ isVisible }) => (
-                <div className={isVisible ? "animate__animated animate__fadeIn" : ""} style={{ height: '400px', width: '100%' }}>
-                  <div id="blackhole-placeholder" style={{ width: '100%', height: '100%' }}></div>
+                <div
+                  className={isVisible ? "animate__animated animate__fadeIn" : ""}
+                  style={{
+                    height: '420px',
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <FlipCard />
                 </div>
               )}
             </TrackVisibility>

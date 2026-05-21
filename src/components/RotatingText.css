@@ -1,0 +1,60 @@
+.text-rotate {
+  display: flex;
+  flex-wrap: wrap;
+  white-space: pre-wrap;
+  position: relative;
+}
+
+.text-rotate-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.text-rotate-word {
+  display: inline-flex;
+}
+
+.text-rotate-lines {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.text-rotate-element {
+  display: inline-block;
+}
+
+.text-rotate-space {
+  white-space: pre;
+}
+
+/* Premium Rotating Text Capsule Box matching requested image */
+.rotating-text-box {
+  background-color: #a855f7 !important; /* Premium Purple / Violet exactly like image */
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-family: 'Outfit', 'Inter', sans-serif !important;
+  border-radius: 12px !important;
+  padding: 4px 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.35) !important;
+  white-space: nowrap !important;
+  text-shadow: none !important;
+  overflow: hidden !important; /* CRITICAL for smooth expanding bounds */
+}
+
+/* Replaces tailwind overflow-hidden pb-0.5 */
+.rt-split-level {
+  overflow: hidden !important;
+  padding-bottom: 2px !important;
+}
+

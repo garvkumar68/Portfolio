@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
-import axios from "axios"; // Import axios for fetching the JSON data
 import { useNavigate, useLocation } from "react-router-dom";
 
 import navIcon1 from "../assets/img/nav-icon1.svg";
@@ -11,7 +10,6 @@ export const NavBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
-  const [logoUrl, setLogoUrl] = useState(""); // State to store the logo URL
   const [isOpen, setIsOpen] = useState(false); // Mobile menu toggle state
 
   const pathname = location.pathname;
@@ -19,20 +17,6 @@ export const NavBar = () => {
   const isNavbarScrolled = !isHome || scrolled;
 
   useEffect(() => {
-    // Fetch logo URL from the JSON
-    const fetchLogoData = async () => {
-      try {
-        const response = await axios.get(
-            "https://raw.githubusercontent.com/garvkumar68/Portfolio/json-data/logo.json"
-        );
-        setLogoUrl(response.data.logo_url); // Set the logo URL from the JSON
-      } catch (error) {
-        console.error("Error fetching logo data: ", error);
-      }
-    };
-
-    fetchLogoData();
-
     // Scroll event handler
     const onScroll = () => {
       if (window.scrollY > 50) {
@@ -74,11 +58,6 @@ export const NavBar = () => {
       <Navbar expand="lg" className={`navbar-custom ${isNavbarScrolled ? "scrolled" : ""}`}>
         <Container fluid className="d-flex justify-content-between align-items-center position-relative ps-1 pe-4 ps-md-2 pe-md-5">
           <Navbar.Brand onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
-            {logoUrl ? (
-                <img src={logoUrl} alt="Logo" className="navbar-logo" />
-            ) : (
-                <p style={{ color: "#fff", margin: 0 }}>Garv Kumar</p>
-            )}
           </Navbar.Brand>
 
           {/* Desktop/Tablet standard Bootstrap Collapse */}
@@ -156,9 +135,6 @@ export const NavBar = () => {
           {/* Immersive Full-Screen Mobile Menu Overlay (Visible on mobile/tablet) */}
           <div className={`mobile-menu-overlay ${isOpen ? 'show' : ''}`}>
             <div className="mobile-menu-header">
-              <div className="mobile-avatar-container">
-                {logoUrl && <img src={logoUrl} alt="Avatar" className="mobile-menu-avatar" />}
-              </div>
               <button className="mobile-menu-close" onClick={handleToggle} aria-label="Close Menu">
                 <span className="close-icon">&times;</span>
               </button>
