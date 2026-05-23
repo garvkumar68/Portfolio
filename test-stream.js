@@ -6,7 +6,7 @@
  */
 
 // --- 🌐 LIVE TARGET ENDPOINT ---
-const API_URL = "https://garv-ai-twin.portfolio-support.workers.dev/api/chat"; 
+const API_URL = "http://127.0.0.1:8787/api/chat"; 
 
 const payload = {
   messages: [

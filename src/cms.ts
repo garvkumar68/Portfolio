@@ -656,7 +656,12 @@ async function compileCloudPrompt(c: any, ghToken: string, repo: string, branch:
         if (Array.isArray(v)) {
           prompt_lines.push(`- **${label}:**`);
           for (const item of v) {
-            if (typeof item !== "object" || item === null) continue;
+            if (typeof item !== "object" || item === null) {
+              if (item && String(item).trim()) {
+                prompt_lines.push(`  - ${item}`);
+              }
+              continue;
+            }
             const itemTitle = item.title || item.name || Object.values(item).find(val => typeof val === "string" && val !== item.imgUrl && val !== item.link) || "";
             prompt_lines.push(`  - **${itemTitle}**`);
             for (const [subK, subV] of Object.entries(item)) {
