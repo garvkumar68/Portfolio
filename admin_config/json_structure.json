@@ -39,7 +39,7 @@
     "type": "list",
     "isStandard": true
   },
-  "systemMetadataConfig": {
+  "systemMetadata": {
     "title": "System Metadata",
     "type": "object",
     "isStandard": true,
