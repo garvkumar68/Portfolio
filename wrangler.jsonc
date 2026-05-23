@@ -5,9 +5,5 @@
   "compatibility_date": "2024-04-03",
   "compatibility_flags": [
     "nodejs_compat"
-  ],
-  "vars": {
-    "LLM_BASE_URL": "https://oysterproduct.igenesys.com/AI/genAI/v1",
-    "LLM_MODEL_NAME": "google/gemma-3-12b"
-  }
+  ]
 }
