@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { BsStars } from "react-icons/bs";
 import { FaMicrophone, FaPaperPlane } from "react-icons/fa";
+import ReactMarkdown from "react-markdown";
 import PixelCard from "./PixelCard";
 const CARD_DATA = {
   name: "Garv Kumar",
@@ -183,12 +184,27 @@ const styles = `
     justify-content: flex-start !important;
     background: transparent !important;
     overflow-y: auto !important;
-    -ms-overflow-style: none !important;
-    scrollbar-width: none !important;
+    min-height: 0 !important;
+    overscroll-behavior: contain !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: rgba(0, 223, 162, 0.4) transparent !important;
   }
   
   .ai-chat-body::-webkit-scrollbar {
-    display: none !important;
+    width: 4px !important;
+  }
+  
+  .ai-chat-body::-webkit-scrollbar-track {
+    background: transparent !important;
+  }
+  
+  .ai-chat-body::-webkit-scrollbar-thumb {
+    background: rgba(0, 223, 162, 0.4) !important;
+    border-radius: 10px !important;
+  }
+  
+  .ai-chat-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 223, 162, 0.7) !important;
   }
 
   .ai-message {
@@ -204,6 +220,36 @@ const styles = `
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     align-self: flex-start;
     margin-bottom: 12px;
+  }
+
+  .ai-message p, 
+  .ai-message ul, 
+  .ai-message ol, 
+  .ai-message li, 
+  .ai-message span, 
+  .ai-message a,
+  .ai-message strong,
+  .ai-message em {
+    font-size: 13px !important;
+    line-height: 1.45 !important;
+    text-align: left !important;
+  }
+
+  .ai-message p {
+    margin: 0 0 8px 0;
+  }
+  
+  .ai-message p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-message ul, .ai-message ol {
+    margin: 4px 0 8px 0;
+    padding-left: 20px;
+  }
+
+  .ai-message li {
+    margin-bottom: 4px;
   }
 
   .user-message {
@@ -398,6 +444,7 @@ const styles = `
   .flip-card-wrapper:hover .pixel-canvas {
     opacity: 0.15 !important;
     transition: opacity 0.8s ease-in-out 0.4s !important;
+    pointer-events: none !important;
   }
   
   .flip-card-wrapper:not(:hover) .pixel-canvas {
@@ -477,31 +524,112 @@ export const FlipCard = () => {
     }
   }, [messages]);
 
-  const handleSend = (e) => {
+  // Stop global scroll hijackers (like react-scroll) from intercepting mouse wheels inside the chat
+  useEffect(() => {
+    const el = chatBodyRef.current;
+    if (!el) return;
+    
+    const stopScrollPropagation = (e) => {
+      e.stopPropagation();
+    };
+
+    el.addEventListener("wheel", stopScrollPropagation, { passive: false });
+    el.addEventListener("touchmove", stopScrollPropagation, { passive: false });
+
+    return () => {
+      el.removeEventListener("wheel", stopScrollPropagation);
+      el.removeEventListener("touchmove", stopScrollPropagation);
+    };
+  }, []);
+
+  const handleSend = async (e) => {
     if (e) e.preventDefault();
     if (!inputValue.trim()) return;
 
     const userText = inputValue;
-    setMessages((prev) => [...prev, { sender: "user", text: userText }]);
+    const currentMessages = [...messages, { sender: "user", text: userText }];
+    setMessages(currentMessages);
     setInputValue("");
 
-    // Simulate response delay
-    setTimeout(() => {
-      let aiResponse = "That's a great question! Garv is always open to discussing new ideas, ML systems, or career opportunities. Feel free to connect on LinkedIn!";
-      const lowerText = userText.toLowerCase();
+    // Create an empty AI message that we will stream into
+    setMessages((prev) => [...prev, { sender: "ai", text: "" }]);
 
-      if (lowerText.includes("project") || lowerText.includes("work") || lowerText.includes("portfolio")) {
-        aiResponse = "Garv has built several smart systems! Some highlights include AstroTerra (SpaceCon 2025 winner), Brain Wizard (Code Wizard Top 10), and more. Check his Projects section!";
-      } else if (lowerText.includes("skill") || lowerText.includes("tech") || lowerText.includes("language")) {
-        aiResponse = "He specializes in Computer Vision, ML, and IoT. His core stack is Python, JavaScript, C++, React, Node.js, OpenCV, and TensorFlow.";
-      } else if (lowerText.includes("contact") || lowerText.includes("email") || lowerText.includes("hire") || lowerText.includes("linkedin")) {
-        aiResponse = "You can contact Garv via the Contact section below, or connect with him directly on LinkedIn (link on the navbar) to discuss opportunities!";
-      } else if (lowerText.includes("hello") || lowerText.includes("hi") || lowerText.includes("hey")) {
-        aiResponse = "Hello! I'm Garv's AI Twin. Ask me anything about his software engineering projects, ML research, or IoT work!";
+    try {
+      // Build API payload mapping our history
+      let apiMessages = currentMessages.map(msg => ({
+        role: msg.sender === "ai" ? "assistant" : "user",
+        content: msg.text
+      }));
+
+      // Gemma and many LLMs strictly require the conversation history to start with a 'user' message
+      while (apiMessages.length > 0 && apiMessages[0].role === "assistant") {
+        apiMessages.shift();
       }
 
-      setMessages((prev) => [...prev, { sender: "ai", text: aiResponse }]);
-    }, 600);
+      const response = await fetch("https://garv-ai-twin.portfolio-support.workers.dev/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: apiMessages,
+          model: "google/gemma-3-12b",
+          stream: true
+        })
+      });
+
+      if (!response.ok) {
+        setMessages((prev) => {
+          const arr = [...prev];
+          arr[arr.length - 1].text = "Error: Failed to reach AI endpoint.";
+          return arr;
+        });
+        return;
+      }
+
+      const reader = response.body?.getReader();
+      if (!reader) return;
+      const decoder = new TextDecoder();
+      let buffer = "";
+      let fullResponse = "";
+
+      // Real-time Stream loop
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || "";
+
+        for (const line of lines) {
+          if (line.trim() === "") continue;
+          if (line.startsWith("data: ")) {
+            const dataStr = line.substring(6).trim();
+            if (dataStr === "[DONE]") break;
+            try {
+              const packet = JSON.parse(dataStr);
+              const content = packet.choices?.[0]?.delta?.content || "";
+              if (content) {
+                fullResponse += content;
+                // Dynamically update the very last message in the array
+                setMessages((prev) => {
+                  const arr = [...prev];
+                  arr[arr.length - 1].text = fullResponse || " "; // fall back to space so bubble renders
+                  return arr;
+                });
+              }
+            } catch (err) {
+              // Ignore parse errors on partial chunks
+            }
+          }
+        }
+      }
+    } catch (err) {
+      setMessages((prev) => {
+        const arr = [...prev];
+        arr[arr.length - 1].text = "Error: Connection failed.";
+        return arr;
+      });
+    }
   };
 
   const handleMicClick = (e) => {
@@ -581,7 +709,26 @@ export const FlipCard = () => {
             <div className="ai-chat-body" ref={chatBodyRef}>
               {messages.map((msg, index) => (
                 <div key={index} className={msg.sender === "ai" ? "ai-message" : "user-message"}>
-                  {msg.text}
+                  {msg.sender === "ai" ? (
+                    <ReactMarkdown
+                      components={{
+                        a: ({ node, ...props }) => (
+                          <a 
+                            {...props} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            style={{ color: "#00dfa2", textDecoration: "none", fontWeight: "600" }} 
+                            onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
+                            onMouseLeave={(e) => e.target.style.textDecoration = 'none'}
+                          />
+                        )
+                      }}
+                    >
+                      {msg.text}
+                    </ReactMarkdown>
+                  ) : (
+                    msg.text
+                  )}
                 </div>
               ))}
             </div>
