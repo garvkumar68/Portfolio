@@ -43,7 +43,6 @@
     "title": "System Metadata",
     "type": "object",
     "isStandard": true,
-    "isSystemFile": true,
     "readOnly": false,
     "skipPromptCompile": true
   },
