@@ -11,7 +11,12 @@
   },
   "experience": {
     "title": "Experience",
-    "type": "object",
+    "type": "list",
+    "isStandard": true
+  },
+  "certifications": {
+    "title": "Certifications",
+    "type": "list",
     "isStandard": true
   },
   "logo": {
