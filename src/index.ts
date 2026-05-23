@@ -48,7 +48,7 @@ app.get("/api/health", (c) => {
   const keyPrefix = c.env.GENAI_KEY ? c.env.GENAI_KEY.substring(0, 4) : "";
   return c.json({
     status: "online",
-    system: "DODO Core Agent",
+    system: "Garv AI Twin Core Agent",
     uptime: "24/7",
     env_keys: envKeys,
     key_type: keyType,
@@ -84,7 +84,7 @@ app.post("/api/chat", async (c) => {
     // Fetch the latest system prompt dynamically from GitHub
     let dynamicSystemPrompt = promptFallback; // High-quality local static fallback compiled from portfolio JSONs!
     try {
-      const promptRes = await fetch(`https://raw.githubusercontent.com/garvkumar68/Portfolio/Json_data/dodo_prompt.json?t=${Date.now()}`);
+      const promptRes = await fetch(`https://raw.githubusercontent.com/garvkumar68/Portfolio/Json_data/garv_ai_twin_prompt.json?t=${Date.now()}`);
       if (promptRes.ok) {
         const promptData = await promptRes.json() as { system_prompt?: string | string[] };
         if (promptData?.system_prompt) {

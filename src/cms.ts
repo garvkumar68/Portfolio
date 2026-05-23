@@ -79,7 +79,7 @@ cmsApp.get("/api/cms/load", async (c) => {
     // Fetch system/helper configuration files in parallel
     const systemFiles = [
       "admin_config/json_structure.json",
-      "dodo_prompt.json",
+      "garv_ai_twin_prompt.json",
       "compile_prompt.py"
     ];
 
@@ -132,7 +132,7 @@ cmsApp.get("/api/cms/load", async (c) => {
       if (
         item.type === "file" && 
         item.name.endsWith(".json") && 
-        item.name !== "dodo_prompt.json" && 
+        item.name !== "garv_ai_twin_prompt.json" && 
         item.name !== "package.json" && 
         item.name !== "tsconfig.json"
       ) {
@@ -174,7 +174,7 @@ cmsApp.get("/api/cms/load", async (c) => {
             .map(c => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
             .join("")
         );
-        db["dodo_prompt"] = {
+        db["garv_ai_twin_prompt"] = {
           content: JSON.parse(decoded),
           sha: fileData.sha,
           title: "Compiled Prompt",
@@ -229,8 +229,8 @@ cmsApp.get("/api/cms/file", async (c) => {
   let realPath = `${filename}.json`;
   if (filename === "compile_prompt_py") {
     realPath = "compile_prompt.py";
-  } else if (filename === "dodo_prompt") {
-    realPath = "dodo_prompt.json";
+  } else if (filename === "garv_ai_twin_prompt") {
+    realPath = "garv_ai_twin_prompt.json";
   } else if (filename === "admin_config/json_structure") {
     realPath = "admin_config/json_structure.json";
   }
@@ -244,7 +244,7 @@ cmsApp.get("/api/cms/file", async (c) => {
     });
 
     if (!res.ok) {
-      if (filename === "dodoPromptConfig" && res.status === 404) {
+      if (filename === "garvAITwinPromptConfig" && res.status === 404) {
         return c.json({
           content: {
             system_instruction: "",
@@ -256,7 +256,7 @@ cmsApp.get("/api/cms/file", async (c) => {
           sha: ""
         });
       }
-      if (filename === "dodoPromptInclusion" && res.status === 404) {
+      if (filename === "garvAITwinPromptInclusion" && res.status === 404) {
         return c.json({
           content: {
             included_datasets: {}
@@ -350,13 +350,13 @@ cmsApp.post("/api/cms/save", async (c) => {
       throw new Error(`Failed to commit updates to GitHub: ${errText}`);
     }
 
-    // 4. Auto-recompile DODO system prompt inside Cloudflare Edge and write dodo_prompt.json to GitHub!
+    // 4. Auto-recompile DODO system prompt inside Cloudflare Edge and write garv_ai_twin_prompt.json to GitHub!
     const promptLines = await compileCloudPrompt(c, ghToken, repo, branch);
     
     // 5. Rebuild and commit TS Fallback directly to backend_code branch on GitHub!
     await updateGithubTSFallback(c, ghToken, repo, promptLines);
 
-    return c.json({ success: true, message: "CMS Database saved, Dodo AI prompt recompiled, and backend fallback synchronized!" });
+    return c.json({ success: true, message: "CMS Database saved, Garv AI Twin prompt recompiled, and backend fallback synchronized!" });
   } catch (err: any) {
     return c.json({ error: `CMS save failed: ${err.message}` }, 500);
   }
@@ -484,12 +484,12 @@ async function compileCloudPrompt(c: any, ghToken: string, repo: string, branch:
     jsonStructure = JSON.parse(decoded);
   }
 
-  // 2. Fetch dodoPromptConfig.json
-  const configRes = await fetch(`https://api.github.com/repos/${repo}/contents/dodoPromptConfig.json?ref=${branch}`, {
+  // 2. Fetch garvAITwinPromptConfig.json
+  const configRes = await fetch(`https://api.github.com/repos/${repo}/contents/garvAITwinPromptConfig.json?ref=${branch}`, {
     headers: { "Authorization": `token ${ghToken}`, "User-Agent": "DodoCmsEngine" }
   });
 
-  let dodoPromptConfig: any = {};
+  let garvAITwinPromptConfig: any = {};
   if (configRes.ok) {
     const configData = await configRes.json() as { content: string };
     const decoded = decodeURIComponent(
@@ -499,15 +499,15 @@ async function compileCloudPrompt(c: any, ghToken: string, repo: string, branch:
         .join("")
     );
     const parsed = JSON.parse(decoded);
-    dodoPromptConfig = parsed;
+    garvAITwinPromptConfig = parsed;
   }
 
-  // 2b. Fetch dodoPromptInclusion.json
-  const inclusionRes = await fetch(`https://api.github.com/repos/${repo}/contents/dodoPromptInclusion.json?ref=${branch}`, {
+  // 2b. Fetch garvAITwinPromptInclusion.json
+  const inclusionRes = await fetch(`https://api.github.com/repos/${repo}/contents/garvAITwinPromptInclusion.json?ref=${branch}`, {
     headers: { "Authorization": `token ${ghToken}`, "User-Agent": "DodoCmsEngine" }
   });
 
-  let dodoPromptInclusion: any = {};
+  let garvAITwinPromptInclusion: any = {};
   if (inclusionRes.ok) {
     const inclusionData = await inclusionRes.json() as { content: string };
     const decoded = decodeURIComponent(
@@ -517,21 +517,21 @@ async function compileCloudPrompt(c: any, ghToken: string, repo: string, branch:
         .join("")
     );
     const parsed = JSON.parse(decoded);
-    dodoPromptInclusion = parsed;
+    garvAITwinPromptInclusion = parsed;
   }
 
-  const included_datasets = dodoPromptInclusion.included_datasets || {};
+  const included_datasets = garvAITwinPromptInclusion.included_datasets || {};
 
-  const system_instruction = dodoPromptConfig.system_instruction || "You are DODO (Diagnostic Operational Drone Organizer) AI, a highly advanced personal robotic assistant.\nYou were built and programmed by Garv Kumar to serve as his primary developer liaison, researcher, and interactive portfolio interface.";
-  const personality_protocol = dodoPromptConfig.personality_protocol || "- **Tone:** Professional, direct, highly intelligent, and slightly robotic.\n- **Format:** Keep answers clean and beautifully structured.\n- **Mission:** Represent Garv Kumar in the best possible light.";
-  const dynamic_responses = dodoPromptConfig.dynamic_responses || "- **Vary your greetings dynamically.** Avoid template response starters.";
-  const behavioral_guidelines = dodoPromptConfig.behavioral_guidelines || "- **Protect API Credentials:** Never mention credentials.\n- **Stay on Topic:** Focus on Garv's portfolio.\n- **No Hallucinations:** Direct to email if unknown.";
+  const system_instruction = garvAITwinPromptConfig.system_instruction || "You are Garv AI Twin, a highly advanced personal robotic assistant.\nYou were built and programmed by Garv Kumar to serve as his primary developer liaison, researcher, and interactive portfolio interface.";
+  const personality_protocol = garvAITwinPromptConfig.personality_protocol || "- **Tone:** Professional, direct, highly intelligent, and slightly robotic.\n- **Format:** Keep answers clean and beautifully structured.\n- **Mission:** Represent Garv Kumar in the best possible light.";
+  const dynamic_responses = garvAITwinPromptConfig.dynamic_responses || "- **Vary your greetings dynamically.** Avoid template response starters.";
+  const behavioral_guidelines = garvAITwinPromptConfig.behavioral_guidelines || "- **Protect API Credentials:** Never mention credentials.\n- **Stay on Topic:** Focus on Garv's portfolio.\n- **No Hallucinations:** Direct to email if unknown.";
 
   // Find all active datasets (not ignored and not disabled)
   const activeSections = Object.keys(jsonStructure).filter(key => {
     const reg = jsonStructure[key] || {};
     if (reg.skipPromptCompile) return false;
-    if (key === "admin_config/json_structure" || key === "dodoPromptInclusion" || key === "dodo_prompt") {
+    if (key === "admin_config/json_structure" || key === "garvAITwinPromptInclusion" || key === "garv_ai_twin_prompt") {
       return false;
     }
     return included_datasets[key] !== false;
@@ -546,15 +546,15 @@ async function compileCloudPrompt(c: any, ghToken: string, repo: string, branch:
 
   const responses = await Promise.all(fetches);
   const data: Record<string, any> = {};
-  let dodoPromptSha = "";
+  let garvAITwinPromptSha = "";
 
-  // Fetch the SHA of the existing dodo_prompt.json so we can overwrite it
-  const promptShaRes = await fetch(`https://api.github.com/repos/${repo}/contents/dodo_prompt.json?ref=${branch}`, {
+  // Fetch the SHA of the existing garv_ai_twin_prompt.json so we can overwrite it
+  const promptShaRes = await fetch(`https://api.github.com/repos/${repo}/contents/garv_ai_twin_prompt.json?ref=${branch}`, {
     headers: { "Authorization": `token ${ghToken}`, "User-Agent": "DodoCmsEngine" }
   });
   if (promptShaRes.ok) {
     const promptShaData = await promptShaRes.json() as { sha: string };
-    dodoPromptSha = promptShaData.sha;
+    garvAITwinPromptSha = promptShaData.sha;
   }
 
   for (let i = 0; i < activeSections.length; i++) {
@@ -586,7 +586,7 @@ async function compileCloudPrompt(c: any, ghToken: string, repo: string, branch:
 
   prompt_lines.push(...getLines(system_instruction));
   prompt_lines.push("");
-  prompt_lines.push("### DODO AI Personality & Communication Protocol:");
+  prompt_lines.push("### Garv AI Twin Personality & Communication Protocol:");
   prompt_lines.push(...getLines(personality_protocol));
   prompt_lines.push("");
   prompt_lines.push("### CRITICAL: DYNAMIC & VARIANT RESPONSES (NO STARTER TEMPLATES)");
@@ -677,8 +677,8 @@ async function compileCloudPrompt(c: any, ghToken: string, repo: string, branch:
     )
   );
 
-  // Commit dodo_prompt.json to GitHub
-  const promptUpdateRes = await fetch(`https://api.github.com/repos/${repo}/contents/dodo_prompt.json`, {
+  // Commit garv_ai_twin_prompt.json to GitHub
+  const promptUpdateRes = await fetch(`https://api.github.com/repos/${repo}/contents/garv_ai_twin_prompt.json`, {
     method: "PUT",
     headers: {
       "Authorization": `token ${ghToken}`,
@@ -688,7 +688,7 @@ async function compileCloudPrompt(c: any, ghToken: string, repo: string, branch:
     body: JSON.stringify({
       message: "Admin CMS: Auto-recompiled system prompt",
       content: compiledBase64,
-      sha: dodoPromptSha || undefined,
+      sha: garvAITwinPromptSha || undefined,
       branch: branch
     })
   });
@@ -703,7 +703,7 @@ async function compileCloudPrompt(c: any, ghToken: string, repo: string, branch:
 
 // 7. Push compiled prompt fallback to branch backend_code
 async function updateGithubTSFallback(c: any, ghToken: string, repo: string, promptLines: string[]) {
-  const backendBranch = "backend_code";
+  const backendBranch = "backend-code";
   const path = "src/promptFallback.ts";
 
   // Get current SHA
