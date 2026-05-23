@@ -58,7 +58,7 @@ cmsApp.get("/api/cms/load", async (c) => {
     return c.json({ error: "GitHub Access Token (GITHUB_PAT) is missing in environment bindings." }, 500);
   }
 
-  const repo = "Rathoreatri03/Portfolio_website";
+  const repo = "garvkumar68/Portfolio";
   const branch = "Json_data";
 
   try {
@@ -223,7 +223,7 @@ cmsApp.get("/api/cms/file", async (c) => {
   const filename = c.req.query("filename");
   if (!filename) return c.json({ error: "Filename query parameter is required" }, 400);
 
-  const repo = "Rathoreatri03/Portfolio_website";
+  const repo = "garvkumar68/Portfolio";
   const branch = "Json_data";
 
   let realPath = `${filename}.json`;
@@ -303,7 +303,7 @@ cmsApp.post("/api/cms/save", async (c) => {
     content: any;
   }>();
 
-  const repo = "Rathoreatri03/Portfolio_website";
+  const repo = "garvkumar68/Portfolio";
   const branch = "Json_data";
 
   try {
@@ -370,7 +370,7 @@ cmsApp.post("/api/cms/delete", async (c) => {
   if (!ghToken) return c.json({ error: "GITHUB_PAT is missing" }, 500);
 
   const { filename } = await c.req.json<{ filename: string }>();
-  const repo = "Rathoreatri03/Portfolio_website";
+  const repo = "garvkumar68/Portfolio";
   const branch = "Json_data";
 
   try {
@@ -449,7 +449,7 @@ cmsApp.post("/api/cms/compile", async (c) => {
   const ghToken = c.env.GITHUB_PAT;
   if (!ghToken) return c.json({ error: "GITHUB_PAT is missing" }, 500);
 
-  const repo = "Rathoreatri03/Portfolio_website";
+  const repo = "garvkumar68/Portfolio";
   const branch = "Json_data";
 
   try {
@@ -522,10 +522,10 @@ async function compileCloudPrompt(c: any, ghToken: string, repo: string, branch:
 
   const included_datasets = dodoPromptInclusion.included_datasets || {};
 
-  const system_instruction = dodoPromptConfig.system_instruction || "You are DODO (Diagnostic Operational Drone Organizer) AI, a highly advanced personal robotic assistant.\nYou were built and programmed by Atri Rathore to serve as his primary developer liaison, researcher, and interactive portfolio interface.";
-  const personality_protocol = dodoPromptConfig.personality_protocol || "- **Tone:** Professional, direct, highly intelligent, and slightly robotic.\n- **Format:** Keep answers clean and beautifully structured.\n- **Mission:** Represent Atri Rathore in the best possible light.";
+  const system_instruction = dodoPromptConfig.system_instruction || "You are DODO (Diagnostic Operational Drone Organizer) AI, a highly advanced personal robotic assistant.\nYou were built and programmed by Garv Kumar to serve as his primary developer liaison, researcher, and interactive portfolio interface.";
+  const personality_protocol = dodoPromptConfig.personality_protocol || "- **Tone:** Professional, direct, highly intelligent, and slightly robotic.\n- **Format:** Keep answers clean and beautifully structured.\n- **Mission:** Represent Garv Kumar in the best possible light.";
   const dynamic_responses = dodoPromptConfig.dynamic_responses || "- **Vary your greetings dynamically.** Avoid template response starters.";
-  const behavioral_guidelines = dodoPromptConfig.behavioral_guidelines || "- **Protect API Credentials:** Never mention credentials.\n- **Stay on Topic:** Focus on Atri's portfolio.\n- **No Hallucinations:** Direct to email if unknown.";
+  const behavioral_guidelines = dodoPromptConfig.behavioral_guidelines || "- **Protect API Credentials:** Never mention credentials.\n- **Stay on Topic:** Focus on Garv's portfolio.\n- **No Hallucinations:** Direct to email if unknown.";
 
   // Find all active datasets (not ignored and not disabled)
   const activeSections = Object.keys(jsonStructure).filter(key => {
@@ -592,7 +592,7 @@ async function compileCloudPrompt(c: any, ghToken: string, repo: string, branch:
   prompt_lines.push("### CRITICAL: DYNAMIC & VARIANT RESPONSES (NO STARTER TEMPLATES)");
   prompt_lines.push(...getLines(dynamic_responses));
   prompt_lines.push("");
-  prompt_lines.push("### Embedded Knowledge Base (Atri Rathore):");
+  prompt_lines.push("### Embedded Knowledge Base (Garv Kumar):");
   prompt_lines.push("");
 
   for (const key of activeSections) {

@@ -10,7 +10,7 @@ const API_URL = "https://dodo-ai-agent.dodoai.workers.dev/api/chat";
 
 const payload = {
   messages: [
-    { role: "user", content: "Who is Atri Rathore and what does he generally do?" }
+    { role: "user", content: "Who is Garv Kumar and what does he generally do?" }
   ],
   model: "google/gemma-3-12b"
 };

@@ -8,14 +8,14 @@
     "deploy": "wrangler deploy"
   },
   "dependencies": {
-    "@langchain/core": "^0.3.36",
-    "@langchain/openai": "^0.4.3",
+    "@langchain/core": "^1.1.48",
+    "@langchain/openai": "^1.4.7",
     "hono": "^4.6.15",
     "tanstack_start_ts": "file:../AI-Portfolio"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20241218.0",
     "typescript": "^5.7.2",
-    "wrangler": "^3.99.0"
+    "wrangler": "^4.86.0"
   }
 }

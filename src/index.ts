@@ -23,11 +23,11 @@ app.use(
         !origin ||
         origin.startsWith("http://localhost:") ||
         origin.startsWith("http://127.0.0.1:") ||
-        origin === "https://rathoreatri03.github.io"
+        origin === "https://garvkumar68.github.io"
       ) {
         return origin;
       }
-      return "https://rathoreatri03.github.io"; // Default fallback
+      return "https://garvkumar68.github.io"; // Default fallback
     },
     allowMethods: ["POST", "GET", "OPTIONS"],
     allowHeaders: ["Content-Type", "Authorization"],
@@ -84,7 +84,7 @@ app.post("/api/chat", async (c) => {
     // Fetch the latest system prompt dynamically from GitHub
     let dynamicSystemPrompt = promptFallback; // High-quality local static fallback compiled from portfolio JSONs!
     try {
-      const promptRes = await fetch(`https://raw.githubusercontent.com/Rathoreatri03/Protfolio_website/Json_data/dodo_prompt.json?t=${Date.now()}`);
+      const promptRes = await fetch(`https://raw.githubusercontent.com/garvkumar68/Portfolio/Json_data/dodo_prompt.json?t=${Date.now()}`);
       if (promptRes.ok) {
         const promptData = await promptRes.json() as { system_prompt?: string | string[] };
         if (promptData?.system_prompt) {
