@@ -1,5 +1,6 @@
 {
   "included_datasets": {
-    "dodo_prompt": false
+    "dodo_prompt": false,
+    "BannerDetails": false
   }
 }
