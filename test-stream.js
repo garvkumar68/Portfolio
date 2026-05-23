@@ -6,7 +6,7 @@
  */
 
 // --- 🌐 LIVE TARGET ENDPOINT ---
-const API_URL = "https://dodo-ai-agent.dodoai.workers.dev/api/chat"; 
+const API_URL = "https://garv-ai-twin.portfolio-support.workers.dev/api/chat"; 
 
 const payload = {
   messages: [

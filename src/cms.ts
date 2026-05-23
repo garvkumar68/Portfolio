@@ -59,7 +59,7 @@ cmsApp.get("/api/cms/load", async (c) => {
   }
 
   const repo = "garvkumar68/Portfolio";
-  const branch = "Json_data";
+  const branch = "json-data";
 
   try {
     // 1. Fetch directory listing for the root of the Json_data branch
@@ -224,7 +224,7 @@ cmsApp.get("/api/cms/file", async (c) => {
   if (!filename) return c.json({ error: "Filename query parameter is required" }, 400);
 
   const repo = "garvkumar68/Portfolio";
-  const branch = "Json_data";
+  const branch = "json-data";
 
   let realPath = `${filename}.json`;
   if (filename === "compile_prompt_py") {
@@ -304,7 +304,7 @@ cmsApp.post("/api/cms/save", async (c) => {
   }>();
 
   const repo = "garvkumar68/Portfolio";
-  const branch = "Json_data";
+  const branch = "json-data";
 
   try {
     // 1. Fetch the latest file SHA securely on the backend using GITHUB_PAT
@@ -371,7 +371,7 @@ cmsApp.post("/api/cms/delete", async (c) => {
 
   const { filename } = await c.req.json<{ filename: string }>();
   const repo = "garvkumar68/Portfolio";
-  const branch = "Json_data";
+  const branch = "json-data";
 
   try {
     // 1. Fetch content file SHA first
@@ -450,7 +450,7 @@ cmsApp.post("/api/cms/compile", async (c) => {
   if (!ghToken) return c.json({ error: "GITHUB_PAT is missing" }, 500);
 
   const repo = "garvkumar68/Portfolio";
-  const branch = "Json_data";
+  const branch = "json-data";
 
   try {
     // 1. Run prompt Edge-Compiler in the cloud
@@ -707,7 +707,7 @@ async function updateGithubTSFallback(c: any, ghToken: string, repo: string, pro
   const path = "src/promptFallback.ts";
 
   // Get current SHA
-  const shaRes = await fetch(`https://api.github.com/repos/${repo}/contents/${path}?ref={backendBranch}`, {
+  const shaRes = await fetch(`https://api.github.com/repos/${repo}/contents/${path}?ref=${backendBranch}`, {
     headers: { "Authorization": `token ${ghToken}`, "User-Agent": "DodoCmsEngine" }
   });
 
