@@ -183,20 +183,20 @@ function AdminComponent() {
   const [showCompileModal, setShowCompileModal] = useState(false);
   const [compileSearchQuery, setCompileSearchQuery] = useState("");
 
-  // Load dodoPromptInclusion on demand when Compile Modal is opened
+  // Load garvAITwinPromptInclusion on demand when Compile Modal is opened
   useEffect(() => {
-    if (showCompileModal && db && db.dodoPromptInclusion && db.dodoPromptInclusion.content === null && token) {
+    if (showCompileModal && db && db.garvAITwinPromptInclusion && db.garvAITwinPromptInclusion.content === null && token) {
       const fetchInclusion = async () => {
         try {
-          const res = await fetch(`${WORKER_BASE}/api/cms/file?filename=dodoPromptInclusion&token=${token}`);
+          const res = await fetch(`${WORKER_BASE}/api/cms/file?filename=garvAITwinPromptInclusion&token=${token}`);
           if (!res.ok) throw new Error("Failed to load prompt inclusion list");
           const data = await res.json();
           setDb(prev => {
             if (!prev) return null;
             return {
               ...prev,
-              dodoPromptInclusion: {
-                ...prev.dodoPromptInclusion,
+              garvAITwinPromptInclusion: {
+                ...prev.garvAITwinPromptInclusion,
                 content: data.content,
                 sha: data.sha
               }
@@ -261,7 +261,7 @@ function AdminComponent() {
           const existingRegistry = db["admin_config/json_structure"]?.content || {};
           const jsonStructure: Record<string, any> = {};
           for (const key of Object.keys(updatedDb)) {
-            if (key === "admin_config/json_structure" || key === "dodo_prompt") continue;
+            if (key === "admin_config/json_structure" || key === "garv_ai_twin_prompt") continue;
             const prev = (existingRegistry[key] || {}) as Record<string, any>;
             const entry: Record<string, any> = {
               title:  updatedDb[key].title || key,
@@ -436,13 +436,13 @@ function AdminComponent() {
         };
       }
 
-      // Ensure dodoPromptInclusion exists even if not yet pushed to GitHub
-      if (!loadedDb["dodoPromptInclusion"]) {
-        const regInfo = registry["dodoPromptInclusion"] || {};
-        loadedDb["dodoPromptInclusion"] = {
+      // Ensure garvAITwinPromptInclusion exists even if not yet pushed to GitHub
+      if (!loadedDb["garvAITwinPromptInclusion"]) {
+        const regInfo = registry["garvAITwinPromptInclusion"] || {};
+        loadedDb["garvAITwinPromptInclusion"] = {
           content: null, sha: "", schema: [],
           type: "object",
-          title: regInfo.title || "Dodo Prompt Inclusion",
+          title: regInfo.title || "Garv AI Twin Prompt Inclusion",
           isSystemFile: true,
           readOnly: true
         };
@@ -505,7 +505,7 @@ function AdminComponent() {
       const existingRegistry = db["admin_config/json_structure"]?.content || {};
       const jsonStructure: Record<string, any> = {};
       for (const key of Object.keys(db)) {
-        if (key === "admin_config/json_structure" || key === "dodo_prompt") continue;
+        if (key === "admin_config/json_structure" || key === "garv_ai_twin_prompt") continue;
         const existing = existingRegistry[key] || {};
         jsonStructure[key] = {
           title:             db[key].title || key,
@@ -592,17 +592,16 @@ function AdminComponent() {
 
   const getIncludedToggles = (): Record<string, boolean> => {
     if (!db) return {};
-    return db.dodoPromptInclusion?.content?.included_datasets || {};
+    return db.garvAITwinPromptInclusion?.content?.included_datasets || {};
   };
 
   const getSourceKeys = (): string[] => {
     if (!db) return [];
     const registry = db["admin_config/json_structure"]?.content || {};
-    // Include a key if it is NOT flagged skipPromptCompile and NOT a system file in the registry.
-    // This is driven entirely by json_structure.json — no hardcoded exclusions needed.
-    return Object.keys(registry).filter(key => {
-      const reg = registry[key] as any;
-      return !reg?.skipPromptCompile && !reg?.isSystemFile;
+    return Object.keys(db).filter(key => {
+      if (db[key].isSystemFile) return false;
+      if (registry[key]?.skipPromptCompile) return false;
+      return true;
     });
   };
 
@@ -617,18 +616,18 @@ function AdminComponent() {
     // Update local DB state
     const updatedDb = {
       ...db,
-      dodoPromptInclusion: {
-        ...db.dodoPromptInclusion,
+      garvAITwinPromptInclusion: {
+        ...db.garvAITwinPromptInclusion,
         content: {
-          ...(db.dodoPromptInclusion?.content || {}),
+          ...(db.garvAITwinPromptInclusion?.content || {}),
           included_datasets: updatedToggles
         }
       }
     };
     setDb(updatedDb);
 
-    // Save dodoPromptInclusion to GitHub automatically
-    setPublishing("dodoPromptInclusion");
+    // Save garvAITwinPromptInclusion to GitHub automatically
+    setPublishing("garvAITwinPromptInclusion");
     try {
       const res = await fetch(`${WORKER_BASE}/api/cms/save`, {
         method: "POST",
@@ -637,8 +636,8 @@ function AdminComponent() {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          filename: "dodoPromptInclusion",
-          content: updatedDb.dodoPromptInclusion.content
+          filename: "garvAITwinPromptInclusion",
+          content: updatedDb.garvAITwinPromptInclusion.content
         })
       });
 
@@ -652,9 +651,9 @@ function AdminComponent() {
         if (!prev) return null;
         return {
           ...prev,
-          dodoPromptInclusion: {
-            ...prev.dodoPromptInclusion,
-            sha: resData.sha || prev.dodoPromptInclusion.sha
+          garvAITwinPromptInclusion: {
+            ...prev.garvAITwinPromptInclusion,
+            sha: resData.sha || prev.garvAITwinPromptInclusion.sha
           }
         };
       });
@@ -878,7 +877,7 @@ function AdminComponent() {
                       );
                   })().map(item => {
                     const isChecked = getIncludedToggles()[item.key] !== false;
-                    const isSaving = publishing === "dodoPromptConfig";
+                    const isSaving = publishing === "garvAITwinPromptConfig";
                     return (
                       <div
                         key={item.key}
@@ -919,7 +918,7 @@ function AdminComponent() {
                     await handleManualCompile();
                     setShowCompileModal(false);
                   }}
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-[#00ff88] to-emerald-500 hover:from-[#00ff88]/90 hover:to-emerald-500/90 text-[#050505] text-[10px] font-bold uppercase tracking-wider rounded-xl shadow-[0_4px_20px_rgba(0,255,136,0.15)] transition-all cursor-pointer disabled:opacity-50"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[#00ff88] hover:bg-[#00ff88]/90 text-black text-[10px] font-bold uppercase tracking-wider rounded-xl shadow-[0_4px_20px_rgba(0,255,136,0.15)] transition-all cursor-pointer disabled:opacity-50"
                 >
                   {isCompiling ? (
                     <RefreshCw className="size-3.5 animate-spin" />

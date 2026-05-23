@@ -28,7 +28,7 @@ export function CustomListEditor({ schema, content, onChange, renderUrlInput }: 
     onConfirm: () => {}
   });
 
-  const list = content || [];
+  const list = Array.isArray(content) ? content : [];
 
   const handleDragStart = (e: React.DragEvent, idx: number) => {
     setDraggedIdx(idx);

@@ -192,7 +192,7 @@ export const compileAtrisInformationText = (db: any, included: Record<string, bo
 
   for (const [key, regInfo] of Object.entries(registry) as [string, any][]) {
     if (regInfo.skipPromptCompile) continue;
-    if (key === "admin_config/json_structure" || key === "dodoPromptInclusion" || key === "dodo_prompt") continue;
+    if (key === "admin_config/json_structure" || key === "garvAITwinPromptInclusion" || key === "garv_ai_twin_prompt") continue;
     if (included[key] === false) continue; // Default to true if not explicitly set to false
     const title = regInfo.title || key;
     const sectionType = regInfo.type || "list";

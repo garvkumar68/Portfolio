@@ -65,11 +65,41 @@ export function CustomSectionWizard({
 
   const [wizardName, setWizardName] = useState(existing?.title || editSectionKey || "");
   const [wizardType, setWizardType] = useState<"list" | "object" | "tags" | "categories">(
-    (existing?.type as any) || "list"
+    (existing?.type as any) || (existing?.content && typeof existing.content === "object" && !Array.isArray(existing.content) ? "object" : "list")
   );
-  const [wizardFields, setWizardFields] = useState<Array<{ key: string; label: string; type: string }>>(
-    existing?.schema?.length ? existing.schema : [{ key: "title", label: "Title", type: "string" }]
-  );
+  const [wizardFields, setWizardFields] = useState<Array<{ key: string; label: string; type: string }>>(() => {
+    if (existing?.schema?.length) return existing.schema;
+    if (existing?.content) {
+      const inferFields = (obj: any): any[] => {
+        return Object.keys(obj).map(k => {
+          let fieldType = typeof obj[k] === "number" ? "number" : typeof obj[k] === "boolean" ? "boolean" : (typeof obj[k] === "string" && obj[k].startsWith("http") ? "url" : (typeof obj[k] === "string" && obj[k].length > 100 ? "longtext" : "string"));
+          let subSchema: any[] = [];
+          if (Array.isArray(obj[k])) {
+            fieldType = "list";
+            if (obj[k].length > 0 && typeof obj[k][0] === "object" && obj[k][0]) {
+              subSchema = inferFields(obj[k][0]);
+            } else {
+              subSchema = [{ key: "title", label: "Title", type: "string" }];
+            }
+          }
+          return {
+            key: k,
+            label: k.charAt(0).toUpperCase() + k.slice(1).replace(/([A-Z])/g, ' $1').trim(),
+            type: fieldType,
+            ...(fieldType === "list" ? { subSchema } : {})
+          };
+        });
+      };
+      if (typeof existing.content === "object" && !Array.isArray(existing.content)) {
+        const keys = Object.keys(existing.content);
+        if (keys.length > 0) return inferFields(existing.content);
+      } else if (Array.isArray(existing.content) && existing.content.length > 0 && typeof existing.content[0] === "object" && existing.content[0]) {
+        const keys = Object.keys(existing.content[0]);
+        if (keys.length > 0) return inferFields(existing.content[0]);
+      }
+    }
+    return [{ key: "title", label: "Title", type: "string" }];
+  });
 
   // Classification
   const [wizardMode, setWizardMode] = useState<WizardMode>(getInitialMode());
@@ -164,7 +194,7 @@ export function CustomSectionWizard({
         const existingRegistry = newDb["admin_config/json_structure"]?.content || {};
         const jsonStructure: Record<string, any> = {};
         for (const key of Object.keys(newDb)) {
-          if (key === "admin_config/json_structure" || key === "dodo_prompt") continue;
+          if (key === "admin_config/json_structure" || key === "garv_ai_twin_prompt") continue;
           const prev = (existingRegistry[key] || {}) as Record<string, any>;
           const entry: Record<string, any> = {
             title:  newDb[key].title || key,

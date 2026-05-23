@@ -19,7 +19,7 @@ export const STANDARD_NAV_TABS = [
   { id: "successStories",    title: "Achievements Log",    label: "successStories.json",    icon: Trophy },
   { id: "skillsData",        title: "Skills Matrix",       label: "skillsData.json",        icon: Layers },
   { id: "techstack",         title: "Tech Stack",          label: "techstack.json",         icon: Wrench },
-  { id: "dodoPromptConfig",  title: "Assistant Rules",     label: "dodoPromptConfig.json", icon: Terminal },
+  { id: "garvAITwinPromptConfig",  title: "Assistant Rules",     label: "garvAITwinPromptConfig.json", icon: Terminal },
 ] as const;
 
 const STANDARD_KEYS = STANDARD_NAV_TABS.map(t => t.id);
@@ -66,7 +66,7 @@ export function AdminSidebar({
             </div>
             {!sidebarMinimized && (
               <div className="animate-in fade-in slide-in-from-left-2 duration-300">
-                <h1 className="font-display text-sm tracking-[0.25em] text-white uppercase font-bold">Dodo CMS</h1>
+                <h1 className="font-display text-sm tracking-[0.25em] text-white uppercase font-bold">Garv AI Twin CMS</h1>
                 <p className="text-[9px] text-[#00ff88] font-mono-fira tracking-widest uppercase mt-0.5">Edge Operations</p>
               </div>
             )}

@@ -16,6 +16,10 @@ export const SideNav = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  if (location.pathname === '/debugger') {
+    return null;
+  }
+
   return (
     <div className="side-nav">
       {routes.map((route, index) => {

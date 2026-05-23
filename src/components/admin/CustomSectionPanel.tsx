@@ -91,12 +91,42 @@ export function CustomSectionPanel({
   // Field Creation States
   const [newFieldLabel, setNewFieldLabel] = useState("");
   const [newFieldKey, setNewFieldKey] = useState("");
-  const [newFieldType, setNewFieldType] = useState<"string" | "longtext" | "url" | "percentage" | "number" | "boolean">("string");
+  const [newFieldType, setNewFieldType] = useState<"string" | "longtext" | "url" | "percentage" | "number" | "boolean" | "list">("string");
+
+  let inferredSchema = db[activeTab]?.schema || [];
+  if (inferredSchema.length === 0 && db[activeTab]?.content) {
+    const content = db[activeTab].content;
+    const inferFields = (obj: any): any[] => {
+      return Object.keys(obj).map(k => {
+        let fieldType = typeof obj[k] === "number" ? "number" : typeof obj[k] === "boolean" ? "boolean" : (typeof obj[k] === "string" && obj[k].startsWith("http") ? "url" : (typeof obj[k] === "string" && obj[k].length > 100 ? "longtext" : "string"));
+        let subSchema: any[] = [];
+        if (Array.isArray(obj[k])) {
+          fieldType = "list";
+          if (obj[k].length > 0 && typeof obj[k][0] === "object" && obj[k][0]) {
+            subSchema = inferFields(obj[k][0]);
+          } else {
+            subSchema = [{ key: "title", label: "Title", type: "string" }];
+          }
+        }
+        return {
+          key: k,
+          label: k.charAt(0).toUpperCase() + k.slice(1).replace(/([A-Z])/g, ' $1').trim(),
+          type: fieldType,
+          ...(fieldType === "list" ? { subSchema } : {})
+        };
+      });
+    };
+    if (typeof content === "object" && !Array.isArray(content)) {
+      inferredSchema = inferFields(content);
+    } else if (Array.isArray(content) && content.length > 0 && typeof content[0] === "object" && content[0]) {
+      inferredSchema = inferFields(content[0]);
+    }
+  }
 
   const section = db[activeTab] ? {
     title: db[activeTab].title || activeTab,
-    type: db[activeTab].type || "list",
-    schema: db[activeTab].schema || []
+    type: db[activeTab].type || (db[activeTab].content && typeof db[activeTab].content === "object" && !Array.isArray(db[activeTab].content) ? "object" : "list"),
+    schema: inferredSchema
   } : null;
 
   if (!section) return null;
@@ -361,6 +391,17 @@ export function CustomSectionPanel({
                             }`}
                           />
                         </button>
+                      </div>
+                    )}
+
+                    {field.type === "list" && (
+                      <div className="mt-4 -mx-1 -mb-1 overflow-hidden border border-white/10 rounded-xl bg-[#030303] shadow-inner">
+                        <CustomListEditor
+                          schema={field.subSchema || []}
+                          content={Array.isArray(val) ? val : []}
+                          onChange={(newList) => handleObjectFieldChange(newList)}
+                          renderUrlInput={renderUrlInput}
+                        />
                       </div>
                     )}
                   </div>

@@ -34,7 +34,7 @@ export function SecurityGateway({
           </div>
           <div>
             <h1 className="font-display text-sm font-bold tracking-[0.3em] uppercase text-white">Security Gateway</h1>
-            <p className="text-[10px] text-muted-foreground font-mono mt-1 uppercase tracking-wider">Dodo Operations Kernel</p>
+            <p className="text-[10px] text-muted-foreground font-mono mt-1 uppercase tracking-wider">Garv AI Twin Operations Kernel</p>
           </div>
         </div>
 

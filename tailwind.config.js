@@ -7,7 +7,14 @@ module.exports = {
     "./src/components/AdminPage.tsx",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+      }
+    },
   },
   plugins: [],
 }
