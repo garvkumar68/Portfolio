@@ -648,15 +648,36 @@ async function compileCloudPrompt(c: any, ghToken: string, repo: string, branch:
     else if (sectionType === "object" && typeof sectionData === "object" && sectionData !== null) {
       prompt_lines.push(`#### ℹ️ ${title}:`);
       for (const [k, v] of Object.entries(sectionData)) {
-        if (!v || !String(v).trim()) continue;
+        if (!v || (typeof v !== "object" && !String(v).trim())) continue;
         if (k === "imgUrl" || k === "image") continue;
 
-        const isUrl = String(v).startsWith("http://") || String(v).startsWith("https://");
         const label = k.charAt(0).toUpperCase() + k.slice(1);
-        if (isUrl) {
-          prompt_lines.push(`- **${label}:** [Link](${v})`);
+
+        if (Array.isArray(v)) {
+          prompt_lines.push(`- **${label}:**`);
+          for (const item of v) {
+            if (typeof item !== "object" || item === null) continue;
+            const itemTitle = item.title || item.name || Object.values(item).find(val => typeof val === "string" && val !== item.imgUrl && val !== item.link) || "";
+            prompt_lines.push(`  - **${itemTitle}**`);
+            for (const [subK, subV] of Object.entries(item)) {
+              if (subK === "title" || subK === "name" || !subV || !String(subV).trim()) continue;
+              if (subK === "imgUrl" || subK === "image") continue;
+              const subIsUrl = String(subV).startsWith("http://") || String(subV).startsWith("https://");
+              const subLabel = subK.charAt(0).toUpperCase() + subK.slice(1);
+              if (subIsUrl) {
+                prompt_lines.push(`    - *${subLabel}:* [Link](${subV})`);
+              } else {
+                prompt_lines.push(`    - *${subLabel}:* ${subV}`);
+              }
+            }
+          }
         } else {
-          prompt_lines.push(`- **${label}:** ${v}`);
+          const isUrl = String(v).startsWith("http://") || String(v).startsWith("https://");
+          if (isUrl) {
+            prompt_lines.push(`- **${label}:** [Link](${v})`);
+          } else {
+            prompt_lines.push(`- **${label}:** ${v}`);
+          }
         }
       }
       prompt_lines.push("");
