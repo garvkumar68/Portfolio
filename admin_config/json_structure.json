@@ -1,0 +1,64 @@
+{
+  "BannerDetails": {
+    "title": "Banner Details",
+    "type": "object",
+    "isStandard": true
+  },
+  "education": {
+    "title": "Education",
+    "type": "list",
+    "isStandard": true
+  },
+  "experience": {
+    "title": "Experience",
+    "type": "object",
+    "isStandard": true
+  },
+  "logo": {
+    "title": "Site Logo",
+    "type": "object",
+    "isStandard": true
+  },
+  "professionalLinks": {
+    "title": "Professional Links",
+    "type": "object",
+    "isStandard": true
+  },
+  "projects": {
+    "title": "Projects",
+    "type": "list",
+    "isStandard": true
+  },
+  "skillsData": {
+    "title": "Skills Matrix",
+    "type": "categories",
+    "isStandard": true
+  },
+  "successStories": {
+    "title": "Success Stories",
+    "type": "list",
+    "isStandard": true
+  },
+  "systemMetadataConfig": {
+    "title": "System Metadata",
+    "type": "object",
+    "isStandard": true,
+    "isSystemFile": true,
+    "readOnly": false,
+    "skipPromptCompile": true
+  },
+  "garvAITwinPromptInclusion": {
+    "title": "Prompt Inclusion Toggles",
+    "type": "object",
+    "isSystemFile": true,
+    "readOnly": true,
+    "skipPromptCompile": true
+  },
+  "garv_ai_twin_prompt": {
+    "title": "AI Master Prompt",
+    "type": "object",
+    "isSystemFile": true,
+    "readOnly": true,
+    "skipPromptCompile": true
+  }
+}
