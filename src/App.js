@@ -13,6 +13,8 @@ import { Contact } from "./components/Contact";
 import { HexagonBackground } from "./components/HexagonBackground";
 import { MinimalistStarfield } from "./components/MinimalistStarfield";
 import { SideNav } from "./components/SideNav";
+import AdminPage from "./components/AdminPage";
+import { Toaster } from "sonner";
 import { useEffect, useState } from "react";
 
 // Scroll to Top on route change helper
@@ -291,6 +293,7 @@ function App() {
       <ScrollNavigator />
       <div className="App">
 
+        <Toaster theme="dark" position="top-right" />
         <MinimalistStarfield />
         <SideNav />
         <Routes>
@@ -301,6 +304,7 @@ function App() {
           <Route path="/certifications" element={<CertificationsPage />} />
           <Route path="/achievements" element={<AchievementsPage />} />
           <Route path="/reachout" element={<ReachoutPage />} />
+          <Route path="/debugger" element={<AdminPage />} />
         </Routes>
       </div>
     </Router>
