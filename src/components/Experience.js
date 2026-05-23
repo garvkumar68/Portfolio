@@ -18,9 +18,7 @@ export const Experience = () => {
                 if (data && data.workExperience) {
                     setProfessionalExp(data.workExperience);
                 } else if (Array.isArray(data)) {
-                    setProfessionalExp(data.filter(item =>
-                        !item.title.toLowerCase().includes("certification")
-                    ));
+                    setProfessionalExp(data);
                 }
             } catch (err) {
                 console.error('Error fetching experience data from GitHub', err);

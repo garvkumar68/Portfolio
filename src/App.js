@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive';
 import { NavBar } from "./components/NavBar";
 import { Banner } from "./components/Banner";
@@ -304,7 +304,8 @@ function App() {
           <Route path="/certifications" element={<CertificationsPage />} />
           <Route path="/achievements" element={<AchievementsPage />} />
           <Route path="/reachout" element={<ReachoutPage />} />
-          <Route path="/debugger" element={<AdminPage />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
     </Router>

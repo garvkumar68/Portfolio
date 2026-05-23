@@ -12,7 +12,7 @@ export const Certifications = () => {
     useEffect(() => {
         const fetchCertifications = async () => {
             try {
-                const url = 'https://raw.githubusercontent.com/garvkumar68/Portfolio/json-data/experience.json';
+                const url = 'https://raw.githubusercontent.com/garvkumar68/Portfolio/json-data/certifications.json';
                 const response = await axios.get(url);
                 const data = response.data;
 
@@ -20,11 +20,7 @@ export const Certifications = () => {
                 if (data && data.certifications) {
                     setCertifications(data.certifications);
                 } else if (Array.isArray(data)) {
-                    const certData = data.filter(item =>
-                        item.title.toLowerCase().includes("certification*") ||
-                        item.title.toLowerCase().includes("certification")
-                    );
-                    setCertifications(certData);
+                    setCertifications(data);
                 }
             } catch (err) {
                 console.error('Error fetching certifications from GitHub', err);

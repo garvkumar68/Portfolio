@@ -16,7 +16,7 @@ export const SideNav = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  if (location.pathname === '/debugger') {
+  if (location.pathname === '/admin') {
     return null;
   }
 

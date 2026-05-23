@@ -1,0 +1,224 @@
+[
+  {
+    "title": "Specialization Certificate IBM RAG and Agentic AI",
+    "stack": "rag, agentic ai, python, ai",
+    "imgUrl": "http://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~CGBDCY6BS7V6/CERTIFICATE_LANDING_PAGE~CGBDCY6BS7V6.jpeg",
+    "link": "https://coursera.org/share/11a2a55fdb8079981283f49a2119bd4c"
+  },
+  {
+    "title": "Specialization Certificate Google Project Management",
+    "stack": "project management, agile",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~8JUMH6ZEDNIN/CERTIFICATE_LANDING_PAGE~8JUMH6ZEDNIN.jpeg",
+    "link": "https://coursera.org/share/e88da66db586489e8f7506eb02d9ff87"
+  },
+  {
+    "title": "Develop Generative AI Applications: Get Started - IBM",
+    "stack": "generative ai, ai, python",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~F1ZZOQFZHZUB/CERTIFICATE_LANDING_PAGE~F1ZZOQFZHZUB.jpeg",
+    "link": "https://coursera.org/share/af7408c3b85cee6f260e094583d85e42"
+  },
+  {
+    "title": "Build RAG Applications: Get Started - IBM",
+    "stack": "rag, ai, python",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~TGF5PQT0VLNM/CERTIFICATE_LANDING_PAGE~TGF5PQT0VLNM.jpeg",
+    "link": "https://coursera.org/share/a79fee160ca8617b6ba924fd50608587"
+  },
+  {
+    "title": "Vector Databases for RAG: An Introduction - IBM",
+    "stack": "vector databases, rag, ai",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~8BG1DXQHR3FX/CERTIFICATE_LANDING_PAGE~8BG1DXQHR3FX.jpeg",
+    "link": "https://coursera.org/share/f870783d6d98454daf10a35a68711d17"
+  },
+  {
+    "title": "Advanced RAG with Vector Databases and Retrievers - IBM",
+    "stack": "rag, vector databases, ai",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~ZM9K4QG9BB0K/CERTIFICATE_LANDING_PAGE~ZM9K4QG9BB0K.jpeg",
+    "link": "https://coursera.org/share/97c51b39a18235ddf00793788d0fd9b8"
+  },
+  {
+    "title": "Build Multimodal Generative AI Applications - IBM",
+    "stack": "generative ai, multimodal, ai",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~GC4GM8OTVAEA/CERTIFICATE_LANDING_PAGE~GC4GM8OTVAEA.jpeg",
+    "link": "https://coursera.org/share/1b27fe2a7ddb842be6d86c108e58ccc4"
+  },
+  {
+    "title": "RAG and Agentic AI Capstone Project - IBM",
+    "stack": "rag, agentic ai, python, ai",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~RI5J12O6TC3C/CERTIFICATE_LANDING_PAGE~RI5J12O6TC3C.jpeg",
+    "link": "https://coursera.org/share/5e0a588386d375b6aee21dec3c1016f8"
+  },
+  {
+    "title": "Foundations of Project Management - Google",
+    "stack": "project management",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~LULREIWGI7O0/CERTIFICATE_LANDING_PAGE~LULREIWGI7O0.jpeg",
+    "link": "https://coursera.org/share/e17dcc8cbcf70d4b9937712719790aa4"
+  },
+  {
+    "title": "Project Initiation: Starting a Successful Project - Google",
+    "stack": "project management",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~W6ITJ5WFPV0Y/CERTIFICATE_LANDING_PAGE~W6ITJ5WFPV0Y.jpeg",
+    "link": "https://coursera.org/share/d9ff325b069560e50eb98558553ef869"
+  },
+  {
+    "title": "Project Planning: Putting It All Together - Google",
+    "stack": "project management",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~YLQVASKNHSMO/CERTIFICATE_LANDING_PAGE~YLQVASKNHSMO.jpeg",
+    "link": "https://coursera.org/share/39ccb443a94543aa03629158c81b41e2"
+  },
+  {
+    "title": "Project Execution: Running the Project - Google",
+    "stack": "project management",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~NTU8YIW1RECD/CERTIFICATE_LANDING_PAGE~NTU8YIW1RECD.jpeg",
+    "link": "https://coursera.org/share/53be06d7558f28049be7a2eb745ade5b"
+  },
+  {
+    "title": "Agile Project Management - Google",
+    "stack": "project management, agile",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~V15QSP6S7QWG/CERTIFICATE_LANDING_PAGE~V15QSP6S7QWG.jpeg",
+    "link": "https://coursera.org/share/e3f3b13cab4466390f79d9b8a46f08c9"
+  },
+  {
+    "title": "Capstone: Applying Project Management in the Real World - Google",
+    "stack": "project management",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~VFB7RQ6F0V3F/CERTIFICATE_LANDING_PAGE~VFB7RQ6F0V3F.jpeg",
+    "link": "https://coursera.org/share/752920ed43ced020dbdc59286625ad2a"
+  },
+  {
+    "title": "Microsoft Certified: Azure AI Fundamentals",
+    "stack": "azure, ai, cloud",
+    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740853551/Azure_fundamental_c2vqbe.png",
+    "link": "https://drive.google.com/file/d/1P5fr_vzp4rVTwQgXtz0_ZOxiU23vONth/view"
+  },
+  {
+    "title": "AWS Cloud Foundations",
+    "stack": "aws, cloud",
+    "imgUrl": "https://res.cloudinary.com/da0wymv5x/image/upload/v1740853553/aws_w5jfz2.png",
+    "link": "https://drive.google.com/file/d/1NTFvYGcX352M17Sgp7RZn0AGnk9YUkY4/view"
+  },
+  {
+    "title": "Prompt Design in Vertex AI - Google Cloud",
+    "stack": "google cloud, vertex ai, generative ai, prompt engineering",
+    "imgUrl": "https://cdn.qwiklabs.com/fniXm3dvAmF5DdygCnoiXfsKiimQ07uMjRuFRs8i%2BW4%3D",
+    "link": "https://www.skills.google/public_profiles/b36307c9-2ec2-40a8-888e-1409879b132e/badges/16108911"
+  },
+  {
+    "title": "Responsible AI: Applying AI Principles with Google Cloud",
+    "stack": "google cloud, ai, responsible ai",
+    "imgUrl": "https://cdn.qwiklabs.com/CKV%2FmEJAENCy83goO1y0joXoynd4phOP7FsEftSGAcg%3D",
+    "link": "https://www.skills.google/public_profiles/b36307c9-2ec2-40a8-888e-1409879b132e/badges/16107461"
+  },
+  {
+    "title": "Introduction to Responsible AI - Google Cloud",
+    "stack": "google cloud, ai, responsible ai",
+    "imgUrl": "https://cdn.qwiklabs.com/jQ%2FmW34ufmz0351n8rWsWXdSZVrVN46wVWyZ8KRSF2c%3D",
+    "link": "https://www.skills.google/public_profiles/b36307c9-2ec2-40a8-888e-1409879b132e/badges/16105573"
+  },
+  {
+    "title": "Introduction to Large Language Models - Google Cloud",
+    "stack": "google cloud, llm, ai",
+    "imgUrl": "https://cdn.qwiklabs.com/hntzUgDDK6JZHcCj3hBnZErv2yacQUwg8Y3h%2F0VQAEQ%3D",
+    "link": "https://www.skills.google/public_profiles/b36307c9-2ec2-40a8-888e-1409879b132e/badges/16105538"
+  },
+  {
+    "title": "Introduction to Generative AI - Google Cloud",
+    "stack": "google cloud, generative ai, ai",
+    "imgUrl": "https://cdn.qwiklabs.com/1IjA1paFzxAwvhaEuCNYzcrZkNyM%2FRWnfSQue%2BwKv3M%3D",
+    "link": "https://www.skills.google/public_profiles/b36307c9-2ec2-40a8-888e-1409879b132e/badges/16105455"
+  },
+  {
+    "title": "Fundamentals of Deep Learning - NVIDIA",
+    "stack": "deep learning, ai, neural networks",
+    "imgUrl": "https://cdn.cookielaw.org/logos/10ddf4ca-c072-45d0-b3ac-eead0ed93db0/b73a5c09-1e15-4dc7-8722-f9cb6c578110/9a7ca633-555d-4e05-a249-5cd7dc512da5/logo_nvidia.png",
+    "link": "https://learn.nvidia.com/certificates?id=-dSfA7AzSgupSTO0xjQzKQ"
+  },
+  {
+    "title": "Introduction to Data Analytics for Business - University of Colorado Boulder",
+    "stack": "data analytics, business intelligence",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~PYUNFNCFN2ZA/CERTIFICATE_LANDING_PAGE~PYUNFNCFN2ZA.jpeg",
+    "link": "https://coursera.org/share/511225be7a13290a3b3cbf783da9f422"
+  },
+  {
+    "title": "Introduction to Computer Vision and Image Processing - IBM",
+    "stack": "computer vision, image processing, ai",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~MMLJ2AMJI826/CERTIFICATE_LANDING_PAGE~MMLJ2AMJI826.jpeg",
+    "link": "https://coursera.org/share/31f53e495120403ac3774600145a05cb"
+  },
+  {
+    "title": "Introduction to Applied Machine Learning - Alberta Machine Intelligence Institute",
+    "stack": "machine learning, ai",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~C2JFRIHAGBTP/CERTIFICATE_LANDING_PAGE~C2JFRIHAGBTP.jpeg",
+    "link": "https://coursera.org/share/ba08690419dbd45375c0f1e19a5e6607"
+  },
+  {
+    "title": "Introduction to Self-Driving Cars - University of Toronto",
+    "stack": "computer vision, self-driving, ai",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~4GUPYKG77IE5/CERTIFICATE_LANDING_PAGE~4GUPYKG77IE5.jpeg",
+    "link": "https://coursera.org/share/1a6cc16c7beb8e86d8e96d903cf8008a"
+  },
+  {
+    "title": "Introduction to Generative AI for Data Analysis - Microsoft",
+    "stack": "generative ai, data analysis, ai",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~G9E7TB5QTQRO/CERTIFICATE_LANDING_PAGE~G9E7TB5QTQRO.jpeg",
+    "link": "https://coursera.org/share/0fcb817b365ba2ddd52e34446e1d482f"
+  },
+  {
+    "title": "Machine Learning for All - University of London",
+    "stack": "machine learning, ai",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~BCXH8JQ4PNH4/CERTIFICATE_LANDING_PAGE~BCXH8JQ4PNH4.jpeg",
+    "link": "https://coursera.org/share/347bcf4bad48e8c1c4a469b291e8058c"
+  },
+  {
+    "title": "Foundations: Data, Data, Everywhere - Google",
+    "stack": "data analytics, sql",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~HLAIQ6OPFFWQ/CERTIFICATE_LANDING_PAGE~HLAIQ6OPFFWQ.jpeg",
+    "link": "https://coursera.org/share/38ff6232119a26f415f5d0e47b81b926"
+  },
+  {
+    "title": "Applied Machine Learning in Python - University of Michigan",
+    "stack": "machine learning, python, scikit-learn",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~DZ3EKO6HBCB9/CERTIFICATE_LANDING_PAGE~DZ3EKO6HBCB9.jpeg",
+    "link": "https://coursera.org/share/b4246d1ed0f26e1572fb911d15f6ff76"
+  },
+  {
+    "title": "Python for Data Science, AI & Development - IBM",
+    "stack": "python, data science, ai",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~AP986VJ4SX8H/CERTIFICATE_LANDING_PAGE~AP986VJ4SX8H.jpeg",
+    "link": "https://coursera.org/share/fb95b86e71763bd610968f5ef50194d4"
+  },
+  {
+    "title": "Capstone: Retrieving, Processing, and Visualizing Data with Python - University of Michigan",
+    "stack": "python, data visualization, web scraping",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~ECLZ7WMMRXMD/CERTIFICATE_LANDING_PAGE~ECLZ7WMMRXMD.jpeg",
+    "link": "https://coursera.org/share/be28e415c1fea37c16bc8982fae396aa"
+  },
+  {
+    "title": "Using Python to Access Web Data - University of Michigan",
+    "stack": "python, web data, apis",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~2695SYT7ZUBS/CERTIFICATE_LANDING_PAGE~2695SYT7ZUBS.jpeg",
+    "link": "https://coursera.org/share/f9bf99caa9b8221050532b242675320e"
+  },
+  {
+    "title": "Python Data Structures - University of Michigan",
+    "stack": "python, data structures",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~AH243YA86R8V/CERTIFICATE_LANDING_PAGE~AH243YA86R8V.jpeg",
+    "link": "https://coursera.org/share/fdcf49a4d1eaf52d90c636ee13f2287c"
+  },
+  {
+    "title": "Introduction to Big Data - University of California San Diego",
+    "stack": "big data, analytics",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~PVUXXPSAGAF8/CERTIFICATE_LANDING_PAGE~PVUXXPSAGAF8.jpeg",
+    "link": "https://coursera.org/share/2dfc99950036d63a6420c6d397669d03"
+  },
+  {
+    "title": "Programming for Everybody (Getting Started with Python) - University of Michigan",
+    "stack": "python, programming",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~72CEK5CLW9VE/CERTIFICATE_LANDING_PAGE~72CEK5CLW9VE.jpeg",
+    "link": "https://coursera.org/share/0fdb83d52ebce007e01f0dabd09a1d32"
+  },
+  {
+    "title": "What is Data Science? - IBM",
+    "stack": "data science, ai",
+    "imgUrl": "https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~E6WC2QUY3WFP/CERTIFICATE_LANDING_PAGE~E6WC2QUY3WFP.jpeg",
+    "link": "https://coursera.org/share/462a87dd84b8767da20d82575d35d824"
+  }
+]

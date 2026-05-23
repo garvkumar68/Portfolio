@@ -1,7 +1,7 @@
 import React from "react";
 import { 
   Terminal, ChevronRight, Plus, Search, LayoutGrid, Globe, 
-  User, Briefcase, Wrench, BookOpen, Trophy, Layers, LogOut, Unlock, Code2 
+  User, Briefcase, Wrench, BookOpen, Trophy, Layers, LogOut, Unlock, Code2, Database 
 } from "lucide-react";
 import { DBState } from "./types";
 
@@ -55,19 +55,19 @@ export function AdminSidebar({
 }: AdminSidebarProps) {
   return (
     <aside className={`h-full shrink-0 bg-[#080808]/95 border-r border-white/5 p-5 flex flex-col justify-between glass-card md:rounded-none select-none transition-all duration-300 ease-in-out z-20 ${
-      sidebarMinimized ? "w-20" : "w-64"
+      sidebarMinimized ? "w-20" : "w-72"
     }`}>
       <div className="flex flex-col h-[88%]">
         {/* Logo Header with Collapse Trigger */}
         <div className="flex items-center justify-between mb-6 shrink-0">
           <div className="flex items-center gap-3 overflow-hidden">
             <div className="size-10 shrink-0 rounded-xl bg-white/[0.02] border border-white/10 flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.02)]">
-              <Terminal className="size-5 text-[#00ff88]" />
+              <Database className="size-5 text-[#00ff88]" />
             </div>
             {!sidebarMinimized && (
               <div className="animate-in fade-in slide-in-from-left-2 duration-300">
-                <h1 className="font-display text-sm tracking-[0.25em] text-white uppercase font-bold">Garv AI Twin CMS</h1>
-                <p className="text-[9px] text-[#00ff88] font-mono-fira tracking-widest uppercase mt-0.5">Edge Operations</p>
+                <h1 className="font-display text-[13px] tracking-[0.15em] text-white uppercase font-bold whitespace-nowrap">Garv AI Twin CMS</h1>
+                <p className="text-[9px] text-[#00ff88] font-mono-fira tracking-widest uppercase mt-0.5 whitespace-nowrap">Edge Operations</p>
               </div>
             )}
           </div>
