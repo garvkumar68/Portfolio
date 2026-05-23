@@ -1,0 +1,21 @@
+{
+  "name": "portfolio-backend",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker AI agent proxy for DODO AI portfolio assistant",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@langchain/core": "^0.3.36",
+    "@langchain/openai": "^0.4.3",
+    "hono": "^4.6.15",
+    "tanstack_start_ts": "file:../AI-Portfolio"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241218.0",
+    "typescript": "^5.7.2",
+    "wrangler": "^3.99.0"
+  }
+}

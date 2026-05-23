@@ -1,0 +1,13 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Cloudflare wrangler
+.wrangler/
+dist/
+
+# Local Environment Secrets (CRITICAL: DO NOT PUSH!)
+.dev.vars
+.env
+.env.local
