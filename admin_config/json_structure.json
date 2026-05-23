@@ -43,8 +43,7 @@
     "title": "System Metadata",
     "type": "object",
     "isStandard": true,
-    "readOnly": false,
-    "skipPromptCompile": true
+    "readOnly": false
   },
   "garvAITwinPromptInclusion": {
     "title": "Prompt Inclusion Toggles",
