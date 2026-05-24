@@ -5,7 +5,7 @@
       "skills": [
         {
           "name": "Machine Learning & Artificial Intelligence",
-          "progress": "expert"
+          "progress": "advanced"
         },
         {
           "name": "Deep Learning (TensorFlow • PyTorch • Keras)",
@@ -25,7 +25,7 @@
         },
         {
           "name": "Agentic AI Workflows & Automation",
-          "progress": "expert"
+          "progress": "advanced"
         }
       ]
     },
@@ -50,7 +50,7 @@
         },
         {
           "name": "Postman & API Testing",
-          "progress": "advanced"
+          "progress": "intermediate"
         },
         {
           "name": "LM Studio & Local Inference",
@@ -63,7 +63,7 @@
       "skills": [
         {
           "name": "Python Backend Engineering",
-          "progress": "expert"
+          "progress": "advanced"
         },
         {
           "name": "FastAPI & Flask",
@@ -75,7 +75,7 @@
         },
         {
           "name": "Docker & Linux Deployment",
-          "progress": "advanced"
+          "progress": "intermediate"
         },
         {
           "name": "AWS & Cloud Infrastructure",
@@ -83,7 +83,7 @@
         },
         {
           "name": "Hugging Face & AI Model Deployment",
-          "progress": "advanced"
+          "progress": "intermediate"
         }
       ]
     },
@@ -92,11 +92,11 @@
       "skills": [
         {
           "name": "C++ • Python • SQL",
-          "progress": "expert"
+          "progress": "advanced"
         },
         {
           "name": "Data Structures & Algorithms",
-          "progress": "expert"
+          "progress": "advanced"
         },
         {
           "name": "Object-Oriented Programming",
@@ -112,7 +112,7 @@
         },
         {
           "name": "System Design & Scalable Thinking",
-          "progress": "advanced"
+          "progress": "intermediate"
         }
       ]
     },
@@ -133,15 +133,40 @@
         },
         {
           "name": "GIS + AI Integration",
-          "progress": "expert"
+          "progress": "advanced"
         },
         {
           "name": "Raster, Vector & 3D Mesh Processing",
           "progress": "advanced"
         },
         {
-          "name": "Urban Intelligence & Digital Twin Systems",
+          "name": "Urban Intelligence & Spatial Digital Twins",
           "progress": "advanced"
+        }
+      ]
+    },
+    {
+      "title": "Growth Areas & Target Skills",
+      "skills": [
+        {
+          "name": "Advanced Cloud Architecture & Scaling (AWS)",
+          "progress": "intermediate"
+        },
+        {
+          "name": "Enterprise DevOps, Microservices & CI/CD Pipelines",
+          "progress": "intermediate"
+        },
+        {
+          "name": "Distributed Streaming & Real-Time Event Processing (Apache Kafka)",
+          "progress": "beginner"
+        },
+        {
+          "name": "Distributed System Design & Message Queues (Redis)",
+          "progress": "intermediate"
+        },
+        {
+          "name": "Production-Grade AI Inference Optimization",
+          "progress": "intermediate"
         }
       ]
     }
