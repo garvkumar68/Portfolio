@@ -1,7 +1,13 @@
 {
   "name": "Garv Kumar",
   "email": "garvkumar68@gmail.com",
-  "dob": "2003-01-01",
+  "dob": "12-01-2005",
   "github": "https://github.com/garvkumar68",
-  "linkedin": "https://linkedin.com/in/garvkumar68"
+  "linkedin": "https://linkedin.com/in/garvkumar68",
+  "portfolio": "https://garvkumar68.github.io/Portfolio/",
+  "projects": "https://garvkumar68.github.io/Portfolio/projects",
+  "skills": "https://garvkumar68.github.io/Portfolio/skills",
+  "experience": "https://garvkumar68.github.io/Portfolio/experience",
+  "certifications": "https://garvkumar68.github.io/Portfolio/certifications",
+  "achievements": "https://garvkumar68.github.io/Portfolio/achievements"
 }
