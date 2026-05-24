@@ -20,6 +20,66 @@ const FALLBACK_IMG =
   "https://drive.google.com/uc?export=view&id=1yAZJCOeH9CGa3gtMfeDsZRs4dgKR-zQV";
 
 const styles = `
+  .flip-card-container {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .outside-ai-btn-row {
+    width: 360px;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 6px;
+  }
+  
+  @media (max-width: 768px) {
+    .outside-ai-btn-row {
+      width: 300px;
+    }
+  }
+.flip-card-container .outside-ai-btn {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: 1px solid rgba(0, 223, 162, 0.4) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    color: #00dfa2 !important;
+    padding: 4px 8px !important;
+    margin: 0 2px 0 0 !important;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px !important;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    z-index: 20;
+    transition: color 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, border-color 0.3s ease !important;
+    opacity: 0.85;
+    font-family: 'Outfit', 'Inter', monospace;
+    white-space: nowrap;
+  }
+
+  .flip-card-container .outside-ai-btn svg {
+    font-size: 12px !important;
+    color: #00dfa2 !important;
+    transition: color 0.3s ease !important;
+  }
+
+  .flip-card-container .outside-ai-btn:hover {
+    color: #00dfa2 !important;
+    opacity: 1 !important;
+    background: rgba(0, 223, 162, 0.12) !important;
+    background-color: rgba(0, 223, 162, 0.12) !important;
+    border-color: rgba(0, 223, 162, 0.7) !important;
+  }
+
+  .flip-card-container .outside-ai-btn:hover svg {
+    color: #00dfa2 !important;
+    fill: #00dfa2 !important;
+  }
+
   .flip-card-wrapper {
     width: 360px !important;
     height: 450px !important;
@@ -662,8 +722,17 @@ export const FlipCard = () => {
   const { name } = CARD_DATA;
 
   return (
-    <>
+    <div className="flip-card-container">
       <style>{styles}</style>
+      <div className="outside-ai-btn-row">
+        <button 
+          className="outside-ai-btn"
+          onClick={(e) => { e.stopPropagation(); setFlipped(!flipped); }}
+          title={flipped ? "Close AI" : "Ai Chat"}
+        >
+          {flipped ? "Close AI" : "Ai Chat"} <BsStars />
+        </button>
+      </div>
       <PixelCard
         variant="default"
         gap={12}
@@ -753,6 +822,6 @@ export const FlipCard = () => {
           </div>
         </div>
       </PixelCard>
-    </>
+    </div>
   );
 };

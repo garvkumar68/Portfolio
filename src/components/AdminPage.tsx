@@ -297,7 +297,7 @@ function AdminComponent() {
   // ── 100% PRODUCTION EDGE MODE: Always fetch dynamically from live Cloudflare & GitHub! ──
   const WORKER_BASE = typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
     ? "http://127.0.0.1:8787"
-    : "https://dodo-ai-agent.dodoai.workers.dev";
+    : "https://garv-ai-twin.portfolio-support.workers.dev";
 
   // Dynamically load premium fonts
   useEffect(() => {
