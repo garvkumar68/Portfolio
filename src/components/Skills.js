@@ -405,9 +405,9 @@ const getTier = (progress) => {
   }
   const p = Number(progress);
   if (p <= 30) return "Aware";
-  if (p <= 60) return "Beginner";
-  if (p <= 80) return "Intermediate";
-  if (p <= 90) return "Advanced";
+  if (p < 60) return "Beginner";
+  if (p <= 84) return "Intermediate";
+  if (p <= 95) return "Advanced";
   return "Expert";
 };
 
@@ -417,8 +417,8 @@ const getProgressNumber = (progress) => {
     if (lower === "aware") return 25;
     if (lower === "beginner") return 50;
     if (lower === "intermediate") return 75;
-    if (lower === "advanced") return 85;
-    if (lower === "expert") return 95;
+    if (lower === "advanced") return 90;
+    if (lower === "expert") return 98;
     return 50;
   }
   return Number(progress);

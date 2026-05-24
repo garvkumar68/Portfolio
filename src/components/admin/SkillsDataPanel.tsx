@@ -113,7 +113,7 @@ export function SkillsDataPanel({
           <button
             onClick={() => {
               const updatedCats = [...categories];
-              updatedCats.push({ title: "New Skill Sector", skills: [{ name: "Skill A", progress: 80 }] });
+              updatedCats.push({ title: "New Skill Sector", skills: [{ name: "Skill A", progress: "advanced" }] });
               setDb({
                 ...db,
                 skillsData: {
@@ -237,20 +237,25 @@ export function SkillsDataPanel({
                           />
                         </div>
                         <div className="col-span-4 flex items-center gap-2">
-                          <input 
-                            type="number" 
-                            min="0" 
-                            max="100"
-                            value={s.progress} 
+                          <select
+                            value={
+                              typeof s.progress === 'number'
+                                ? (s.progress <= 30 ? "aware" : s.progress <= 60 ? "beginner" : s.progress <= 80 ? "intermediate" : s.progress <= 90 ? "advanced" : "expert")
+                                : String(s.progress || "").toLowerCase()
+                            }
                             onChange={e => {
                               const updatedCats = [...categories];
-                              updatedCats[catIdx].skills[sIdx].progress = parseInt(e.target.value) || 0;
+                              updatedCats[catIdx].skills[sIdx].progress = e.target.value;
                               setDb({...db, skillsData: {...db.skillsData, content: {...db.skillsData.content, categories: updatedCats}}});
                             }}
-                            className="w-full cyber-input font-bold"
-                            placeholder="Progress %"
-                          />
-                          <span className="text-[10px] text-muted-foreground font-mono">%</span>
+                            className="w-full cyber-input font-bold text-xs p-2"
+                          >
+                            <option value="aware">Aware</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                            <option value="expert">Expert</option>
+                          </select>
                         </div>
                         <div className="col-span-2 flex justify-end">
                           <button
@@ -273,7 +278,7 @@ export function SkillsDataPanel({
                 <button
                   onClick={() => {
                     const updatedCats = [...categories];
-                    updatedCats[catIdx].skills.push({ name: "New Expertise", progress: 75 });
+                    updatedCats[catIdx].skills.push({ name: "New Expertise", progress: "intermediate" });
                     setDb({...db, skillsData: {...db.skillsData, content: {...db.skillsData.content, categories: updatedCats}}});
                   }}
                   className="flex items-center gap-1.5 px-3 py-1.5 bg-white/[0.02] border border-white/5 hover:border-white/10 hover:text-white text-muted-foreground text-[9px] font-bold rounded-lg uppercase transition-all mt-2 cursor-pointer"
