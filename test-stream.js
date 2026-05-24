@@ -6,11 +6,11 @@
  */
 
 // --- 🌐 LIVE TARGET ENDPOINT ---
-const API_URL = "http://127.0.0.1:8787/api/chat"; 
+const API_URL = "https://garv-ai-twin.portfolio-support.workers.dev/api/chat"; 
 
 const payload = {
   messages: [
-    { role: "user", content: "Who is Garv Kumar and what does he generally do?" }
+    { role: "user", content: "Who is Garv Kumar and what does he generally do? and does he know ai and if yes how can u verify" }
   ],
   model: "google/gemma-3-12b"
 };
