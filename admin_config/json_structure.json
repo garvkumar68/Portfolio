@@ -121,7 +121,17 @@
         "type": "string"
       }
     ],
-    "isStandard": true,
-    "readOnly": false
+    "isStandard": true
+  },
+  "aitwinnotesforcontext": {
+    "title": "Ai-twin-notes-for-context",
+    "type": "list",
+    "schema": [
+      {
+        "key": "note",
+        "label": "NOTE",
+        "type": "string"
+      }
+    ]
   }
 }
