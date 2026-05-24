@@ -5,6 +5,17 @@
     "schema": [],
     "isStandard": true
   },
+  "aitwinnotesforcontext": {
+    "title": "Ai-twin-notes-for-context",
+    "type": "list",
+    "schema": [
+      {
+        "key": "note",
+        "label": "NOTE",
+        "type": "string"
+      }
+    ]
+  },
   "certifications": {
     "title": "Certifications",
     "type": "list",
@@ -123,16 +134,5 @@
     ],
     "isStandard": true,
     "readOnly": false
-  },
-  "aitwinnotesforcontext": {
-    "title": "Ai-twin-notes-for-context",
-    "type": "list",
-    "schema": [
-      {
-        "key": "note",
-        "label": "NOTE",
-        "type": "string"
-      }
-    ]
   }
 }

@@ -5,27 +5,27 @@
       "skills": [
         {
           "name": "Machine Learning & Artificial Intelligence",
-          "progress": 92
+          "progress": "expert"
         },
         {
           "name": "Deep Learning (TensorFlow • PyTorch • Keras)",
-          "progress": 88
+          "progress": "advanced"
         },
         {
           "name": "Generative AI & LLM Engineering",
-          "progress": 90
+          "progress": "advanced"
         },
         {
           "name": "Computer Vision & Detection Systems",
-          "progress": 89
+          "progress": "advanced"
         },
         {
           "name": "Natural Language Processing (NLP)",
-          "progress": 85
+          "progress": "advanced"
         },
         {
           "name": "Agentic AI Workflows & Automation",
-          "progress": 91
+          "progress": "expert"
         }
       ]
     },
@@ -34,27 +34,27 @@
       "skills": [
         {
           "name": "Pandas • NumPy • Scikit-learn",
-          "progress": 89
+          "progress": "advanced"
         },
         {
           "name": "Data Visualization & Analytics",
-          "progress": 85
+          "progress": "advanced"
         },
         {
           "name": "OpenCV & Image Processing",
-          "progress": 88
+          "progress": "advanced"
         },
         {
           "name": "LangChain & AI Orchestration",
-          "progress": 84
+          "progress": "advanced"
         },
         {
           "name": "Postman & API Testing",
-          "progress": 82
+          "progress": "advanced"
         },
         {
           "name": "LM Studio & Local Inference",
-          "progress": 80
+          "progress": "intermediate"
         }
       ]
     },
@@ -63,27 +63,27 @@
       "skills": [
         {
           "name": "Python Backend Engineering",
-          "progress": 91
+          "progress": "expert"
         },
         {
           "name": "FastAPI & Flask",
-          "progress": 88
+          "progress": "advanced"
         },
         {
           "name": "REST APIs & System Integration",
-          "progress": 87
+          "progress": "advanced"
         },
         {
           "name": "Docker & Linux Deployment",
-          "progress": 82
+          "progress": "advanced"
         },
         {
           "name": "AWS & Cloud Infrastructure",
-          "progress": 78
+          "progress": "intermediate"
         },
         {
           "name": "Hugging Face & AI Model Deployment",
-          "progress": 84
+          "progress": "advanced"
         }
       ]
     },
@@ -92,55 +92,56 @@
       "skills": [
         {
           "name": "C++ • Python • SQL",
-          "progress": 92
+          "progress": "expert"
         },
         {
           "name": "Data Structures & Algorithms",
-          "progress": 91
+          "progress": "expert"
         },
         {
           "name": "Object-Oriented Programming",
-          "progress": 90
+          "progress": "advanced"
         },
         {
           "name": "Git & GitHub",
-          "progress": 89
+          "progress": "advanced"
         },
         {
           "name": "Multithreading & Optimization",
-          "progress": 83
+          "progress": "advanced"
         },
         {
           "name": "System Design & Scalable Thinking",
-          "progress": 82
+          "progress": "advanced"
         }
       ]
-    },{
+    },
+    {
       "title": "Geospatial AI & Spatial Intelligence",
       "skills": [
         {
           "name": "PostGIS & Spatial Databases",
-          "progress": 90
+          "progress": "advanced"
         },
         {
           "name": "GeoServer & Geospatial APIs",
-          "progress": 87
+          "progress": "advanced"
         },
         {
           "name": "Spatial Analysis & Geospatial Modelling",
-          "progress": 89
+          "progress": "advanced"
         },
         {
           "name": "GIS + AI Integration",
-          "progress": 93
+          "progress": "expert"
         },
         {
           "name": "Raster, Vector & 3D Mesh Processing",
-          "progress": 84
+          "progress": "advanced"
         },
         {
           "name": "Urban Intelligence & Digital Twin Systems",
-          "progress": 86
+          "progress": "advanced"
         }
       ]
     }

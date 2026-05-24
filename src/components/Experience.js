@@ -53,7 +53,7 @@ export const Experience = () => {
                                     </p>
 
                                     {/* Professional Experience Section */}
-                                    <h3 className="divided-subheading">Work & Research Experience</h3>
+                                    <h3 className="divided-subheading">Work Experience</h3>
                                     <div className="divided-grid mb-5">
                                         <Row className="g-4 justify-content-start">
                                             {professionalExp.map((item, index) => (

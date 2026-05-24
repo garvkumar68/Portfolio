@@ -399,6 +399,31 @@ function TimerBar({ timerRef }) {
   );
 }
 
+const getTier = (progress) => {
+  if (typeof progress === 'string' && isNaN(Number(progress))) {
+    return progress.charAt(0).toUpperCase() + progress.slice(1).toLowerCase();
+  }
+  const p = Number(progress);
+  if (p <= 30) return "Aware";
+  if (p <= 60) return "Beginner";
+  if (p <= 80) return "Intermediate";
+  if (p <= 90) return "Advanced";
+  return "Expert";
+};
+
+const getProgressNumber = (progress) => {
+  if (typeof progress === 'string' && isNaN(Number(progress))) {
+    const lower = progress.toLowerCase();
+    if (lower === "aware") return 25;
+    if (lower === "beginner") return 50;
+    if (lower === "intermediate") return 75;
+    if (lower === "advanced") return 85;
+    if (lower === "expert") return 95;
+    return 50;
+  }
+  return Number(progress);
+};
+
 /* ─────────────────────────────────────────────────────────────────────────────
  * SkillCard
  * Holds refs to all bar DOM nodes. When activated changes to true, it calls
@@ -497,9 +522,9 @@ function SkillCard({ category, index, activated, showTimer }) {
           <div key={s.name}>
             <div className="skill-item-row">
               <span className="skill-item-name">{s.name.toUpperCase()}</span>
-              <span className="skill-item-pct">{s.progress}%</span>
+              <span className="skill-item-pct">{getTier(s.progress)}</span>
             </div>
-            <ProgressBar level={s.progress} delay={si * 80} />
+            <ProgressBar level={getProgressNumber(s.progress)} delay={si * 80} />
           </div>
         ))}
       </div>
