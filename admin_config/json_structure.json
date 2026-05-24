@@ -121,7 +121,8 @@
         "type": "string"
       }
     ],
-    "isStandard": true
+    "isStandard": true,
+    "readOnly": false
   },
   "aitwinnotesforcontext": {
     "title": "Ai-twin-notes-for-context",
