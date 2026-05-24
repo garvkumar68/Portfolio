@@ -112,7 +112,7 @@ export function CustomSectionWizard({
 
   const [isSaving, setIsSaving] = useState(false);
 
-  const WORKER_BASE = "https://dodo-ai-agent.dodoai.workers.dev";
+  const WORKER_BASE = "https://garv-ai-twin.portfolio-support.workers.dev";
 
   const handleGenerateSection = async (e: React.MouseEvent) => {
     e.preventDefault();
