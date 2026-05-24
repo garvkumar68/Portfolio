@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './PixelCard.css';
 
 class Pixel {
@@ -122,7 +122,8 @@ const VARIANTS = {
   }
 };
 
-export default function PixelCard({ variant = 'default', gap, speed, colors, noFocus, className = '', children, onMouseEnter, onMouseLeave, onClick }) {
+export default function PixelCard({ variant = 'default', gap, speed, colors, noFocus, className = '', active = false, children, onMouseEnter, onMouseLeave, onClick }) {
+  const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const pixelsRef = useRef([]);
@@ -199,14 +200,23 @@ export default function PixelCard({ variant = 'default', gap, speed, colors, noF
   };
 
   const handleMouseEnter = (e) => {
-    handleAnimation('appear');
+    setIsHovered(true);
     if (onMouseEnter) onMouseEnter(e);
   };
   
   const handleMouseLeave = (e) => {
-    handleAnimation('disappear');
+    setIsHovered(false);
     if (onMouseLeave) onMouseLeave(e);
   };
+
+  useEffect(() => {
+    if (active || isHovered) {
+      handleAnimation('appear');
+    } else {
+      handleAnimation('disappear');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active, isHovered]);
   
   const onFocus = e => {
     if (e.currentTarget.contains(e.relatedTarget)) return;
