@@ -610,7 +610,20 @@ async function compileCloudPrompt(c: any, ghToken: string, repo: string, branch:
       for (const cat of categories) {
         prompt_lines.push(`- **${cat.title || cat.name || ""}**:`);
         const skillsList = (cat.skills || []).map((s: any) => {
-          if (s.progress) return `${s.name} (${s.progress}% proficiency)`;
+          if (s.progress !== undefined && s.progress !== null) {
+            let tier = "";
+            if (typeof s.progress === 'string' && isNaN(Number(s.progress))) {
+              tier = s.progress.charAt(0).toUpperCase() + s.progress.slice(1).toLowerCase();
+            } else {
+              const p = Number(s.progress);
+              if (p <= 30) tier = "Aware";
+              else if (p <= 60) tier = "Beginner";
+              else if (p <= 80) tier = "Intermediate";
+              else if (p <= 90) tier = "Advanced";
+              else tier = "Expert";
+            }
+            return `${s.name} (${tier})`;
+          }
           return s.name;
         });
         prompt_lines.push(`  - ${skillsList.join(", ")}`);
