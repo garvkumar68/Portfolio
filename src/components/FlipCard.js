@@ -507,7 +507,7 @@ const styles = `
     pointer-events: none !important;
   }
   
-  .flip-card-wrapper:not(:hover) .pixel-canvas {
+  .flip-card-wrapper:not(:hover):not(.flipped) .pixel-canvas {
     opacity: 1 !important;
     transition: opacity 0.2s ease-in-out !important;
   }
@@ -523,6 +523,18 @@ export const FlipCard = () => {
   const [isListening, setIsListening] = useState(false);
   const chatBodyRef = useRef(null);
   const recognitionRef = useRef(null);
+
+  // Sync state with global floating button
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('flipcard-state', { detail: flipped }));
+  }, [flipped]);
+
+  // Listen for global floating button clicks
+  useEffect(() => {
+    const handleToggle = () => setFlipped(prev => !prev);
+    window.addEventListener('toggle-flipcard', handleToggle);
+    return () => window.removeEventListener('toggle-flipcard', handleToggle);
+  }, []);
 
   useEffect(() => {
     axios
@@ -724,25 +736,17 @@ export const FlipCard = () => {
   return (
     <div className="flip-card-container">
       <style>{styles}</style>
-      <div className="outside-ai-btn-row">
-        <button 
-          className="outside-ai-btn"
-          onClick={(e) => { e.stopPropagation(); setFlipped(!flipped); }}
-          title={flipped ? "Close AI" : "Ai Chat"}
-        >
-          {flipped ? "Close AI" : "Ai Chat"} <BsStars />
-        </button>
-      </div>
       <PixelCard
         variant="default"
         gap={12}
         speed={45}
         colors="#00dfa2,#00b386,#008060"
         noFocus={true}
-        className="flip-card-wrapper"
+        className={`flip-card-wrapper ${flipped ? "flipped" : ""}`}
         onMouseEnter={() => setFlipped(true)}
         onMouseLeave={() => setFlipped(false)}
         onClick={() => setFlipped((f) => !f)}
+        active={flipped}
       >
         <div className={`flip-card-inner${flipped ? " flipped" : ""}`}>
 

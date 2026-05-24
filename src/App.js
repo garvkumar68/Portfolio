@@ -13,6 +13,7 @@ import { Contact } from "./components/Contact";
 import { HexagonBackground } from "./components/HexagonBackground";
 import { MinimalistStarfield } from "./components/MinimalistStarfield";
 import { SideNav } from "./components/SideNav";
+import { FloatingAIChat } from "./components/FloatingAIChat";
 import AdminPage from "./components/AdminPage";
 import { Toaster } from "sonner";
 import { useEffect, useState } from "react";
@@ -296,6 +297,7 @@ function App() {
         <Toaster theme="dark" position="top-right" />
         <MinimalistStarfield />
         <SideNav />
+        <FloatingAIChat />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/skills" element={<SkillsPage />} />
