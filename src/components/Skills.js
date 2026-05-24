@@ -122,7 +122,8 @@ const css = `
 
   .skill-card-3d {
     position: absolute;
-    inset-inline: 0;
+    left: 0;
+    right: 0;
     margin: 0 auto;
     width: 90%;
     max-width: 440px;

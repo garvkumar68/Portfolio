@@ -2,66 +2,137 @@
   "BannerDetails": {
     "title": "Banner Details",
     "type": "object",
-    "isStandard": true
-  },
-  "education": {
-    "title": "Education",
-    "type": "list",
-    "isStandard": true
-  },
-  "experience": {
-    "title": "Experience",
-    "type": "list",
+    "schema": [],
     "isStandard": true
   },
   "certifications": {
     "title": "Certifications",
     "type": "list",
+    "schema": [],
     "isStandard": true
+  },
+  "education": {
+    "title": "Education",
+    "type": "list",
+    "schema": [],
+    "isStandard": true
+  },
+  "experience": {
+    "title": "Experience",
+    "type": "list",
+    "schema": [],
+    "isStandard": true
+  },
+  "garvAITwinPromptInclusion": {
+    "title": "Prompt Inclusion Toggles",
+    "type": "object",
+    "schema": [],
+    "isSystemFile": true,
+    "readOnly": true,
+    "skipPromptCompile": true
   },
   "logo": {
     "title": "Site Logo",
     "type": "object",
+    "schema": [],
     "isStandard": true
   },
   "professionalLinks": {
     "title": "Professional Links",
     "type": "object",
+    "schema": [],
     "isStandard": true
   },
   "projects": {
     "title": "Projects",
     "type": "list",
+    "schema": [],
     "isStandard": true
   },
   "skillsData": {
     "title": "Skills Matrix",
     "type": "categories",
+    "schema": [],
     "isStandard": true
   },
   "successStories": {
     "title": "Success Stories",
     "type": "list",
+    "schema": [],
     "isStandard": true
   },
   "systemMetadata": {
     "title": "System Metadata",
     "type": "object",
+    "schema": [
+      {
+        "key": "name",
+        "label": "Name",
+        "type": "string"
+      },
+      {
+        "key": "email",
+        "label": "Email",
+        "type": "string"
+      },
+      {
+        "key": "dob",
+        "label": "Dob",
+        "type": "string"
+      },
+      {
+        "key": "github",
+        "label": "Github",
+        "type": "url"
+      },
+      {
+        "key": "linkedin",
+        "label": "Linkedin",
+        "type": "url"
+      },
+      {
+        "key": "portfolio",
+        "label": "Portfolio",
+        "type": "string"
+      },
+      {
+        "key": "projects",
+        "label": "Projects",
+        "type": "string"
+      },
+      {
+        "key": "skills",
+        "label": "Skills",
+        "type": "string"
+      },
+      {
+        "key": "experience",
+        "label": "Experience",
+        "type": "string"
+      },
+      {
+        "key": "certifications",
+        "label": "certifications",
+        "type": "string"
+      },
+      {
+        "key": "achievements",
+        "label": "achievements",
+        "type": "string"
+      }
+    ],
     "isStandard": true,
     "readOnly": false
   },
-  "garvAITwinPromptInclusion": {
-    "title": "Prompt Inclusion Toggles",
-    "type": "object",
-    "isSystemFile": true,
-    "readOnly": true,
-    "skipPromptCompile": true
-  },
-  "garv_ai_twin_prompt": {
-    "title": "AI Master Prompt",
-    "type": "object",
-    "isSystemFile": true,
-    "readOnly": true,
-    "skipPromptCompile": true
+  "aitwinnotesforcontext": {
+    "title": "Ai-twin-notes-for-context",
+    "type": "list",
+    "schema": [
+      {
+        "key": "note",
+        "label": "NOTE",
+        "type": "string"
+      }
+    ]
   }
 }
