@@ -67,7 +67,7 @@ export function CustomSectionPanel({
     if (skill?.format) return skill.format;
     if (formatMap[key]) return formatMap[key];
     const progress = skill?.progress || 0;
-    if (progress === 95 || progress === 80 || progress === 60 || progress === 40) return "tier";
+    if (typeof progress === 'string' || progress === 95 || progress === 80 || progress === 60 || progress === 40) return "tier";
     return "percent";
   };
 
@@ -732,9 +732,9 @@ export function CustomSectionPanel({
                                     const format = val as any;
                                     setFormatMap({ ...formatMap, [`${catIdx}-${skillIdx}`]: format });
                                     
-                                    let newProgress = skill.progress || 0;
+                                    let newProgress: any = skill.progress || 0;
                                     if (format === "tier") {
-                                      newProgress = 95;
+                                      newProgress = "expert";
                                     }
                                     const currentData = db[activeTab].content;
                                     const newCats = [...currentData.categories];
@@ -758,7 +758,11 @@ export function CustomSectionPanel({
                                 <span className="text-[8px] font-mono text-muted-foreground tracking-widest uppercase">Value</span>
                                 {getSkillFormat(skill, `${catIdx}-${skillIdx}`) === "tier" ? (
                                   <CustomSelect
-                                    value={String(skill.progress >= 90 ? "95" : skill.progress >= 75 ? "80" : skill.progress >= 50 ? "60" : "40")}
+                                    value={
+                                      typeof skill.progress === 'string'
+                                        ? skill.progress.toLowerCase()
+                                        : (skill.progress > 95 ? "expert" : skill.progress >= 85 ? "advanced" : skill.progress >= 60 ? "intermediate" : skill.progress > 30 ? "beginner" : "aware")
+                                    }
                                     onOpenChange={(open) => {
                                       if (open) setActiveOpenSelect(`${catIdx}-${skillIdx}`);
                                       else if (activeOpenSelect === `${catIdx}-${skillIdx}`) setActiveOpenSelect(null);
@@ -766,14 +770,15 @@ export function CustomSectionPanel({
                                     onChange={(val) => {
                                       const currentData = db[activeTab].content;
                                       const newCats = [...currentData.categories];
-                                      newCats[catIdx].skills[skillIdx] = { ...newCats[catIdx].skills[skillIdx], progress: parseInt(val) };
+                                      newCats[catIdx].skills[skillIdx] = { ...newCats[catIdx].skills[skillIdx], progress: val };
                                       updateCustomContent({ ...currentData, categories: newCats });
                                     }}
                                     options={[
-                                      { value: "95", label: "Expert (95%)" },
-                                      { value: "80", label: "Advanced (80%)" },
-                                      { value: "60", label: "Intermediate (60%)" },
-                                      { value: "40", label: "Beginner (40%)" }
+                                      { value: "expert", label: "Expert" },
+                                      { value: "advanced", label: "Advanced" },
+                                      { value: "intermediate", label: "Intermediate" },
+                                      { value: "beginner", label: "Beginner" },
+                                      { value: "aware", label: "Aware" }
                                     ]}
                                   />
                                 ) : getSkillFormat(skill, `${catIdx}-${skillIdx}`) === "custom" ? (
