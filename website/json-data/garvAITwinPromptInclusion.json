@@ -1,6 +1,6 @@
 {
   "included_datasets": {
-    "dodo_prompt": false,
-    "BannerDetails": true
+    "BannerDetails": true,
+    "aitwinnotesforcontext": true
   }
 }
